@@ -15,6 +15,20 @@
         href="{{ asset('css/styles.min.css') }}" />
 
     <style>
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
         body {
             background: #f5f7fb;
         }
@@ -23,16 +37,165 @@
             display: none !important;
         }
 
+        /* =====================================================
+           MAIN WRAPPER
+        ====================================================== */
+
+        #main-wrapper {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .left-sidebar {
+            position: fixed !important;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: 270px !important;
+            max-width: 270px !important;
+
+            z-index: 1000;
+
+            overflow: hidden !important;
+
+            background: #fff;
+        }
+
+        .left-sidebar > div {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .brand-logo {
+            width: 100%;
+            min-height: 100px;
+            padding: 20px 24px;
+        }
+
+        .scroll-sidebar {
+            height: calc(100vh - 100px) !important;
+
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+
+        /* Scrollbar sidebar */
+
+        .scroll-sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .scroll-sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scroll-sidebar::-webkit-scrollbar-thumb {
+            background: #d9e1ef;
+            border-radius: 10px;
+        }
+
+        /* =====================================================
+           BRAND
+        ====================================================== */
+
         .school-brand {
             font-size: 20px;
             font-weight: 700;
             color: #2a3547;
+            line-height: 1.2;
         }
 
         .school-subtitle {
             font-size: 12px;
             color: #7c8fac;
+            margin-top: 4px;
         }
+
+        .logo-preview {
+            max-width: 140px;
+            max-height: 55px;
+            object-fit: contain;
+        }
+
+        /* =====================================================
+           SIDEBAR MENU
+        ====================================================== */
+
+        .sidebar-link {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .sidebar-link.active {
+            background: #ecf2ff;
+            color: #5d87ff;
+        }
+
+        .sidebar-link.active i {
+            color: #5d87ff;
+        }
+
+        /* =====================================================
+           BODY / CONTENT
+        ====================================================== */
+
+        .body-wrapper {
+            margin-left: 270px !important;
+
+            width: calc(100% - 270px) !important;
+            max-width: calc(100% - 270px) !important;
+
+            min-height: 100vh;
+
+            overflow-x: hidden !important;
+        }
+
+        .body-wrapper-inner {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .body-wrapper-inner .container-fluid {
+            width: 100%;
+            max-width: 100%;
+
+            overflow-x: hidden;
+
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .app-header {
+            position: fixed !important;
+
+            top: 0;
+            left: 270px !important;
+
+            width: calc(100% - 270px) !important;
+            max-width: calc(100% - 270px) !important;
+
+            z-index: 900;
+        }
+
+        .navbar {
+            width: 100%;
+        }
+
+        /* =====================================================
+           DASHBOARD TITLE
+        ====================================================== */
 
         .dashboard-title {
             font-size: 25px;
@@ -44,10 +207,48 @@
             color: #7c8fac;
         }
 
+        /* =====================================================
+           WELCOME BOX
+        ====================================================== */
+
+        .welcome-box {
+            border: 0;
+            border-radius: 15px;
+
+            background: linear-gradient(
+                135deg,
+                #5d87ff,
+                #4570ea
+            );
+
+            color: white;
+
+            min-height: 130px;
+
+            overflow: hidden;
+        }
+
+        .welcome-box h3 {
+            color: white;
+        }
+
+        .welcome-box p {
+            color: rgba(255, 255, 255, .85);
+        }
+
+        /* =====================================================
+           STAT CARD
+        ====================================================== */
+
         .stat-card {
             border: 0;
             border-radius: 12px;
+
+            height: 114px;
+            min-height: 114px;
+
             overflow: hidden;
+
             transition: .2s;
         }
 
@@ -55,9 +256,21 @@
             transform: translateY(-3px);
         }
 
+        .stat-card .card-body {
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+
+            padding: 20px;
+        }
+
         .stat-icon {
             width: 50px;
             height: 50px;
+
+            min-width: 50px;
+
             border-radius: 12px;
 
             display: flex;
@@ -92,32 +305,28 @@
             color: #fa896b;
         }
 
-        .menu-card {
+        /* =====================================================
+           CARD
+        ====================================================== */
+
+        .card {
+            max-width: 100%;
+
             border: 0;
-            border-radius: 12px;
-            transition: .2s;
+
+            overflow: hidden;
         }
 
-        .menu-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .menu-icon {
-            width: 45px;
-            height: 45px;
-
-            border-radius: 10px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 21px;
-        }
+        /* =====================================================
+           PROFILE
+        ====================================================== */
 
         .profile-info {
             padding: 12px 0;
+
             border-bottom: 1px solid #edf2f7;
+
+            word-break: break-word;
         }
 
         .profile-info:last-child {
@@ -133,30 +342,46 @@
         .profile-value {
             color: #2a3547;
             font-weight: 500;
+
+            word-break: break-word;
         }
 
-        .welcome-box {
+        /* =====================================================
+           MENU CEPAT
+        ====================================================== */
+
+        .menu-card {
             border: 0;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #5d87ff, #4570ea);
-            color: white;
+            border-radius: 12px;
+
+            min-height: 85px;
+
+            transition: .2s;
+
+            overflow: hidden;
         }
 
-        .welcome-box h3 {
-            color: white;
+        .menu-card:hover {
+            transform: translateY(-3px);
         }
 
-        .welcome-box p {
-            color: rgba(255, 255, 255, .85);
+        .menu-card .card-body {
+            padding: 18px;
         }
 
-        .sidebar-link.active {
-            background: #ecf2ff;
-            color: #5d87ff;
-        }
+        .menu-icon {
+            width: 45px;
+            height: 45px;
 
-        .sidebar-link.active i {
-            color: #5d87ff;
+            min-width: 45px;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
         }
 
         .quick-link {
@@ -168,11 +393,281 @@
             color: #5d87ff;
         }
 
-        .logo-preview {
-            max-width: 140px;
-            max-height: 55px;
-            object-fit: contain;
+        /* =====================================================
+           TABLE
+        ====================================================== */
+
+        .table-responsive {
+            width: 100%;
+            max-width: 100%;
+
+            overflow-x: auto;
+            overflow-y: hidden;
         }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        td,
+        th {
+            white-space: nowrap;
+        }
+
+        /* =====================================================
+           ROW
+        ====================================================== */
+
+        .row {
+            max-width: 100%;
+        }
+
+        /* =====================================================
+           IMAGE
+        ====================================================== */
+
+        img {
+            max-width: 100%;
+        }
+
+        /* =====================================================
+           MOBILE / TABLET
+        ====================================================== */
+
+        @media (max-width: 1199px) {
+
+            .left-sidebar {
+                width: 270px !important;
+                max-width: 270px !important;
+            }
+
+            .body-wrapper {
+                margin-left: 0 !important;
+
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .app-header {
+                left: 0 !important;
+
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        /* =====================================================
+           HP
+        ====================================================== */
+
+        @media (max-width: 767px) {
+
+            .body-wrapper-inner .container-fluid {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .welcome-box {
+                min-height: auto;
+            }
+
+            .welcome-box .card-body {
+                padding: 20px !important;
+            }
+
+            .stat-card {
+                height: 100px;
+                min-height: 100px;
+            }
+
+            .stat-card .card-body {
+                padding: 15px;
+            }
+
+            .stat-icon {
+                width: 45px;
+                height: 45px;
+                min-width: 45px;
+            }
+
+            .menu-card {
+                min-height: 75px;
+            }
+        }
+
+        /* =====================================================
+           AGAR TIDAK ADA HORIZONTAL OVERFLOW
+        ====================================================== */
+
+        .container,
+        .container-fluid,
+        .row,
+        .card,
+        .card-body {
+            max-width: 100%;
+        }
+
+        .text-nowrap {
+            max-width: 100%;
+        }
+
+        /* =====================================================
+           RAPAPIAN FINAL - SIDEBAR & WELCOME
+           Hanya merapikan jarak, tanpa mengubah desain utama.
+        ====================================================== */
+
+        .brand-logo {
+            min-height: 80px !important;
+            height: 80px !important;
+            padding: 14px 24px !important;
+            box-sizing: border-box !important;
+        }
+
+        .scroll-sidebar {
+            height: calc(100vh - 80px) !important;
+            padding: 4px 14px 10px !important;
+            box-sizing: border-box !important;
+        }
+
+        .scroll-sidebar #sidebarnav {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .scroll-sidebar .sidebar-item {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .scroll-sidebar .sidebar-link {
+            min-height: 42px !important;
+            height: 42px !important;
+            padding: 8px 14px !important;
+            margin: 1px 0 !important;
+            border-radius: 8px !important;
+            box-sizing: border-box !important;
+        }
+
+        .scroll-sidebar .nav-small-cap {
+            min-height: 24px !important;
+            margin: 7px 0 4px !important;
+            padding: 3px 14px !important;
+            box-sizing: border-box !important;
+        }
+
+        .scroll-sidebar .sidebar-divider {
+            margin: 6px 0 !important;
+        }
+
+        .scroll-sidebar form {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .scroll-sidebar form .sidebar-link {
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        /* Header tetap 70px, isi langsung berada di bawahnya. */
+        .body-wrapper-inner {
+            padding-top: 88px !important;
+            margin-top: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .body-wrapper-inner .container-fluid {
+            padding-top: 0 !important;
+        }
+
+        .welcome-box {
+            margin-top: 0 !important;
+            margin-bottom: 24px !important;
+        }
+
+        @media (max-width: 1199px) {
+            .body-wrapper-inner {
+                padding-top: 88px !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .body-wrapper-inner {
+                padding-top: 78px !important;
+            }
+        }
+
+
+        /* =====================================================
+           FINAL - SIDEBAR & WELCOME RAPIH
+        ====================================================== */
+        .left-sidebar {
+            top: 0 !important; left: 0 !important; bottom: 0 !important;
+            width: 270px !important; max-width: 270px !important;
+            height: 100vh !important; overflow: hidden !important;
+            background: #fff !important;
+        }
+        .left-sidebar > div {
+            height: 100% !important;
+            display: flex !important; flex-direction: column !important;
+            overflow: hidden !important;
+        }
+        .brand-logo {
+            height: 80px !important; min-height: 80px !important;
+            padding: 14px 24px !important; box-sizing: border-box !important;
+            flex-shrink: 0 !important;
+        }
+        .scroll-sidebar {
+            height: auto !important; flex: 1 1 auto !important;
+            padding: 6px 14px 12px !important; box-sizing: border-box !important;
+            overflow-y: auto !important; overflow-x: hidden !important;
+        }
+        .scroll-sidebar #sidebarnav { margin: 0 !important; padding: 0 !important; }
+        .scroll-sidebar .sidebar-item { margin: 0 !important; padding: 0 !important; }
+        .scroll-sidebar .sidebar-link {
+            width: 100% !important; height: 40px !important; min-height: 40px !important;
+            margin: 1px 0 !important; padding: 0 10px !important;
+            display: flex !important; align-items: center !important;
+            box-sizing: border-box !important; border-radius: 8px !important;
+        }
+        .scroll-sidebar .sidebar-link > span:first-child {
+            width: 28px !important; min-width: 28px !important;
+            display: flex !important; align-items: center !important; justify-content: center !important;
+        }
+        .scroll-sidebar .sidebar-link .hide-menu { margin-left: 8px !important; line-height: 1 !important; }
+        .scroll-sidebar .nav-small-cap {
+            height: 22px !important; min-height: 22px !important;
+            margin: 7px 0 4px !important; padding: 0 10px !important;
+            display: flex !important; align-items: center !important;
+            box-sizing: border-box !important;
+        }
+        .scroll-sidebar .nav-small-cap .nav-small-cap-icon { display: none !important; }
+        .scroll-sidebar .sidebar-divider { margin: 5px 8px !important; }
+        .scroll-sidebar form { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+        .scroll-sidebar form .sidebar-link { width: 100% !important; border: 0 !important; }
+        .body-wrapper {
+            margin-left: 270px !important; width: calc(100% - 270px) !important;
+            max-width: calc(100% - 270px) !important; min-height: 100vh !important;
+        }
+        .app-header {
+            top: 0 !important; left: 270px !important;
+            width: calc(100% - 270px) !important; max-width: calc(100% - 270px) !important;
+            height: 70px !important;
+        }
+        .body-wrapper-inner {
+            padding-top: 88px !important; margin-top: 0 !important; box-sizing: border-box !important;
+        }
+        .body-wrapper-inner .container-fluid { padding-top: 0 !important; }
+        .welcome-box { margin-top: 0 !important; margin-bottom: 24px !important; }
+        @media (max-width: 1199px) {
+            .body-wrapper { margin-left: 0 !important; width: 100% !important; max-width: 100% !important; }
+            .app-header { left: 0 !important; width: 100% !important; max-width: 100% !important; }
+        }
+        @media (max-width: 767px) {
+            .body-wrapper-inner { padding-top: 78px !important; }
+        }
+
     </style>
 </head>
 
@@ -212,7 +707,7 @@
 
                             <div>
                                 <div class="school-brand">
-                                    ADMIN SEKOLAH
+                                    MTsN 10 TASIKMALAYA
                                 </div>
 
                                 <div class="school-subtitle">
@@ -240,11 +735,6 @@
 
                     <ul id="sidebarnav">
 
-
-                        {{-- =============================
-                            MENU UTAMA
-                        ============================== --}}
-
                         <li class="nav-small-cap">
 
                             <iconify-icon
@@ -266,9 +756,7 @@
                                 href="{{ url('/') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-dashboard"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
@@ -280,16 +768,14 @@
                         </li>
 
 
-                        {{-- PROFIL SEKOLAH --}}
+                        {{-- PROFIL --}}
                         <li class="sidebar-item">
 
                             <a class="sidebar-link"
                                 href="{{ url('/admin/profil') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-school"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
@@ -308,9 +794,7 @@
                                 href="{{ url('/admin/guru') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-users"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
@@ -329,9 +813,7 @@
                                 href="{{ url('/admin/siswa') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-school"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
@@ -350,9 +832,7 @@
                                 href="{{ url('/admin/berita') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-news"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
@@ -371,9 +851,7 @@
                                 href="{{ url('/admin/galeri') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-photo"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
@@ -392,9 +870,7 @@
                                 href="{{ url('/admin/ekstrakurikuler') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-trophy"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
@@ -406,6 +882,21 @@
                         </li>
 
 
+                        {{-- MANAGEMENT USER --}}
+                        <li class="nav-small-cap">
+
+                            <iconify-icon
+                                icon="solar:menu-dots-linear"
+                                class="nav-small-cap-icon fs-4">
+                            </iconify-icon>
+
+                            <span class="hide-menu">
+                                MANAGEMENT USER
+                            </span>
+
+                        </li>
+
+
                         {{-- USER --}}
                         <li class="sidebar-item">
 
@@ -413,13 +904,11 @@
                                 href="{{ url('/admin/user') }}">
 
                                 <span class="d-flex">
-
                                     <i class="ti ti-user"></i>
-
                                 </span>
 
                                 <span class="hide-menu">
-                                    Pengguna
+                                    User
                                 </span>
 
                             </a>
@@ -427,15 +916,11 @@
                         </li>
 
 
-                        {{-- PEMBATAS --}}
                         <li>
-
                             <span class="sidebar-divider lg"></span>
-
                         </li>
 
 
-                        {{-- INFORMASI --}}
                         <li class="nav-small-cap">
 
                             <iconify-icon
@@ -463,9 +948,7 @@
                                     class="sidebar-link border-0 bg-transparent w-100 text-start">
 
                                     <span class="d-flex">
-
                                         <i class="ti ti-logout"></i>
-
                                     </span>
 
                                     <span class="hide-menu">
@@ -529,9 +1012,7 @@
                                     <i class="ti ti-user-circle fs-6"></i>
 
                                     <span class="ms-2">
-
                                         {{ session('username', 'Admin') }}
-
                                     </span>
 
                                 </a>
@@ -542,15 +1023,11 @@
                                     <div class="p-3">
 
                                         <h6 class="mb-1">
-
                                             {{ session('username', 'Admin') }}
-
                                         </h6>
 
                                         <small class="text-muted">
-
                                             {{ session('role', 'Admin') }}
-
                                         </small>
 
                                     </div>
@@ -577,9 +1054,7 @@
                 <div class="container-fluid">
 
 
-                    {{-- =============================
-                        WELCOME
-                    ============================== --}}
+                    {{-- WELCOME --}}
 
                     <div class="card welcome-box mb-4">
 
@@ -621,10 +1096,9 @@
                     </div>
 
 
-
-                    {{-- =============================
-                        STATISTIK DATABASE
-                    ============================== --}}
+                    {{-- =====================================================
+                        STATISTIK
+                    ====================================================== --}}
 
                     <div class="row">
 
@@ -639,23 +1113,17 @@
                                     <div class="d-flex align-items-center">
 
                                         <div class="stat-icon icon-blue">
-
                                             <i class="ti ti-users"></i>
-
                                         </div>
 
                                         <div class="ms-3">
 
                                             <h3 class="mb-0">
-
                                                 {{ $jumlahGuru ?? 0 }}
-
                                             </h3>
 
                                             <span class="text-muted">
-
                                                 Data Guru
-
                                             </span>
 
                                         </div>
@@ -679,23 +1147,17 @@
                                     <div class="d-flex align-items-center">
 
                                         <div class="stat-icon icon-green">
-
                                             <i class="ti ti-school"></i>
-
                                         </div>
 
                                         <div class="ms-3">
 
                                             <h3 class="mb-0">
-
                                                 {{ $jumlahSiswa ?? 0 }}
-
                                             </h3>
 
                                             <span class="text-muted">
-
                                                 Data Siswa
-
                                             </span>
 
                                         </div>
@@ -719,23 +1181,17 @@
                                     <div class="d-flex align-items-center">
 
                                         <div class="stat-icon icon-orange">
-
                                             <i class="ti ti-news"></i>
-
                                         </div>
 
                                         <div class="ms-3">
 
                                             <h3 class="mb-0">
-
                                                 {{ $jumlahBerita ?? 0 }}
-
                                             </h3>
 
                                             <span class="text-muted">
-
                                                 Berita
-
                                             </span>
 
                                         </div>
@@ -749,7 +1205,7 @@
                         </div>
 
 
-                        {{-- EKSTRAKURIKULER --}}
+                        {{-- EKSKUL --}}
                         <div class="col-lg-3 col-md-6">
 
                             <div class="card stat-card">
@@ -759,23 +1215,17 @@
                                     <div class="d-flex align-items-center">
 
                                         <div class="stat-icon icon-purple">
-
                                             <i class="ti ti-trophy"></i>
-
                                         </div>
 
                                         <div class="ms-3">
 
                                             <h3 class="mb-0">
-
                                                 {{ $jumlahEkskul ?? 0 }}
-
                                             </h3>
 
                                             <span class="text-muted">
-
                                                 Ekstrakurikuler
-
                                             </span>
 
                                         </div>
@@ -791,10 +1241,9 @@
                     </div>
 
 
-
-                    {{-- =============================
-                        PROFIL SEKOLAH + GALERI
-                    ============================== --}}
+                    {{-- =====================================================
+                        PROFIL + GALERI
+                    ====================================================== --}}
 
                     <div class="row mt-2">
 
@@ -811,32 +1260,25 @@
                                         <div>
 
                                             <h4 class="card-title mb-1">
-
                                                 Profil Sekolah
-
                                             </h4>
 
                                             <p class="card-subtitle">
-
                                                 Data dari tabel
                                                 <b>profil_sekolah</b>
-
                                             </p>
 
                                         </div>
-
 
                                         <a href="{{ url('/admin/profil') }}"
                                             class="btn btn-primary">
 
                                             <i class="ti ti-edit"></i>
-
                                             Kelola
 
                                         </a>
 
                                     </div>
-
 
                                     <hr>
 
@@ -845,7 +1287,6 @@
 
                                         <div class="row">
 
-                                            {{-- NAMA --}}
                                             <div class="col-md-6">
 
                                                 <div class="profile-info">
@@ -855,9 +1296,7 @@
                                                     </div>
 
                                                     <div class="profile-value">
-
                                                         {{ $profil->nama_sekolah ?? '-' }}
-
                                                     </div>
 
                                                 </div>
@@ -865,7 +1304,6 @@
                                             </div>
 
 
-                                            {{-- KEPALA --}}
                                             <div class="col-md-6">
 
                                                 <div class="profile-info">
@@ -875,9 +1313,7 @@
                                                     </div>
 
                                                     <div class="profile-value">
-
                                                         {{ $profil->kepala_sekolah ?? '-' }}
-
                                                     </div>
 
                                                 </div>
@@ -885,7 +1321,6 @@
                                             </div>
 
 
-                                            {{-- NPSN --}}
                                             <div class="col-md-6">
 
                                                 <div class="profile-info">
@@ -895,9 +1330,7 @@
                                                     </div>
 
                                                     <div class="profile-value">
-
                                                         {{ $profil->npsn ?? '-' }}
-
                                                     </div>
 
                                                 </div>
@@ -905,7 +1338,6 @@
                                             </div>
 
 
-                                            {{-- KONTAK --}}
                                             <div class="col-md-6">
 
                                                 <div class="profile-info">
@@ -915,9 +1347,7 @@
                                                     </div>
 
                                                     <div class="profile-value">
-
                                                         {{ $profil->kontak ?? '-' }}
-
                                                     </div>
 
                                                 </div>
@@ -925,7 +1355,6 @@
                                             </div>
 
 
-                                            {{-- ALAMAT --}}
                                             <div class="col-md-12">
 
                                                 <div class="profile-info">
@@ -935,9 +1364,7 @@
                                                     </div>
 
                                                     <div class="profile-value">
-
                                                         {{ $profil->alamat ?? '-' }}
-
                                                     </div>
 
                                                 </div>
@@ -945,7 +1372,6 @@
                                             </div>
 
 
-                                            {{-- TAHUN BERDIRI --}}
                                             <div class="col-md-6">
 
                                                 <div class="profile-info">
@@ -955,9 +1381,7 @@
                                                     </div>
 
                                                     <div class="profile-value">
-
                                                         {{ $profil->tahun_berdiri ?? '-' }}
-
                                                     </div>
 
                                                 </div>
@@ -965,7 +1389,6 @@
                                             </div>
 
 
-                                            {{-- VISI MISI --}}
                                             <div class="col-md-6">
 
                                                 <div class="profile-info">
@@ -975,9 +1398,7 @@
                                                     </div>
 
                                                     <div class="profile-value">
-
                                                         {{ $profil->visi_misi ?? '-' }}
-
                                                     </div>
 
                                                 </div>
@@ -989,9 +1410,7 @@
                                     @else
 
                                         <div class="alert alert-warning mb-0">
-
                                             Data profil sekolah belum tersedia.
-
                                         </div>
 
                                     @endif
@@ -1003,7 +1422,7 @@
                         </div>
 
 
-                        {{-- DATA GALERI --}}
+                        {{-- GALERI --}}
                         <div class="col-lg-4">
 
                             <div class="card">
@@ -1015,15 +1434,11 @@
                                         <div>
 
                                             <h4 class="card-title mb-1">
-
                                                 Galeri
-
                                             </h4>
 
                                             <p class="card-subtitle">
-
                                                 Data galeri sekolah
-
                                             </p>
 
                                         </div>
@@ -1042,15 +1457,11 @@
                                         </div>
 
                                         <h2 class="mb-1">
-
                                             {{ $jumlahGaleri ?? 0 }}
-
                                         </h2>
 
                                         <p class="text-muted mb-3">
-
                                             Total Galeri
-
                                         </p>
 
                                         <a href="{{ url('/admin/galeri') }}"
@@ -1071,10 +1482,9 @@
                     </div>
 
 
-
-                    {{-- =============================
+                    {{-- =====================================================
                         MENU CEPAT
-                    ============================== --}}
+                    ====================================================== --}}
 
                     <div class="row mt-2">
 
@@ -1085,16 +1495,12 @@
                                 <div class="card-body">
 
                                     <h4 class="card-title mb-1">
-
                                         Menu Cepat
-
                                     </h4>
 
                                     <p class="card-subtitle mb-4">
-
                                         Kelola data sesuai tabel database
                                         sekolah.
-
                                     </p>
 
 
@@ -1114,9 +1520,7 @@
                                                         <div class="d-flex align-items-center">
 
                                                             <div class="menu-icon icon-blue">
-
                                                                 <i class="ti ti-school"></i>
-
                                                             </div>
 
                                                             <div class="ms-3">
@@ -1155,9 +1559,7 @@
                                                         <div class="d-flex align-items-center">
 
                                                             <div class="menu-icon icon-green">
-
                                                                 <i class="ti ti-users"></i>
-
                                                             </div>
 
                                                             <div class="ms-3">
@@ -1196,9 +1598,7 @@
                                                         <div class="d-flex align-items-center">
 
                                                             <div class="menu-icon icon-purple">
-
                                                                 <i class="ti ti-school"></i>
-
                                                             </div>
 
                                                             <div class="ms-3">
@@ -1237,9 +1637,7 @@
                                                         <div class="d-flex align-items-center">
 
                                                             <div class="menu-icon icon-orange">
-
                                                                 <i class="ti ti-news"></i>
-
                                                             </div>
 
                                                             <div class="ms-3">
@@ -1278,9 +1676,7 @@
                                                         <div class="d-flex align-items-center">
 
                                                             <div class="menu-icon icon-blue">
-
                                                                 <i class="ti ti-photo"></i>
-
                                                             </div>
 
                                                             <div class="ms-3">
@@ -1319,9 +1715,7 @@
                                                         <div class="d-flex align-items-center">
 
                                                             <div class="menu-icon icon-orange">
-
                                                                 <i class="ti ti-trophy"></i>
-
                                                             </div>
 
                                                             <div class="ms-3">
@@ -1360,9 +1754,7 @@
                                                         <div class="d-flex align-items-center">
 
                                                             <div class="menu-icon icon-purple">
-
                                                                 <i class="ti ti-user"></i>
-
                                                             </div>
 
                                                             <div class="ms-3">
@@ -1398,10 +1790,9 @@
                     </div>
 
 
-
-                    {{-- =============================
+                    {{-- =====================================================
                         DATA TERBARU
-                    ============================== --}}
+                    ====================================================== --}}
 
                     <div class="row mt-2">
 
@@ -1429,9 +1820,7 @@
 
                                         <a href="{{ url('/admin/guru') }}"
                                             class="btn btn-sm btn-primary">
-
                                             Lihat Semua
-
                                         </a>
 
                                     </div>
@@ -1445,17 +1834,9 @@
 
                                                 <tr>
 
-                                                    <th>
-                                                        Nama Guru
-                                                    </th>
-
-                                                    <th>
-                                                        NIP
-                                                    </th>
-
-                                                    <th>
-                                                        Mapel
-                                                    </th>
+                                                    <th>Nama Guru</th>
+                                                    <th>NIP</th>
+                                                    <th>Mapel</th>
 
                                                 </tr>
 
@@ -1532,9 +1913,7 @@
 
                                         <a href="{{ url('/admin/siswa') }}"
                                             class="btn btn-sm btn-primary">
-
                                             Lihat Semua
-
                                         </a>
 
                                     </div>
@@ -1548,17 +1927,9 @@
 
                                                 <tr>
 
-                                                    <th>
-                                                        NISN
-                                                    </th>
-
-                                                    <th>
-                                                        Nama
-                                                    </th>
-
-                                                    <th>
-                                                        Jenis Kelamin
-                                                    </th>
+                                                    <th>NISN</th>
+                                                    <th>Nama</th>
+                                                    <th>Jenis Kelamin</th>
 
                                                 </tr>
 
@@ -1614,14 +1985,12 @@
                     </div>
 
 
-
                     {{-- FOOTER --}}
+
                     <div class="py-4 text-center">
 
                         <p class="mb-0 text-muted">
-
                             Sistem Informasi Profil Sekolah
-
                         </p>
 
                     </div>

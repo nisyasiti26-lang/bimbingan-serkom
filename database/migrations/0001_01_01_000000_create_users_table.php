@@ -4,26 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('user', function (Blueprint $table) {
-            $table->int('id_user')->primary;
+            $table->integer('id_user')->primary();
             $table->string('name');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('password');
-            $table->enum('role',['admin','operator']);
+            $table->enum('role', ['admin', 'operator']);
             $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->int('id_user')->primary();
+            $table->integer('id_user')->primary();
             $table->string('username');
             $table->timestamp('created_at')->nullable();
         });
@@ -38,12 +34,9 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
