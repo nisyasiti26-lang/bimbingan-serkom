@@ -13,12 +13,9 @@ class User extends Authenticatable
 
     protected $primaryKey = 'id_user';
 
-    public $incrementing = false;
-
-    protected $keyType = 'int';
+    public $timestamps = false;
 
     protected $fillable = [
-        'id_user',
         'name',
         'username',
         'password',
@@ -27,6 +24,5 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 }

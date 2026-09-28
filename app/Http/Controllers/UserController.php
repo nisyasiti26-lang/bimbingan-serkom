@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $users = User::orderBy('id_user', 'desc')->get();
 
-        return view('user.index', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
 
@@ -24,50 +24,43 @@ class UserController extends Controller
     // =========================
     public function create()
     {
-        return view('user.create');
+        return view('admin.user.create');
     }
 
 
     // =========================
     // SIMPAN USER
     // =========================
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+   public function store(Request $request)
+{
+    $validated = $request->validate([
+        'username' => [
+            'required',
+            'string',
+            'max:255',
+            'unique:user,username'
+        ],
+        'password' => [
+            'required',
+            'string',
+            'min:6'
+        ],
+        'role' => [
+            'required',
+            'in:admin,operator'
+        ],
+    ]);
 
-            'username' => [
-                'required',
-                'string',
-                'max:255',
-                'unique:user,username'
-            ],
+    User::create([
+        'name' => $validated['username'],
+        'username' => $validated['username'],
+        'password' => Hash::make($validated['password']),
+        'role' => $validated['role'],
+    ]);
 
-            'password' => [
-                'required',
-                'string',
-                'min:6'
-            ],
-
-            'role' => [
-                'required',
-                'in:admin,operator'
-            ],
-        ]);
-
-        User::create([
-            'name' => $validated['name'],
-            'username' => $validated['username'],
-
-            // Password di-enkripsi
-            'password' => Hash::make($validated['password']),
-
-            'role' => $validated['role'],
-        ]);
-
-        return redirect('/admin/user')
-            ->with('success', 'User berhasil ditambahkan.');
-    }
+    return redirect('/admin/user')
+        ->with('success', 'User berhasil ditambahkan.');
+}
 
 
     // =========================
@@ -77,7 +70,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id_user);
 
-        return view('user.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
 
@@ -120,7 +113,7 @@ class UserController extends Controller
             'role' => $validated['role'],
         ];
 
-        // Kalau password diisi, password diganti
+        // Jika password diisi, password akan diubah
         if (!empty($validated['password'])) {
             $data['password'] = Hash::make($validated['password']);
         }

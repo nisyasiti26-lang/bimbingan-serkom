@@ -127,7 +127,7 @@
                                                 class="form-check-label text-dark"
                                                 for="remember">
 
-                                                Ingat Saya?
+                                                Ingat Saya
 
                                             </label>
 
