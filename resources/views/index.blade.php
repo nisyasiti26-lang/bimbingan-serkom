@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title', 'Admin - SMK Singaparna')
+        @yield('title', 'Admin - SMKS Singaparna')
     </title>
 
 
@@ -694,7 +694,7 @@
             <i class="bi bi-mortarboard-fill"></i>
 
             <span>
-                SMK Singaparna
+                SMKS Singaparna
             </span>
 
         </a>
@@ -924,7 +924,7 @@
 
             <h5 class="header-title">
 
-                @yield('title', 'Dashboard - SMK Singaparna')
+                @yield('title', 'Dashboard - SMKS Singaparna')
 
             </h5>
 
@@ -995,7 +995,7 @@
 
 <footer class="main-footer">
 
-    © {{ date('Y') }} SMK Singaparna
+    © {{ date('Y') }} SMKS Singaparna
 
 </footer>
 

@@ -34,10 +34,9 @@ class ProfilSekolahController extends Controller
         'deskripsi' => 'nullable|string',
     ]);
 
-    // Ambil data profil pertama
+   
     $profil = ProfilSekolah::first();
 
-    // Kalau belum ada data, buat data baru
     if (!$profil) {
         $profil = new ProfilSekolah();
     }
@@ -51,12 +50,10 @@ class ProfilSekolahController extends Controller
     $profil->tahun_berdiri = $request->tahun_berdiri;
     $profil->deskripsi = $request->deskripsi;
 
-    // Foto
     if ($request->hasFile('foto')) {
         $profil->foto = $request->file('foto')->store('profil', 'public');
     }
 
-    // Logo
     if ($request->hasFile('logo')) {
         $profil->logo = $request->file('logo')->store('profil', 'public');
     }

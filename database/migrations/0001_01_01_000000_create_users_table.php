@@ -17,13 +17,11 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->integer('id_user')->primary();
             $table->string('username');
             $table->timestamp('created_at')->nullable();
         });
-
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();

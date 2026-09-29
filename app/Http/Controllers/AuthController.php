@@ -39,7 +39,7 @@ class AuthController extends Controller
             'role' => $user->role,
         ]);
 
-        // Setelah login langsung ke dashboard
+
         return redirect('/');
     }
 

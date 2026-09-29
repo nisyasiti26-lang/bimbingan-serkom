@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // =========================
-    // TAMPILKAN DATA USER
-    // =========================
     public function index()
     {
         $users = User::orderBy('id_user', 'desc')->get();
@@ -18,21 +15,14 @@ class UserController extends Controller
         return view('admin.user.index', compact('users'));
     }
 
-
-    // =========================
-    // HALAMAN TAMBAH USER
-    // =========================
     public function create()
     {
         return view('admin.user.create');
     }
 
 
-    // =========================
-    // SIMPAN USER
-    // =========================
    public function store(Request $request)
-{
+   {
     $validated = $request->validate([
         'username' => [
             'required',
@@ -62,10 +52,6 @@ class UserController extends Controller
         ->with('success', 'User berhasil ditambahkan.');
 }
 
-
-    // =========================
-    // HALAMAN EDIT USER
-    // =========================
     public function edit($id_user)
     {
         $user = User::findOrFail($id_user);
@@ -73,10 +59,6 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user'));
     }
 
-
-    // =========================
-    // UPDATE USER
-    // =========================
     public function update(Request $request, $id_user)
     {
         $user = User::findOrFail($id_user);
@@ -124,10 +106,6 @@ class UserController extends Controller
             ->with('success', 'User berhasil diubah.');
     }
 
-
-    // =========================
-    // HAPUS USER
-    // =========================
     public function destroy($id_user)
     {
         $user = User::findOrFail($id_user);
