@@ -89,16 +89,8 @@
 </style>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="form-card">
-            <h5 class="mb-1">
-                <i class="bi bi-person-plus me-2"></i>
-                Tambah Data User
-            </h5>
-            <p class="text-muted mb-4">
-                Silakan masukkan data pengguna baru.
-            </p>
-            <hr>
 
             @if ($errors->any())
                 <div class="alert alert-danger">

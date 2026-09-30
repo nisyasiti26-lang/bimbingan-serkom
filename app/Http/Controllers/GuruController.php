@@ -21,7 +21,7 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
-        $request->validat([
+        $request->validate([
             'nama_guru' => 'required|max:40',
             'nip' => 'nullable|max:15',
             'mapel' => 'nullable|max:40',

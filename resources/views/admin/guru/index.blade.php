@@ -10,31 +10,35 @@
         padding: 0 0 30px;
     }
 
-    /* HEADER */
-    .guru-header {
+    /* CARD */
+    .guru-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 10px;
+        overflow: hidden;
+    }
+
+    /* HEADER CARD */
+    .guru-card-header {
         padding: 20px 24px;
+        border-bottom: 1px solid #e8edf3;
 
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        margin-bottom: 20px;
     }
 
-    .guru-header h3 {
+    .guru-card-title {
         margin: 0;
         font-size: 22px;
         font-weight: 700;
         color: #12365d;
     }
 
-    .guru-header p {
+    .guru-card-subtitle {
         margin: 5px 0 0;
         font-size: 13px;
-        color: #6b7f95;
+        color: #8b99aa;
     }
 
     /* TOMBOL TAMBAH */
@@ -43,7 +47,7 @@
         align-items: center;
         gap: 7px;
 
-        padding: 9px 15px;
+        padding: 10px 16px;
 
         background: #1769aa;
         color: #ffffff;
@@ -51,7 +55,7 @@
         border: none;
         border-radius: 6px;
 
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 600;
 
         text-decoration: none;
@@ -61,32 +65,6 @@
     .btn-tambah:hover {
         background: #12568d;
         color: #ffffff;
-    }
-
-    /* CARD */
-    .guru-card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .guru-card-header {
-        padding: 20px 24px;
-        border-bottom: 1px solid #e8edf3;
-    }
-
-    .guru-card-title {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 700;
-        color: #12365d;
-    }
-
-    .guru-card-subtitle {
-        margin: 5px 0 0;
-        font-size: 12px;
-        color: #8b99aa;
     }
 
     /* TABLE */
@@ -279,7 +257,7 @@
     /* RESPONSIVE */
     @media (max-width: 700px) {
 
-        .guru-header {
+        .guru-card-header {
             flex-direction: column;
             align-items: flex-start;
             gap: 15px;
@@ -299,56 +277,35 @@
 
 <div class="guru-wrapper">
 
-    {{-- HEADER --}}
-
-    <div class="guru-header">
-
-        <div>
-
-            <h3>
-                Data Guru
-            </h3>
-
-            <p>
-                Kelola data guru SMKS Singaparna
-            </p>
-
-        </div>
-
-
-        {{-- TOMBOL TAMBAH --}}
-
-        <a href="{{ route('admin.guru.create') }}"
-           class="btn-tambah">
-
-            <i class="bi bi-plus-lg"></i>
-
-            Tambah Guru
-
-        </a>
-
-    </div>
-
-
     {{-- CARD DATA GURU --}}
-
     <div class="guru-card">
 
+        {{-- HEADER --}}
         <div class="guru-card-header">
 
-            <div class="guru-card-title">
-                Daftar Guru
+            <div>
+                <div class="guru-card-title">
+                    Daftar Guru
+                </div>
+
+                <div class="guru-card-subtitle">
+                    Data guru yang terdaftar dalam sistem
+                </div>
             </div>
 
-            <div class="guru-card-subtitle">
-                Data guru yang terdaftar dalam sistem
-            </div>
+            {{-- TOMBOL TAMBAH --}}
+            <a href="{{ route('admin.guru.create') }}"
+               class="btn-tambah">
+
+                <i class="bi bi-plus-lg"></i>
+                Tambah Guru
+
+            </a>
 
         </div>
 
 
         {{-- CEK DATA GURU --}}
-
         @if(isset($gurus) && $gurus->count() > 0)
 
             <div class="guru-table-wrapper">
@@ -395,14 +352,12 @@
                             <tr>
 
                                 {{-- NOMOR --}}
-
                                 <td class="nomor">
                                     {{ $loop->iteration }}
                                 </td>
 
 
                                 {{-- FOTO --}}
-
                                 <td>
 
                                     @if($guru->foto)
@@ -426,7 +381,6 @@
 
 
                                 {{-- NAMA --}}
-
                                 <td class="nama-guru">
 
                                     {{ $guru->nama_guru }}
@@ -435,7 +389,6 @@
 
 
                                 {{-- NIP --}}
-
                                 <td>
 
                                     {{ $guru->nip ?? '-' }}
@@ -444,7 +397,6 @@
 
 
                                 {{-- MAPEL --}}
-
                                 <td>
 
                                     @if($guru->mapel)
@@ -463,13 +415,11 @@
 
 
                                 {{-- AKSI --}}
-
                                 <td>
 
                                     <div class="aksi">
 
                                         {{-- EDIT --}}
-
                                         <a
                                             href="{{ route('admin.guru.edit', $guru->id_guru) }}"
                                             class="btn-aksi btn-edit"
@@ -481,7 +431,6 @@
 
 
                                         {{-- HAPUS --}}
-
                                         <form
                                             action="{{ route('admin.guru.delete', $guru->id_guru) }}"
                                             method="POST"
@@ -521,7 +470,6 @@
         @else
 
             {{-- JIKA DATA KOSONG --}}
-
             <div class="empty-guru">
 
                 <i class="bi bi-person-workspace"></i>

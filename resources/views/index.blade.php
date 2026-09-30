@@ -1,311 +1,540 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta charset="UTF-8">
+    <title>@yield('title', 'Dashboard - SMKS Singaparna')</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>
-        @yield('title', 'Admin - SMKS Singaparna')
-    </title>
-
-
-    {{-- Bootstrap Icons --}}
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-
-    {{-- Bootstrap --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
 
-    {{-- CSS bawaan template --}}
-    <link rel="stylesheet"
-        href="{{ asset('css/styles.min.css') }}">
-
+    <!-- Tabler Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 
     <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
 
         * {
             box-sizing: border-box;
         }
 
+        html,
         body {
             margin: 0;
             padding: 0;
+            min-height: 100%;
+        }
 
-            font-family: Arial, Helvetica, sans-serif;
-
-            background: #f4f7fb;
-
-            color: #172b4d;
+        body {
+            background: #f6f8fc;
+            color: #2a3547;
+            font-family: "Segoe UI", Arial, sans-serif;
         }
 
 
-        /* ========================================
+        /* =====================================================
            SIDEBAR
-        ======================================== */
+        ===================================================== */
 
         .left-sidebar {
             position: fixed;
-
             top: 0;
             left: 0;
+            bottom: 0;
 
-            width: 250px;
-            height: 100vh;
+            width: 225px;
 
-            z-index: 1000;
+            background: #ffffff;
 
-            background: linear-gradient(
-                180deg,
-                #155a98 0%,
-                #176db0 100%
-            );
+            border-right: 1px solid #e9edf2;
 
-            color: white;
+            z-index: 1100;
 
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
         }
 
 
-        /* ========================================
-           LOGO
-        ======================================== */
+        /* =====================================================
+           LOGO SEKOLAH
+        ===================================================== */
 
-        .brand-logo {
-            height: 70px;
+        .sidebar-brand {
+            height: 75px;
+
+            flex-shrink: 0;
 
             display: flex;
             align-items: center;
 
-            padding: 0 22px;
+            padding: 0 20px;
 
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            background: #ffffff;
+
+            border-bottom: 1px solid #f0f2f5;
         }
 
-        .brand-logo a {
-            color: white;
+        .sidebar-brand a {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
 
             text-decoration: none;
-
-            font-size: 18px;
-
-            font-weight: 700;
         }
 
-        .brand-logo i {
-            font-size: 24px;
+        .sidebar-logo {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #edf3ff;
+            color: #5d87ff;
+
+            font-size: 20px;
 
             margin-right: 10px;
         }
 
+        .sidebar-school-name {
+            color: #2a3547;
 
-        /* ========================================
-           SIDEBAR MENU
-        ======================================== */
+            font-size: 15px;
+            font-weight: 700;
+
+            line-height: 1.2;
+
+            white-space: nowrap;
+        }
+
+        .sidebar-school-subtitle {
+            display: block;
+
+            color: #98a2b3;
+
+            font-size: 9px;
+
+            margin-top: 3px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           SIDEBAR NAVIGATION
+        ===================================================== */
 
         .sidebar-nav {
-            padding: 20px 12px;
+            flex: 1;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            padding: 18px 12px 10px;
         }
 
         .sidebar-nav ul {
-            list-style: none;
-
             padding: 0;
-
             margin: 0;
+
+            list-style: none;
         }
 
-        .sidebar-nav li {
-            margin-bottom: 6px;
+        .menu-title {
+            padding: 12px 8px 7px;
+
+            color: #8b95a7;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .3px;
         }
 
-        .sidebar-nav a,
-        .sidebar-nav button {
+        .sidebar-item {
+            margin-bottom: 3px;
+        }
+
+        .sidebar-link {
             width: 100%;
+            min-height: 38px;
 
             display: flex;
-
             align-items: center;
 
-            gap: 13px;
+            gap: 11px;
 
-            padding: 12px 15px;
+            padding: 0 10px;
 
             border: none;
-
-            border-radius: 8px;
+            border-radius: 6px;
 
             background: transparent;
 
-            color: rgba(255,255,255,0.9);
+            color: #4d5b73;
+
+            font-size: 13px;
+            font-weight: 500;
 
             text-decoration: none;
 
-            font-size: 14px;
-
-            cursor: pointer;
-
-            transition: all 0.2s ease;
+            transition: all .2s ease;
         }
 
-        .sidebar-nav a i,
-        .sidebar-nav button i {
-            width: 22px;
+        .sidebar-link i {
+            width: 19px;
 
-            font-size: 19px;
+            flex-shrink: 0;
+
+            text-align: center;
+
+            color: #6f7d93;
+
+            font-size: 17px;
         }
 
-        .sidebar-nav a:hover,
-        .sidebar-nav button:hover {
-            background: rgba(255,255,255,0.13);
 
-            color: white;
+        /* Hover */
+
+        .sidebar-link:hover {
+            background: #f1f5ff;
+            color: #2856b9;
         }
 
-        .sidebar-nav a.active {
-            background: rgba(255,255,255,0.18);
+        .sidebar-link:hover i {
+            color: #2856b9;
+        }
 
-            color: white;
+
+        /* Menu aktif */
+
+        .sidebar-item.active > .sidebar-link {
+            background: #2856b9;
+
+            color: #ffffff;
 
             font-weight: 600;
+
+            box-shadow: 0 2px 5px rgba(40, 86, 185, .15);
+        }
+
+        .sidebar-item.active > .sidebar-link i {
+            color: #ffffff;
         }
 
 
-        /* ========================================
-           LOGOUT
-        ======================================== */
+        /* Scrollbar */
 
-        .logout-form {
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: #dfe4eb;
+            border-radius: 10px;
+        }
+
+
+        /* =====================================================
+           LOGOUT SIDEBAR
+        ===================================================== */
+
+        .sidebar-logout {
+            flex-shrink: 0;
+
+            padding: 10px 12px 15px;
+
+            background: #ffffff;
+
+            border-top: 1px solid #f0f2f5;
+        }
+
+        .sidebar-logout form {
             margin: 0;
         }
 
-        .logout-form button {
+        .logout-button {
+            width: 100%;
+            min-height: 38px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 0 10px;
+
+            border: none;
+            border-radius: 6px;
+
+            background: transparent;
+
+            color: #4d5b73;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
             text-align: left;
         }
 
+        .logout-button i {
+            width: 19px;
 
-        /* ========================================
+            flex-shrink: 0;
+
+            text-align: center;
+
+            color: #6f7d93;
+
+            font-size: 17px;
+        }
+
+        .logout-button:hover {
+            background: #fff1f1;
+            color: #dc3545;
+        }
+
+        .logout-button:hover i {
+            color: #dc3545;
+        }
+
+
+        /* =====================================================
            HEADER
-        ======================================== */
+        ===================================================== */
 
         .app-header {
             position: fixed;
 
             top: 0;
+            left: 225px;
             right: 0;
-            left: 250px;
 
             height: 75px;
 
-            background: white;
+            background: #ffffff;
 
-            border-bottom: 1px solid #e9eef5;
+            border-bottom: 1px solid #edf0f5;
 
-            z-index: 999;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, .03);
 
-            display: flex;
-
-            align-items: center;
+            z-index: 1000;
         }
 
         .header-inner {
             width: 100%;
-
-            padding: 0 28px;
+            height: 75px;
 
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-        }
 
-        .header-title {
-            font-size: 20px;
-
-            font-weight: 700;
-
-            color: #17365d;
-
-            margin: 0;
+            padding: 0 25px;
         }
 
 
-        /* ========================================
-           PROFILE HEADER
-        ======================================== */
+        /* =====================================================
+           NOTIFICATION
+        ===================================================== */
 
-        .header-profile {
+        .header-left {
             display: flex;
-
             align-items: center;
-
-            gap: 12px;
         }
 
-        .profile-icon {
-            width: 42px;
-            height: 42px;
+        .notification-button {
+            position: relative;
+
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+
+            background: transparent;
 
             border-radius: 50%;
 
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            background: #e8f2fc;
-
-            color: #155a98;
+            color: #4d5b73;
 
             font-size: 20px;
+
+            cursor: pointer;
         }
 
-        .profile-info {
+        .notification-button:hover {
+            background: #f4f7fb;
+            color: #2856b9;
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 7px;
+            right: 7px;
+
+            width: 7px;
+            height: 7px;
+
+            background: #2856b9;
+
+            border-radius: 50%;
+
+            border: 1px solid #ffffff;
+        }
+
+
+        /* =====================================================
+           PROFILE HEADER
+        ===================================================== */
+
+        .header-profile {
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            text-decoration: none;
+
+            padding: 4px 7px;
+
+            border-radius: 7px;
+        }
+
+        .header-profile:hover {
+            background: #f7f9fc;
+        }
+
+        .profile-avatar {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff3df;
+
+            color: #f39c12;
+
+            font-size: 18px;
+        }
+
+        .profile-detail {
             line-height: 1.2;
         }
 
         .profile-name {
-            font-size: 14px;
+            color: #2a3547;
 
-            font-weight: 700;
-
-            color: #172b4d;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .profile-role {
-            margin-top: 4px;
+            color: #98a2b3;
 
-            font-size: 12px;
+            font-size: 10px;
 
-            color: #8492a6;
+            margin-top: 3px;
+        }
+
+        .profile-chevron {
+            color: #98a2b3;
+
+            font-size: 14px;
         }
 
 
-        /* ========================================
-           MAIN CONTENT
-        ======================================== */
+        /* =====================================================
+           DROPDOWN
+        ===================================================== */
+
+        .dropdown-menu {
+            min-width: 190px;
+
+            padding: 7px;
+
+            margin-top: 8px !important;
+
+            border: 1px solid #edf0f5 !important;
+
+            border-radius: 8px !important;
+
+            box-shadow: 0 8px 25px rgba(30, 60, 90, .10) !important;
+        }
+
+        .dropdown-item {
+            padding: 8px 10px;
+
+            border-radius: 6px;
+
+            color: #536176;
+
+            font-size: 13px;
+        }
+
+        .dropdown-item:hover {
+            background: #f3f6ff;
+
+            color: #2856b9;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
 
         .body-wrapper {
-            margin-left: 250px !important;
+            margin-left: 225px;
 
-            padding-top: 75px !important;
+            padding-top: 75px;
 
-            min-height: calc(100vh - 75px) !important;
+            min-height: 100vh;
 
-            margin-top: 0 !important;
+            background: #f6f8fc;
         }
 
         .body-wrapper-inner {
-            padding: 20px 30px 30px !important;
-
-            margin: 0 !important;
+            padding: 25px 30px 35px;
         }
 
         .container-fluid {
@@ -317,358 +546,37 @@
         }
 
 
-        /* ========================================
-           FIX POSISI HALAMAN
-        ======================================== */
-
-        .body-wrapper,
-        .body-wrapper-inner,
-        .body-wrapper .container-fluid {
-            margin-top: 0 !important;
-        }
-
-        .body-wrapper-inner {
-            padding-top: 20px !important;
-        }
-
-        .top-header {
-            margin-top: 0 !important;
-
-            padding-top: 0 !important;
-        }
-
-        .dashboard-content {
-            margin-top: 0 !important;
-        }
-
-
-        /* ========================================
-           GENERAL CARD
-        ======================================== */
-
-        .card-custom {
-            background: white;
-
-            border-radius: 12px;
-
-            border: 1px solid #edf1f6;
-
-            box-shadow: 0 3px 15px rgba(30, 60, 90, 0.05);
-
-            padding: 24px;
-        }
-
-
-        /* ========================================
-           USER PAGE
-        ======================================== */
-
-        .top-header {
-            margin-bottom: 20px;
-        }
-
-        .top-header h3 {
-            color: #0b315f;
-
-            font-size: 24px;
-
-            font-weight: 700;
-
-            margin-bottom: 5px;
-        }
-
-        .top-header p {
-            color: #7890a8;
-
-            font-size: 14px;
-
-            margin-bottom: 0;
-        }
-
-        .card-title-custom {
-            color: #17365d;
-
-            font-size: 16px;
-
-            font-weight: 600;
-        }
-
-        .btn-tambah {
-            display: inline-flex;
-
-            align-items: center;
-
-            padding: 9px 15px;
-
-            border-radius: 7px;
-
-            background: #155a98;
-
-            color: white;
-
-            text-decoration: none;
-
-            font-size: 14px;
-
-            border: none;
-        }
-
-        .btn-tambah:hover {
-            background: #104b80;
-
-            color: white;
-        }
-
-        .btn-edit {
-            display: inline-flex;
-
-            align-items: center;
-
-            padding: 6px 10px;
-
-            border-radius: 6px;
-
-            background: transparent;
-
-            color: #17365d;
-
-            text-decoration: none;
-
-            font-size: 13px;
-
-            border: 1px solid #dce4ed;
-        }
-
-        .btn-edit:hover {
-            background: #f4f7fb;
-
-            color: #155a98;
-        }
-
-        .btn-hapus {
-            display: inline-flex;
-
-            align-items: center;
-
-            padding: 6px 10px;
-
-            border-radius: 6px;
-
-            background: transparent;
-
-            color: #dc3545;
-
-            font-size: 13px;
-
-            border: 1px solid #f1c5ca;
-        }
-
-        .btn-hapus:hover {
-            background: #fff5f5;
-        }
-
-        .badge-admin {
-            display: inline-block;
-
-            padding: 5px 10px;
-
-            border-radius: 20px;
-
-            background: #e8f2fc;
-
-            color: #155a98;
-
-            font-size: 12px;
-
-            font-weight: 600;
-        }
-
-        .badge-operator {
-            display: inline-block;
-
-            padding: 5px 10px;
-
-            border-radius: 20px;
-
-            background: #edf7ed;
-
-            color: #3c7d3c;
-
-            font-size: 12px;
-
-            font-weight: 600;
-        }
-
-
-        /* ========================================
-           BUTTON
-        ======================================== */
-
-        .btn-primary-custom {
-            background: #155a98;
-
-            border: none;
-
-            color: white;
-
-            padding: 10px 18px;
-
-            border-radius: 7px;
-
-            text-decoration: none;
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 7px;
-
-            transition: 0.2s;
-        }
-
-        .btn-primary-custom:hover {
-            background: #104b80;
-
-            color: white;
-        }
-
-
-        /* ========================================
-           TABLE
-        ======================================== */
-
-        .table-custom {
-            width: 100%;
-
-            border-collapse: collapse;
-        }
-
-        .table-custom th {
-            background: #f6f9fc;
-
-            color: #526581;
-
-            font-size: 13px;
-
-            font-weight: 600;
-
-            padding: 14px;
-
-            text-align: left;
-        }
-
-        .table-custom td {
-            padding: 14px;
-
-            border-top: 1px solid #edf1f6;
-
-            font-size: 14px;
-        }
-
-
-        /* ========================================
-           ALERT
-        ======================================== */
-
-        .alert {
-            border-radius: 8px;
-        }
-
-
-        /* ========================================
-           FOOTER
-        ======================================== */
-
-        .main-footer {
-            margin-left: 250px;
-
-            margin-top: 0;
-
-            padding: 20px 0;
-
-            text-align: center;
-
-            color: #8a99ad;
-
-            font-size: 13px;
-        }
-
-
-        /* ========================================
+        /* =====================================================
            RESPONSIVE
-        ======================================== */
-
-        @media (max-width: 991px) {
-
-            .left-sidebar {
-                width: 220px;
-            }
-
-            .app-header {
-                left: 220px;
-            }
-
-            .body-wrapper {
-                margin-left: 220px !important;
-            }
-
-            .main-footer {
-                margin-left: 220px;
-            }
-
-        }
-
+        ===================================================== */
 
         @media (max-width: 768px) {
 
             .left-sidebar {
-                width: 70px;
-            }
-
-            .brand-logo {
-                justify-content: center;
-
-                padding: 0;
-            }
-
-            .brand-logo span {
-                display: none;
-            }
-
-            .sidebar-nav a span,
-            .sidebar-nav button span {
-                display: none;
-            }
-
-            .sidebar-nav a,
-            .sidebar-nav button {
-                justify-content: center;
-
-                padding: 13px 8px;
+                transform: translateX(-100%);
             }
 
             .app-header {
-                left: 70px;
+                left: 0;
             }
 
             .body-wrapper {
-                margin-left: 70px !important;
+                margin-left: 0;
             }
 
-            .main-footer {
-                margin-left: 70px;
-            }
-
-            .profile-info {
+            .profile-detail,
+            .profile-chevron {
                 display: none;
             }
 
+            .body-wrapper-inner {
+                padding: 20px 15px;
+            }
         }
 
     </style>
 
-
-    @yield('css')
+    @stack('styles')
 
 </head>
 
@@ -676,51 +584,63 @@
 <body>
 
 
-{{-- =========================================================
+<!-- =====================================================
      SIDEBAR
-========================================================= --}}
+===================================================== -->
 
 <aside class="left-sidebar">
 
 
-    {{-- =====================================================
-         LOGO
-    ====================================================== --}}
+    <!-- LOGO -->
 
-    <div class="brand-logo">
+    <div class="sidebar-brand">
 
         <a href="{{ url('/') }}">
 
-            <i class="bi bi-mortarboard-fill"></i>
+            <div class="sidebar-logo">
+                <i class="ti ti-school"></i>
+            </div>
 
-            <span>
-                SMKS Singaparna
-            </span>
+            <div>
+
+                <div class="sidebar-school-name">
+                    SMKS Singaparna
+                </div>
+
+                <span class="sidebar-school-subtitle">
+                    Sistem Informasi Sekolah
+                </span>
+
+            </div>
 
         </a>
 
     </div>
 
 
-    {{-- =====================================================
-         MENU
-    ====================================================== --}}
+    <!-- MENU -->
 
-    <div class="sidebar-nav">
+    <nav class="sidebar-nav">
 
         <ul>
 
 
-            {{-- =================================================
-                 DASHBOARD
-            ================================================== --}}
+            <!-- HOME -->
 
-            <li>
+            <li class="menu-title">
+                HOME
+            </li>
 
-                <a href="{{ url('/') }}"
-                   class="{{ request()->is('/') ? 'active' : '' }}">
 
-                    <i class="bi bi-house-door"></i>
+            <!-- DASHBOARD -->
+
+            <li class="sidebar-item {{ request()->is('/') ? 'active' : '' }}">
+
+                <a
+                    href="{{ url('/') }}"
+                    class="sidebar-link">
+
+                    <i class="ti ti-layout-dashboard"></i>
 
                     <span>
                         Dashboard
@@ -731,16 +651,15 @@
             </li>
 
 
-            {{-- =================================================
-                 PROFIL SEKOLAH
-            ================================================== --}}
+            <!-- PROFIL -->
 
-            <li>
+            <li class="sidebar-item {{ request()->is('profile-sekolah*') ? 'active' : '' }}">
 
-                <a href="{{ url('/profile-sekolah') }}"
-                   class="{{ request()->is('profile-sekolah*') ? 'active' : '' }}">
+                <a
+                    href="{{ url('/profile-sekolah') }}"
+                    class="sidebar-link">
 
-                    <i class="bi bi-building"></i>
+                    <i class="ti ti-school"></i>
 
                     <span>
                         Profil Sekolah
@@ -751,16 +670,15 @@
             </li>
 
 
-            {{-- =================================================
-                 DATA GURU
-            ================================================== --}}
+            <!-- GURU -->
 
-            <li>
+            <li class="sidebar-item {{ request()->is('admin/guru*') ? 'active' : '' }}">
 
-                <a href="{{ url('/admin/guru') }}"
-                   class="{{ request()->is('admin/guru*') ? 'active' : '' }}">
+                <a
+                    href="{{ url('/admin/guru') }}"
+                    class="sidebar-link">
 
-                    <i class="bi bi-person-badge"></i>
+                    <i class="ti ti-users"></i>
 
                     <span>
                         Data Guru
@@ -771,16 +689,15 @@
             </li>
 
 
-            {{-- =================================================
-                 DATA SISWA
-            ================================================== --}}
+            <!-- SISWA -->
 
-            <li>
+            <li class="sidebar-item {{ request()->is('admin/siswa*') ? 'active' : '' }}">
 
-                <a href="{{ url('/admin/siswa') }}"
-                   class="{{ request()->is('admin/siswa*') ? 'active' : '' }}">
+                <a
+                    href="{{ url('/admin/siswa') }}"
+                    class="sidebar-link">
 
-                    <i class="bi bi-people"></i>
+                    <i class="ti ti-user"></i>
 
                     <span>
                         Data Siswa
@@ -791,16 +708,23 @@
             </li>
 
 
-            {{-- =================================================
-                 BERITA
-            ================================================== --}}
 
-            <li>
+            <!-- DATA SEKOLAH -->
 
-                <a href="{{ url('/admin/berita') }}"
-                   class="{{ request()->is('admin/berita*') ? 'active' : '' }}">
+            <li class="menu-title">
+                DATA SEKOLAH
+            </li>
 
-                    <i class="bi bi-newspaper"></i>
+
+            <!-- BERITA -->
+
+            <li class="sidebar-item {{ request()->is('admin/berita*') ? 'active' : '' }}">
+
+                <a
+                    href="{{ url('/admin/berita') }}"
+                    class="sidebar-link">
+
+                    <i class="ti ti-news"></i>
 
                     <span>
                         Berita
@@ -811,16 +735,15 @@
             </li>
 
 
-            {{-- =================================================
-                 GALERI
-            ================================================== --}}
+            <!-- GALERI -->
 
-            <li>
+            <li class="sidebar-item {{ request()->is('admin/galeri*') ? 'active' : '' }}">
 
-                <a href="{{ url('/admin/galeri') }}"
-                   class="{{ request()->is('admin/galeri*') ? 'active' : '' }}">
+                <a
+                    href="{{ url('/admin/galeri') }}"
+                    class="sidebar-link">
 
-                    <i class="bi bi-images"></i>
+                    <i class="ti ti-photo"></i>
 
                     <span>
                         Galeri
@@ -831,16 +754,15 @@
             </li>
 
 
-            {{-- =================================================
-                 EKSTRAKURIKULER
-            ================================================== --}}
+            <!-- EKSTRAKURIKULER -->
 
-            <li>
+            <li class="sidebar-item {{ request()->is('admin/ekstrakurikuler*') ? 'active' : '' }}">
 
-                <a href="{{ url('/admin/ekstrakurikuler') }}"
-                   class="{{ request()->is('admin/ekstrakurikuler*') ? 'active' : '' }}">
+                <a
+                    href="{{ url('/admin/ekstrakurikuler') }}"
+                    class="sidebar-link">
 
-                    <i class="bi bi-trophy"></i>
+                    <i class="ti ti-trophy"></i>
 
                     <span>
                         Ekstrakurikuler
@@ -851,16 +773,23 @@
             </li>
 
 
-            {{-- =================================================
-                 USER
-            ================================================== --}}
 
-            <li>
+            <!-- PENGATURAN -->
 
-                <a href="{{ url('/admin/user') }}"
-                   class="{{ request()->is('admin/user') || request()->is('admin/user/*') ? 'active' : '' }}">
+            <li class="menu-title">
+                PENGATURAN
+            </li>
 
-                    <i class="bi bi-person-gear"></i>
+
+            <!-- USER -->
+
+            <li class="sidebar-item {{ request()->is('admin/user*') ? 'active' : '' }}">
+
+                <a
+                    href="{{ url('/admin/user') }}"
+                    class="sidebar-link">
+
+                    <i class="ti ti-user-cog"></i>
 
                     <span>
                         User
@@ -870,36 +799,34 @@
 
             </li>
 
-
-            {{-- =================================================
-                 LOGOUT
-            ================================================== --}}
-
-            <li>
-
-                <form action="{{ url('/logout') }}"
-                      method="POST"
-                      class="logout-form">
-
-                    @csrf
-
-                    <button type="submit"
-                            onclick="return confirm('Anda yakin ingin keluar?')">
-
-                        <i class="bi bi-box-arrow-right"></i>
-
-                        <span>
-                            Logout
-                        </span>
-
-                    </button>
-
-                </form>
-
-            </li>
-
-
         </ul>
+
+    </nav>
+
+
+    <!-- LOGOUT -->
+
+    <div class="sidebar-logout">
+
+        <form
+            action="{{ url('/logout') }}"
+            method="POST">
+
+            @csrf
+
+            <button
+                type="submit"
+                class="logout-button">
+
+                <i class="ti ti-logout"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </form>
 
     </div>
 
@@ -907,61 +834,129 @@
 
 
 
-{{-- =========================================================
+<!-- =====================================================
      HEADER
-========================================================= --}}
+===================================================== -->
 
 <header class="app-header">
 
     <div class="header-inner">
 
 
-        {{-- =================================================
-             JUDUL HALAMAN
-        ================================================== --}}
+        <!-- NOTIFICATION -->
 
-        <div>
+        <div class="header-left">
 
-            <h5 class="header-title">
+            <button
+                type="button"
+                class="notification-button">
 
-                @yield('title', 'Dashboard - SMKS Singaparna')
+                <i class="ti ti-bell"></i>
 
-            </h5>
+                <span class="notification-dot"></span>
 
-        </div>
-
-
-        {{-- =================================================
-             PROFILE
-        ================================================== --}}
-
-        <div class="header-profile">
-
-            <div class="profile-icon">
-
-                <i class="bi bi-person-fill"></i>
-
-            </div>
-
-
-            <div class="profile-info">
-
-                <div class="profile-name">
-
-                    {{ session('username', 'Admin') }}
-
-                </div>
-
-                <div class="profile-role">
-
-                    {{ session('role', 'Admin') }}
-
-                </div>
-
-            </div>
+            </button>
 
         </div>
 
+
+
+        <!-- PROFILE -->
+
+        <div class="dropdown">
+
+            <a
+                href="#"
+                class="header-profile"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+
+
+                <div class="profile-avatar">
+
+                    <i class="ti ti-user"></i>
+
+                </div>
+
+
+                <div class="profile-detail">
+
+                    <div class="profile-name">
+
+                        {{ session('username', 'Admin') }}
+
+                    </div>
+
+                    <div class="profile-role">
+
+                        {{ session('role', 'Admin') }}
+
+                    </div>
+
+                </div>
+
+
+                <i class="ti ti-chevron-down profile-chevron"></i>
+
+            </a>
+
+
+
+            <ul class="dropdown-menu dropdown-menu-end">
+
+
+                <!-- AKUN -->
+
+                <li>
+
+                    <a
+                        class="dropdown-item"
+                        href="{{ url('/admin/user') }}">
+
+                        <i class="ti ti-user me-2"></i>
+
+                        Akun Saya
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <hr class="dropdown-divider">
+
+                </li>
+
+
+                <!-- LOGOUT -->
+
+                <li>
+
+                    <form
+                        action="{{ url('/logout') }}"
+                        method="POST">
+
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="dropdown-item text-danger">
+
+                            <i class="ti ti-logout me-2"></i>
+
+                            Logout
+
+                        </button>
+
+                    </form>
+
+                </li>
+
+
+            </ul>
+
+        </div>
 
     </div>
 
@@ -969,11 +964,11 @@
 
 
 
-{{-- =========================================================
-     ISI HALAMAN
-========================================================= --}}
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
 
-<main class="body-wrapper">
+<div class="body-wrapper">
 
     <div class="body-wrapper-inner">
 
@@ -985,31 +980,19 @@
 
     </div>
 
-</main>
+</div>
 
 
 
-{{-- =========================================================
-     FOOTER
-========================================================= --}}
-
-<footer class="main-footer">
-
-    © {{ date('Y') }} SMKS Singaparna
-
-</footer>
-
-
-
-{{-- =========================================================
+<!-- =====================================================
      JAVASCRIPT
-========================================================= --}}
+===================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
-@yield('js')
-
+@stack('scripts')
 
 </body>
 

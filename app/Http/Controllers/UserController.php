@@ -42,7 +42,6 @@ class UserController extends Controller
     ]);
 
     User::create([
-        'name' => $validated['username'],
         'username' => $validated['username'],
         'password' => Hash::make($validated['password']),
         'role' => $validated['role'],
