@@ -1,14 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfilSekolahController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\EkstrakurikulerController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GaleriController;
 
 use App\Models\Guru;
 use App\Models\Siswa;
+use App\Models\Berita;
+use App\Models\Ekstrakurikuler;
 
 
 /*
@@ -19,20 +25,42 @@ use App\Models\Siswa;
 
 Route::get('/', function () {
 
+    // =========================
+    // JUMLAH DATA
+    // =========================
+
     $jumlahGuru = Guru::count();
+
     $jumlahSiswa = Siswa::count();
+
+    $jumlahBerita = Berita::count();
+
+    $jumlahEkskul = Ekstrakurikuler::count();
+
+
+    // =========================
+    // DATA GURU TERBARU
+    // =========================
 
     $guruTerbaru = Guru::orderBy('id_guru', 'desc')
         ->take(5)
         ->get();
 
+
+    // =========================
+    // DATA SISWA TERBARU
+    // =========================
+
     $siswaTerbaru = Siswa::orderBy('id_siswa', 'desc')
         ->take(5)
         ->get();
 
+
     return view('admin.dashboard.index', compact(
         'jumlahGuru',
         'jumlahSiswa',
+        'jumlahBerita',
+        'jumlahEkskul',
         'guruTerbaru',
         'siswaTerbaru'
     ));
@@ -139,3 +167,78 @@ Route::put('/admin/siswa/update/{id_siswa}', [SiswaController::class, 'update'])
 
 Route::delete('/admin/siswa/delete/{id_siswa}', [SiswaController::class, 'destroy'])
     ->name('admin.siswa.delete');
+
+
+/*
+|--------------------------------------------------------------------------
+| EKSTRAKURIKULER
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])
+    ->name('admin.ekstrakurikuler.index');
+
+Route::get('/admin/ekstrakurikuler/create', [EkstrakurikulerController::class, 'create'])
+    ->name('admin.ekstrakurikuler.create');
+
+Route::post('/admin/ekstrakurikuler/store', [EkstrakurikulerController::class, 'store'])
+    ->name('admin.ekstrakurikuler.store');
+
+Route::get('/admin/ekstrakurikuler/edit/{id_ekskul}', [EkstrakurikulerController::class, 'edit'])
+    ->name('admin.ekstrakurikuler.edit');
+
+Route::put('/admin/ekstrakurikuler/update/{id_ekskul}', [EkstrakurikulerController::class, 'update'])
+    ->name('admin.ekstrakurikuler.update');
+
+Route::delete('/admin/ekstrakurikuler/delete/{id_ekskul}', [EkstrakurikulerController::class, 'destroy'])
+    ->name('admin.ekstrakurikuler.delete');
+
+
+/*
+|--------------------------------------------------------------------------
+| BERITA
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin/berita', [BeritaController::class, 'index'])
+    ->name('admin.berita.index');
+
+Route::get('/admin/berita/create', [BeritaController::class, 'create'])
+    ->name('admin.berita.create');
+
+Route::post('/admin/berita/store', [BeritaController::class, 'store'])
+    ->name('admin.berita.store');
+
+Route::get('/admin/berita/edit/{id_berita}', [BeritaController::class, 'edit'])
+    ->name('admin.berita.edit');
+
+Route::put('/admin/berita/update/{id_berita}', [BeritaController::class, 'update'])
+    ->name('admin.berita.update');
+
+Route::delete('/admin/berita/delete/{id_berita}', [BeritaController::class, 'destroy'])
+    ->name('admin.berita.delete');
+
+
+/*
+|--------------------------------------------------------------------------
+| GALERI
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin/galeri', [GaleriController::class, 'index'])
+    ->name('admin.galeri.index');
+
+Route::get('/admin/galeri/create', [GaleriController::class, 'create'])
+    ->name('admin.galeri.create');
+
+Route::post('/admin/galeri/store', [GaleriController::class, 'store'])
+    ->name('admin.galeri.store');
+
+Route::get('/admin/galeri/edit/{id_galeri}', [GaleriController::class, 'edit'])
+    ->name('admin.galeri.edit');
+
+Route::put('/admin/galeri/update/{id_galeri}', [GaleriController::class, 'update'])
+    ->name('admin.galeri.update');
+
+Route::delete('/admin/galeri/delete/{id_galeri}', [GaleriController::class, 'destroy'])
+    ->name('admin.galeri.delete');

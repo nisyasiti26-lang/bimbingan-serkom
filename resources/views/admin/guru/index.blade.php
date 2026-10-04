@@ -10,7 +10,51 @@
         padding: 0 0 30px;
     }
 
-    /* CARD */
+    /* =========================
+       ALERT
+    ========================= */
+
+    .alert-success {
+        background: #d1e7dd;
+        color: #0f5132;
+        border: 1px solid #badbcc;
+        padding: 13px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #842029;
+        border: 1px solid #f5c2c7;
+        padding: 13px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .alert-danger strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .alert-danger ul {
+        margin: 5px 0 0 20px;
+        padding: 0;
+    }
+
+    .alert-danger li {
+        margin-bottom: 3px;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
     .guru-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
@@ -18,7 +62,10 @@
         overflow: hidden;
     }
 
-    /* HEADER CARD */
+    /* =========================
+       HEADER CARD
+    ========================= */
+
     .guru-card-header {
         padding: 20px 24px;
         border-bottom: 1px solid #e8edf3;
@@ -41,7 +88,10 @@
         color: #8b99aa;
     }
 
-    /* TOMBOL TAMBAH */
+    /* =========================
+       TOMBOL TAMBAH
+    ========================= */
+
     .btn-tambah {
         display: inline-flex;
         align-items: center;
@@ -67,7 +117,10 @@
         color: #ffffff;
     }
 
-    /* TABLE */
+    /* =========================
+       TABLE
+    ========================= */
+
     .guru-table-wrapper {
         width: 100%;
         overflow-x: auto;
@@ -113,7 +166,10 @@
         border-bottom: none;
     }
 
-    /* NOMOR */
+    /* =========================
+       NOMOR
+    ========================= */
+
     .nomor {
         width: 60px;
         text-align: center !important;
@@ -121,7 +177,10 @@
         font-weight: 600;
     }
 
-    /* FOTO */
+    /* =========================
+       FOTO
+    ========================= */
+
     .guru-foto {
         width: 45px;
         height: 45px;
@@ -151,13 +210,19 @@
         font-size: 18px;
     }
 
-    /* NAMA */
+    /* =========================
+       NAMA
+    ========================= */
+
     .nama-guru {
         font-weight: 600;
         color: #243b53 !important;
     }
 
-    /* MAPEL */
+    /* =========================
+       MAPEL
+    ========================= */
+
     .badge-mapel {
         display: inline-block;
 
@@ -172,7 +237,10 @@
         font-weight: 600;
     }
 
-    /* AKSI */
+    /* =========================
+       AKSI
+    ========================= */
+
     .aksi {
         display: flex;
         align-items: center;
@@ -219,7 +287,10 @@
         color: #b02a37;
     }
 
-    /* DATA KOSONG */
+    /* =========================
+       DATA KOSONG
+    ========================= */
+
     .empty-guru {
         padding: 60px 20px;
 
@@ -254,7 +325,10 @@
         font-size: 12px;
     }
 
-    /* RESPONSIVE */
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
     @media (max-width: 700px) {
 
         .guru-card-header {
@@ -277,13 +351,68 @@
 
 <div class="guru-wrapper">
 
-    {{-- CARD DATA GURU --}}
+    {{-- =========================================
+         VALIDASI BERHASIL
+    ========================================== --}}
+
+    @if(session('success'))
+
+        <div class="alert-success">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span>
+                {{ session('success') }}
+            </span>
+
+        </div>
+
+    @endif
+
+
+    {{-- =========================================
+         VALIDASI ERROR
+    ========================================== --}}
+
+    @if($errors->any())
+
+        <div class="alert-danger">
+
+            <strong>
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Terjadi kesalahan:
+            </strong>
+
+            <ul>
+
+                @foreach($errors->all() as $error)
+
+                    <li>
+                        {{ $error }}
+                    </li>
+
+                @endforeach
+
+            </ul>
+
+        </div>
+
+    @endif
+
+
+    {{-- =========================================
+         CARD DATA GURU
+    ========================================== --}}
+
     <div class="guru-card">
 
+
         {{-- HEADER --}}
+
         <div class="guru-card-header">
 
             <div>
+
                 <div class="guru-card-title">
                     Daftar Guru
                 </div>
@@ -291,13 +420,17 @@
                 <div class="guru-card-subtitle">
                     Data guru yang terdaftar dalam sistem
                 </div>
+
             </div>
 
+
             {{-- TOMBOL TAMBAH --}}
+
             <a href="{{ route('admin.guru.create') }}"
                class="btn-tambah">
 
                 <i class="bi bi-plus-lg"></i>
+
                 Tambah Guru
 
             </a>
@@ -305,8 +438,12 @@
         </div>
 
 
-        {{-- CEK DATA GURU --}}
+        {{-- =========================================
+             CEK DATA GURU
+        ========================================== --}}
+
         @if(isset($gurus) && $gurus->count() > 0)
+
 
             <div class="guru-table-wrapper">
 
@@ -352,12 +489,16 @@
                             <tr>
 
                                 {{-- NOMOR --}}
+
                                 <td class="nomor">
+
                                     {{ $loop->iteration }}
+
                                 </td>
 
 
                                 {{-- FOTO --}}
+
                                 <td>
 
                                     @if($guru->foto)
@@ -381,6 +522,7 @@
 
 
                                 {{-- NAMA --}}
+
                                 <td class="nama-guru">
 
                                     {{ $guru->nama_guru }}
@@ -389,6 +531,7 @@
 
 
                                 {{-- NIP --}}
+
                                 <td>
 
                                     {{ $guru->nip ?? '-' }}
@@ -397,12 +540,15 @@
 
 
                                 {{-- MAPEL --}}
+
                                 <td>
 
                                     @if($guru->mapel)
 
                                         <span class="badge-mapel">
+
                                             {{ $guru->mapel }}
+
                                         </span>
 
                                     @else
@@ -415,11 +561,14 @@
 
 
                                 {{-- AKSI --}}
+
                                 <td>
 
                                     <div class="aksi">
 
+
                                         {{-- EDIT --}}
+
                                         <a
                                             href="{{ route('admin.guru.edit', $guru->id_guru) }}"
                                             class="btn-aksi btn-edit"
@@ -431,6 +580,7 @@
 
 
                                         {{-- HAPUS --}}
+
                                         <form
                                             action="{{ route('admin.guru.delete', $guru->id_guru) }}"
                                             method="POST"
@@ -469,7 +619,11 @@
 
         @else
 
-            {{-- JIKA DATA KOSONG --}}
+
+            {{-- =========================================
+                 DATA KOSONG
+            ========================================== --}}
+
             <div class="empty-guru">
 
                 <i class="bi bi-person-workspace"></i>
@@ -484,10 +638,12 @@
 
             </div>
 
+
         @endif
 
     </div>
 
 </div>
+
 
 @endsection

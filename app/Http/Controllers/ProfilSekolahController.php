@@ -10,58 +10,64 @@ class ProfilSekolahController extends Controller
     public function index()
     {
         $profil = ProfilSekolah::first();
-
         return view('admin.profil.index', compact('profil'));
     }
 
      public function edit()
     {
         $profil = ProfilSekolah::first();
-
         return view('admin.profil.edit', compact('profil'));
     }
 
    public function update(Request $request)
 {
     $request->validate([
-        'nama_sekolah' => 'required|string|max:255',
-        'kepala_sekolah' => 'nullable|string|max:255',
-        'npsn' => 'nullable|string|max:50',
-        'alamat' => 'nullable|string',
-        'kontak' => 'nullable|string|max:100',
-        'visi_misi' => 'nullable|string',
-        'tahun_berdiri' => 'nullable|string|max:10',
-        'deskripsi' => 'nullable|string',
+        'nama_sekolah' => 'required|max:40',
+        'kepala_sekolah' => 'required|max:40',
+        'npsn' => 'nullable|max:20',
+        'tahun_berdiri' => 'nullable|integer',
+        'kontak' => 'nullable|max:50',
+        'alamat' => 'nullable',
+        'visi_misi' => 'nullable',
+        'deskripsi' => 'nullable',
+        'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
 
-   
     $profil = ProfilSekolah::first();
 
     if (!$profil) {
-        $profil = new ProfilSekolah();
+        return redirect()
+            ->route('admin.profile')
+            ->with('error', 'Data profil sekolah tidak ditemukan.');
     }
 
-    $profil->nama_sekolah = $request->nama_sekolah;
-    $profil->kepala_sekolah = $request->kepala_sekolah;
-    $profil->npsn = $request->npsn;
-    $profil->alamat = $request->alamat;
-    $profil->kontak = $request->kontak;
-    $profil->visi_misi = $request->visi_misi;
-    $profil->tahun_berdiri = $request->tahun_berdiri;
-    $profil->deskripsi = $request->deskripsi;
+    $data = $request->except(['logo', 'foto']);
 
-    if ($request->hasFile('foto')) {
-        $profil->foto = $request->file('foto')->store('profil', 'public');
-    }
-
+    // Upload logo
     if ($request->hasFile('logo')) {
-        $profil->logo = $request->file('logo')->store('profil', 'public');
+        $logo = $request->file('logo');
+        $namaLogo = time() . '_logo.' . $logo->getClientOriginalExtension();
+
+        $logo->storeAs('profil', $namaLogo, 'public');
+
+        $data['logo'] = 'profil/' . $namaLogo;
     }
 
-    $profil->save();
+    // Upload foto
+    if ($request->hasFile('foto')) {
+        $foto = $request->file('foto');
+        $namaFoto = time() . '_foto.' . $foto->getClientOriginalExtension();
+
+        $foto->storeAs('profil', $namaFoto, 'public');
+
+        $data['foto'] = 'profil/' . $namaFoto;
+    }
+
+    $profil->update($data);
 
     return redirect()
         ->route('admin.profile')
-        ->with('success', 'Profil sekolah berhasil disimpan.');
+        ->with('success', 'Profil sekolah berhasil diperbarui.');
 }
 }

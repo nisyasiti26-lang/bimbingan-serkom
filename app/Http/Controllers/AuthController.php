@@ -38,8 +38,6 @@ class AuthController extends Controller
             'username' => $user->name,
             'role' => $user->role,
         ]);
-
-
         return redirect('/');
     }
 

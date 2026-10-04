@@ -24,10 +24,6 @@
 
     <style>
 
-        /* =====================================================
-           RESET
-        ===================================================== */
-
         * {
             box-sizing: border-box;
         }
@@ -55,18 +51,12 @@
             top: 0;
             left: 0;
             bottom: 0;
-
             width: 225px;
-
             background: #ffffff;
-
             border-right: 1px solid #e9edf2;
-
             z-index: 1100;
-
             display: flex;
             flex-direction: column;
-
             overflow: hidden;
         }
 
@@ -77,68 +67,48 @@
 
         .sidebar-brand {
             height: 75px;
-
             flex-shrink: 0;
-
             display: flex;
             align-items: center;
-
             padding: 0 20px;
-
             background: #ffffff;
-
             border-bottom: 1px solid #f0f2f5;
         }
 
         .sidebar-brand a {
             width: 100%;
-
             display: flex;
             align-items: center;
-
             text-decoration: none;
         }
 
         .sidebar-logo {
             width: 38px;
             height: 38px;
-
             flex-shrink: 0;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             border-radius: 9px;
-
             background: #edf3ff;
             color: #5d87ff;
-
             font-size: 20px;
-
             margin-right: 10px;
         }
 
         .sidebar-school-name {
             color: #2a3547;
-
             font-size: 15px;
             font-weight: 700;
-
             line-height: 1.2;
-
             white-space: nowrap;
         }
 
         .sidebar-school-subtitle {
             display: block;
-
             color: #98a2b3;
-
             font-size: 9px;
-
             margin-top: 3px;
-
             white-space: nowrap;
         }
 
@@ -149,30 +119,23 @@
 
         .sidebar-nav {
             flex: 1;
-
             overflow-y: auto;
             overflow-x: hidden;
-
             padding: 18px 12px 10px;
         }
 
         .sidebar-nav ul {
             padding: 0;
             margin: 0;
-
             list-style: none;
         }
 
         .menu-title {
             padding: 12px 8px 7px;
-
             color: #8b95a7;
-
             font-size: 10px;
             font-weight: 700;
-
             text-transform: uppercase;
-
             letter-spacing: .3px;
         }
 
@@ -183,43 +146,27 @@
         .sidebar-link {
             width: 100%;
             min-height: 38px;
-
             display: flex;
             align-items: center;
-
             gap: 11px;
-
             padding: 0 10px;
-
             border: none;
             border-radius: 6px;
-
             background: transparent;
-
             color: #4d5b73;
-
             font-size: 13px;
             font-weight: 500;
-
             text-decoration: none;
-
             transition: all .2s ease;
         }
 
         .sidebar-link i {
             width: 19px;
-
             flex-shrink: 0;
-
             text-align: center;
-
             color: #6f7d93;
-
             font-size: 17px;
         }
-
-
-        /* Hover */
 
         .sidebar-link:hover {
             background: #f1f5ff;
@@ -230,16 +177,10 @@
             color: #2856b9;
         }
 
-
-        /* Menu aktif */
-
         .sidebar-item.active > .sidebar-link {
             background: #2856b9;
-
             color: #ffffff;
-
             font-weight: 600;
-
             box-shadow: 0 2px 5px rgba(40, 86, 185, .15);
         }
 
@@ -248,7 +189,9 @@
         }
 
 
-        /* Scrollbar */
+        /* =====================================================
+           SCROLLBAR
+        ===================================================== */
 
         .sidebar-nav::-webkit-scrollbar {
             width: 4px;
@@ -270,11 +213,8 @@
 
         .sidebar-logout {
             flex-shrink: 0;
-
             padding: 10px 12px 15px;
-
             background: #ffffff;
-
             border-top: 1px solid #f0f2f5;
         }
 
@@ -285,40 +225,26 @@
         .logout-button {
             width: 100%;
             min-height: 38px;
-
             display: flex;
             align-items: center;
-
             gap: 11px;
-
             padding: 0 10px;
-
             border: none;
             border-radius: 6px;
-
             background: transparent;
-
             color: #4d5b73;
-
             font-size: 13px;
             font-weight: 500;
-
             font-family: inherit;
-
             cursor: pointer;
-
             text-align: left;
         }
 
         .logout-button i {
             width: 19px;
-
             flex-shrink: 0;
-
             text-align: center;
-
             color: #6f7d93;
-
             font-size: 17px;
         }
 
@@ -338,30 +264,22 @@
 
         .app-header {
             position: fixed;
-
             top: 0;
             left: 225px;
             right: 0;
-
             height: 75px;
-
             background: #ffffff;
-
             border-bottom: 1px solid #edf0f5;
-
             box-shadow: 0 1px 6px rgba(0, 0, 0, .03);
-
             z-index: 1000;
         }
 
         .header-inner {
             width: 100%;
             height: 75px;
-
             display: flex;
             align-items: center;
-            justify-content: space-between;
-
+            justify-content: flex-start;
             padding: 0 25px;
         }
 
@@ -373,28 +291,21 @@
         .header-left {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .notification-button {
             position: relative;
-
             width: 40px;
             height: 40px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             border: none;
-
             background: transparent;
-
             border-radius: 50%;
-
             color: #4d5b73;
-
             font-size: 20px;
-
             cursor: pointer;
         }
 
@@ -405,18 +316,71 @@
 
         .notification-dot {
             position: absolute;
-
             top: 7px;
             right: 7px;
-
             width: 7px;
             height: 7px;
-
             background: #2856b9;
-
             border-radius: 50%;
-
             border: 1px solid #ffffff;
+        }
+
+
+        /* =====================================================
+           SEARCH HEADER
+        ===================================================== */
+
+        .header-search {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            /* DEKAT DENGAN NOTIFIKASI */
+            margin-left: 15px;
+            margin-right: 0;
+        }
+
+        .search-box {
+            width: 400px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #98a2b3;
+            font-size: 17px;
+            pointer-events: none;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 40px;
+            padding: 0 15px 0 40px;
+
+            border: 1px solid #e5e9f0;
+            border-radius: 8px;
+
+            background: #f8fafc;
+            color: #2a3547;
+
+            font-size: 13px;
+            outline: none;
+
+            transition: .2s;
+        }
+
+        .search-box input::placeholder {
+            color: #98a2b3;
+        }
+
+        .search-box input:focus {
+            background: #ffffff;
+            border-color: #5d87ff;
+            box-shadow: 0 0 0 3px rgba(93, 135, 255, .10);
         }
 
 
@@ -427,13 +391,9 @@
         .header-profile {
             display: flex;
             align-items: center;
-
             gap: 9px;
-
             text-decoration: none;
-
             padding: 4px 7px;
-
             border-radius: 7px;
         }
 
@@ -444,17 +404,12 @@
         .profile-avatar {
             width: 38px;
             height: 38px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             border-radius: 50%;
-
             background: #fff3df;
-
             color: #f39c12;
-
             font-size: 18px;
         }
 
@@ -464,22 +419,18 @@
 
         .profile-name {
             color: #2a3547;
-
             font-size: 13px;
             font-weight: 600;
         }
 
         .profile-role {
             color: #98a2b3;
-
             font-size: 10px;
-
             margin-top: 3px;
         }
 
         .profile-chevron {
             color: #98a2b3;
-
             font-size: 14px;
         }
 
@@ -490,32 +441,32 @@
 
         .dropdown-menu {
             min-width: 190px;
-
             padding: 7px;
-
             margin-top: 8px !important;
-
             border: 1px solid #edf0f5 !important;
-
             border-radius: 8px !important;
-
             box-shadow: 0 8px 25px rgba(30, 60, 90, .10) !important;
         }
 
         .dropdown-item {
             padding: 8px 10px;
-
             border-radius: 6px;
-
             color: #536176;
-
             font-size: 13px;
         }
 
         .dropdown-item:hover {
             background: #f3f6ff;
-
             color: #2856b9;
+        }
+
+
+        /* =====================================================
+           PROFILE TETAP DI KANAN
+        ===================================================== */
+
+        .header-inner > .dropdown {
+            margin-left: auto;
         }
 
 
@@ -525,11 +476,8 @@
 
         .body-wrapper {
             margin-left: 225px;
-
             padding-top: 75px;
-
             min-height: 100vh;
-
             background: #f6f8fc;
         }
 
@@ -539,9 +487,7 @@
 
         .container-fluid {
             width: 100%;
-
             padding: 0 !important;
-
             margin: 0 !important;
         }
 
@@ -564,6 +510,18 @@
                 margin-left: 0;
             }
 
+            .header-inner {
+                padding: 0 15px;
+            }
+
+            .header-search {
+                margin-left: 10px;
+            }
+
+            .search-box {
+                width: 220px;
+            }
+
             .profile-detail,
             .profile-chevron {
                 display: none;
@@ -572,6 +530,7 @@
             .body-wrapper-inner {
                 padding: 20px 15px;
             }
+
         }
 
     </style>
@@ -708,7 +667,6 @@
             </li>
 
 
-
             <!-- DATA SEKOLAH -->
 
             <li class="menu-title">
@@ -773,7 +731,6 @@
             </li>
 
 
-
             <!-- PENGATURAN -->
 
             <li class="menu-title">
@@ -799,18 +756,22 @@
 
             </li>
 
+
         </ul>
 
     </nav>
 
 
-    <!-- LOGOUT -->
+    <!-- =====================================================
+         LOGOUT SIDEBAR
+    ====================================================== -->
 
     <div class="sidebar-logout">
 
         <form
             action="{{ url('/logout') }}"
-            method="POST">
+            method="POST"
+            onsubmit="return confirm('Apakah Anda yakin ingin logout?');">
 
             @csrf
 
@@ -860,6 +821,24 @@
         </div>
 
 
+        <!-- SEARCH -->
+
+        <div class="header-search">
+
+            <div class="search-box">
+
+                <i class="ti ti-search"></i>
+
+                <input
+                    type="text"
+                    id="headerSearch"
+                    placeholder="Cari menu..."
+                    autocomplete="off">
+
+            </div>
+
+        </div>
+
 
         <!-- PROFILE -->
 
@@ -871,7 +850,6 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
 
-
                 <div class="profile-avatar">
 
                     <i class="ti ti-user"></i>
@@ -882,15 +860,11 @@
                 <div class="profile-detail">
 
                     <div class="profile-name">
-
                         {{ session('username', 'Admin') }}
-
                     </div>
 
                     <div class="profile-role">
-
                         {{ session('role', 'Admin') }}
-
                     </div>
 
                 </div>
@@ -901,6 +875,7 @@
             </a>
 
 
+            <!-- DROPDOWN PROFILE -->
 
             <ul class="dropdown-menu dropdown-menu-end">
 
@@ -935,7 +910,8 @@
 
                     <form
                         action="{{ url('/logout') }}"
-                        method="POST">
+                        method="POST"
+                        onsubmit="return confirm('Apakah Anda yakin ingin logout?');">
 
                         @csrf
 
@@ -992,7 +968,148 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
+
+<script>
+
+    /* =====================================================
+       SEARCH MENU
+    ===================================================== */
+
+    const headerSearch = document.getElementById('headerSearch');
+
+    if (headerSearch) {
+
+        headerSearch.addEventListener('keydown', function (event) {
+
+            if (event.key !== 'Enter') {
+                return;
+            }
+
+            const keyword = this.value.toLowerCase().trim();
+
+            if (keyword === '') {
+                return;
+            }
+
+
+            /* DASHBOARD */
+
+            if (
+                keyword.includes('dashboard') ||
+                keyword.includes('home')
+            ) {
+
+                window.location.href = "{{ url('/') }}";
+
+                return;
+            }
+
+
+            /* PROFIL SEKOLAH */
+
+            if (
+                keyword.includes('profil') ||
+                keyword.includes('sekolah')
+            ) {
+
+                window.location.href = "{{ url('/profile-sekolah') }}";
+
+                return;
+            }
+
+
+            /* GURU */
+
+            if (
+                keyword.includes('guru') ||
+                keyword.includes('pengajar')
+            ) {
+
+                window.location.href = "{{ url('/admin/guru') }}";
+
+                return;
+            }
+
+
+            /* SISWA */
+
+            if (
+                keyword.includes('siswa') ||
+                keyword.includes('murid')
+            ) {
+
+                window.location.href = "{{ url('/admin/siswa') }}";
+
+                return;
+            }
+
+
+            /* BERITA */
+
+            if (keyword.includes('berita')) {
+
+                window.location.href = "{{ url('/admin/berita') }}";
+
+                return;
+            }
+
+
+            /* GALERI */
+
+            if (
+                keyword.includes('galeri') ||
+                keyword.includes('foto')
+            ) {
+
+                window.location.href = "{{ url('/admin/galeri') }}";
+
+                return;
+            }
+
+
+            /* EKSTRAKURIKULER */
+
+            if (
+                keyword.includes('ekstrakurikuler') ||
+                keyword.includes('ekskul')
+            ) {
+
+                window.location.href = "{{ url('/admin/ekstrakurikuler') }}";
+
+                return;
+            }
+
+
+            /* USER */
+
+            if (
+                keyword.includes('user') ||
+                keyword.includes('akun')
+            ) {
+
+                window.location.href = "{{ url('/admin/user') }}";
+
+                return;
+            }
+
+
+            /* TIDAK DITEMUKAN */
+
+            alert(
+                'Pencarian "' +
+                this.value +
+                '" tidak ditemukan.'
+            );
+
+        });
+
+    }
+
+</script>
+
+
 @stack('scripts')
+
 
 </body>
 

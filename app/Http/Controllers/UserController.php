@@ -11,7 +11,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('id_user', 'desc')->get();
-
         return view('admin.user.index', compact('users'));
     }
 
@@ -54,14 +53,12 @@ class UserController extends Controller
     public function edit($id_user)
     {
         $user = User::findOrFail($id_user);
-
         return view('admin.user.edit', compact('user'));
     }
 
     public function update(Request $request, $id_user)
     {
         $user = User::findOrFail($id_user);
-
         $validated = $request->validate([
             'name' => [
                 'required',
@@ -108,9 +105,7 @@ class UserController extends Controller
     public function destroy($id_user)
     {
         $user = User::findOrFail($id_user);
-
         $user->delete();
-
         return redirect('/admin/user')
             ->with('success', 'User berhasil dihapus.');
     }

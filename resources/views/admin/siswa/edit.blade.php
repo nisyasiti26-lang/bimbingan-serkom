@@ -1,7 +1,5 @@
 @extends('index')
-
 @section('title', 'Edit Siswa - SMK Singaparna')
-
 @section('content')
 
 <style>
@@ -9,7 +7,6 @@
         width: 100%;
         margin-top: 10px;
     }
-
     .edit-card {
         background: #ffffff;
         border: 1px solid #e2eaf3;
@@ -29,10 +26,6 @@
         color: #17365d;
         font-size: 18px;
         font-weight: 700;
-    }
-
-    .edit-card-header h5 i {
-        color: #1769aa;
     }
 
     .edit-card-header p {
@@ -55,11 +48,6 @@
         font-size: 14px;
         font-weight: 600;
         color: #263b55;
-    }
-
-    .form-label i {
-        color: #1769aa;
-        margin-right: 5px;
     }
 
     .form-control,
@@ -152,82 +140,48 @@
         .btn-batal {
             width: 100%;
         }
+
     }
+
 </style>
 
 
 <div class="edit-siswa-wrapper">
-
     <div class="edit-card">
-
-        {{-- HEADER --}}
         <div class="edit-card-header">
-
             <h5>
-                <i class="bi bi-person-gear me-2"></i>
                 Edit Data Siswa
             </h5>
-
-            <p>
-                Silakan ubah data siswa yang diperlukan.
-            </p>
-
         </div>
-
-
-        {{-- BODY --}}
         <div class="edit-card-body">
-
-            {{-- ERROR VALIDASI --}}
             @if ($errors->any())
-
                 <div class="alert alert-danger">
-
                     <strong>
-                        <i class="bi bi-exclamation-circle me-1"></i>
                         Terjadi kesalahan!
                     </strong>
-
                     <ul class="mb-0 mt-2">
-
                         @foreach ($errors->all() as $error)
-
                             <li>
                                 {{ $error }}
                             </li>
-
                         @endforeach
-
                     </ul>
-
                 </div>
-
             @endif
-
-
-            {{-- FORM --}}
-            <form action="{{ route('admin.siswa.update', $siswa->id_siswa) }}"
-                  method="POST">
-
+                action="{{ route('admin.siswa.update', $siswa->id_siswa) }}"
+                method="POST"
+            >
                 @csrf
                 @method('PUT')
-
-
-                {{-- BARIS PERTAMA --}}
-                <div class="row">
-
-                    {{-- NISN --}}
+                <div class="row">               
                     <div class="col-md-6">
-
                         <div class="form-group">
-
-                            <label for="nisn" class="form-label">
-
-                                <i class="bi bi-card-text"></i>
+                            <label
+                                for="nisn"
+                                class="form-label"
+                            >
                                 NISN
-
                             </label>
-
                             <input
                                 type="text"
                                 class="form-control"
@@ -245,15 +199,16 @@
 
 
                     {{-- NAMA SISWA --}}
+
                     <div class="col-md-6">
 
                         <div class="form-group">
 
-                            <label for="nama_siswa" class="form-label">
-
-                                <i class="bi bi-person"></i>
+                            <label
+                                for="nama_siswa"
+                                class="form-label"
+                            >
                                 Nama Siswa
-
                             </label>
 
                             <input
@@ -275,18 +230,21 @@
 
 
                 {{-- BARIS KEDUA --}}
+
                 <div class="row">
 
+
                     {{-- JENIS KELAMIN --}}
+
                     <div class="col-md-6">
 
                         <div class="form-group">
 
-                            <label for="jenis_kelamin" class="form-label">
-
-                                <i class="bi bi-gender-ambiguous"></i>
+                            <label
+                                for="jenis_kelamin"
+                                class="form-label"
+                            >
                                 Jenis Kelamin
-
                             </label>
 
                             <select
@@ -300,18 +258,18 @@
                                     -- Pilih Jenis Kelamin --
                                 </option>
 
-                                <option value="Laki-Laki"
-                                    {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Laki-Laki' ? 'selected' : '' }}>
-
+                                <option
+                                    value="Laki-Laki"
+                                    {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Laki-Laki' ? 'selected' : '' }}
+                                >
                                     Laki-Laki
-
                                 </option>
 
-                                <option value="Perempuan"
-                                    {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
-
+                                <option
+                                    value="Perempuan"
+                                    {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}
+                                >
                                     Perempuan
-
                                 </option>
 
                             </select>
@@ -322,17 +280,17 @@
 
 
                     {{-- TAHUN MASUK --}}
+
                     <div class="col-md-6">
 
                         <div class="form-group">
 
-                            <label for="tahun_masuk" class="form-label">
-
-                                <i class="bi bi-calendar3"></i>
+                            <label
+                                for="tahun_masuk"
+                                class="form-label"
+                            >
                                 Tahun Masuk
-
                             </label>
-
                             <input
                                 type="number"
                                 class="form-control"
@@ -353,25 +311,30 @@
 
 
                 {{-- BUTTON --}}
+
                 <div class="form-actions">
 
-                    <button type="submit" class="btn-simpan">
+                    <button
+                        type="submit"
+                        class="btn-simpan"
+                    >
 
-                        <i class="bi bi-save me-2"></i>
                         Simpan Perubahan
 
                     </button>
 
 
-                    <a href="{{ route('admin.siswa.index') }}"
-                       class="btn-batal">
+                    <a
+                        href="{{ route('admin.siswa.index') }}"
+                        class="btn-batal"
+                    >
 
-                        <i class="bi bi-arrow-left me-2"></i>
                         Batal
 
                     </a>
 
                 </div>
+
 
             </form>
 
@@ -380,5 +343,6 @@
     </div>
 
 </div>
+
 
 @endsection

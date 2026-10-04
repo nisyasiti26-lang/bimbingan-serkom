@@ -10,7 +10,6 @@ class SiswaController extends Controller
     public function index()
     {
         $siswas = Siswa::orderBy('nama_siswa', 'asc')->get();
-
         return view('admin.siswa.index', compact('siswas'));
     }
 
@@ -20,29 +19,29 @@ class SiswaController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'nisn' => 'required|max:10|unique:siswa,nisn',
-            'nama_siswa' => 'required|max:40',
-            'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
-            'tahun_masuk' => 'required|digits:4',
-        ]);
+{
+    $request->validate([
+        'nisn' => 'required|max:10',
+        'nama_siswa' => 'required|max:40',
+        'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
+        'tahun_masuk' => 'required|integer|min:2000|max:2100',
+    ]);
 
-        Siswa::create([
-            'nisn' => $request->nisn,
-            'nama_siswa' => $request->nama_siswa,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tahun_masuk' => $request->tahun_masuk,
-        ]);
+    Siswa::create([
+        'nisn' => $request->nisn,
+        'nama_siswa' => $request->nama_siswa,
+        'jenis_kelamin' => $request->jenis_kelamin,
+        'tahun_masuk' => $request->tahun_masuk,
+    ]);
 
-        return redirect('/admin/siswa')
-            ->with('success', 'Data siswa berhasil ditambahkan.');
-    }
+    return redirect()
+        ->route('admin.siswa.index')
+        ->with('success', 'Siswa berhasil ditambahkan.');
+}
 
     public function edit($id_siswa)
     {
         $siswa = Siswa::findOrFail($id_siswa);
-
         return view('admin.siswa.edit', compact('siswa'));
     }
 
@@ -71,9 +70,7 @@ class SiswaController extends Controller
     public function destroy($id_siswa)
     {
         $siswa = Siswa::findOrFail($id_siswa);
-
         $siswa->delete();
-
         return redirect('/admin/siswa')
             ->with('success', 'Data siswa berhasil dihapus.');
     }

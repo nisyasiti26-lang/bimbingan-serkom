@@ -5,43 +5,24 @@
 @section('content')
 
 <style>
-
-    /* =========================
-       DASHBOARD
-    ========================= */
-
     .dashboard-wrapper {
         width: 100%;
         padding: 10px 5px 30px;
     }
-
-
-    /* =========================
-       WELCOME
-    ========================= */
-
     .welcome-section {
         margin-bottom: 25px;
     }
-
     .welcome-section h3 {
         color: #17365d;
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 5px;
     }
-
     .welcome-section p {
         color: #7890a8;
         font-size: 14px;
         margin: 0;
     }
-
-
-    /* =========================
-       STAT CARD
-    ========================= */
-
     .stat-card {
         background: #ffffff;
         border: 1px solid #e6ebf2;
@@ -50,49 +31,35 @@
         min-height: 125px;
         transition: 0.2s;
     }
-
     .stat-card:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(30, 60, 90, 0.08);
     }
-
     .stat-card-body {
         padding: 22px;
     }
-
     .stat-title {
         color: #7890a8;
         font-size: 13px;
         margin-bottom: 8px;
     }
-
     .stat-number {
         color: #17365d;
         font-size: 27px;
         font-weight: 700;
         margin: 0;
     }
-
     .stat-icon {
         width: 48px;
         height: 48px;
         border-radius: 10px;
-
         display: flex;
         align-items: center;
         justify-content: center;
-
         background: #e8f2fc;
         color: #155a98;
-
         font-size: 22px;
     }
-
-
-    /* =========================
-       CONTENT CARD
-    ========================= */
-
     .dashboard-card {
         background: #ffffff;
         border: 1px solid #e6ebf2;
@@ -100,39 +67,28 @@
         box-shadow: 0 2px 8px rgba(30, 60, 90, 0.04);
         overflow: hidden;
     }
-
     .dashboard-card-header {
         padding: 20px 22px;
         border-bottom: 1px solid #edf1f6;
     }
-
     .dashboard-card-header h5 {
         color: #17365d;
         font-size: 16px;
         font-weight: 700;
         margin: 0 0 4px;
     }
-
     .dashboard-card-header p {
         color: #7890a8;
         font-size: 13px;
         margin: 0;
     }
-
     .dashboard-card-body {
         padding: 22px;
     }
-
-
-    /* =========================
-       TABLE
-    ========================= */
-
     .dashboard-table {
         width: 100%;
         border-collapse: collapse;
     }
-
     .dashboard-table th {
         color: #7890a8;
         background: #f8fafc;
@@ -142,91 +98,58 @@
         text-align: left;
         border-bottom: 1px solid #e8edf3;
     }
-
     .dashboard-table td {
         color: #334155;
         font-size: 13px;
         padding: 13px 14px;
         border-bottom: 1px solid #edf1f6;
     }
-
     .dashboard-table tbody tr:last-child td {
         border-bottom: none;
     }
-
-
-    /* =========================
-       PROFILE
-    ========================= */
-
     .profile-box {
         background: #f8fbfe;
         border: 1px solid #e5edf5;
         border-radius: 8px;
         padding: 18px;
     }
-
     .profile-label {
         color: #7890a8;
         font-size: 12px;
         margin-bottom: 3px;
     }
-
     .profile-value {
         color: #17365d;
         font-size: 14px;
         font-weight: 600;
     }
-
-
-    /* =========================
-       EMPTY DATA
-    ========================= */
-
     .empty-data {
         text-align: center;
         padding: 25px 10px;
         color: #94a3b8;
         font-size: 13px;
     }
-
     .empty-data i {
         font-size: 30px;
         display: block;
         margin-bottom: 8px;
     }
-
-
-    /* =========================
-       FLEX CARD
-    ========================= */
-
     .flexy-info {
         display: flex;
         align-items: center;
         gap: 15px;
     }
-
     .flexy-icon {
         width: 50px;
         height: 50px;
-
         display: flex;
         align-items: center;
         justify-content: center;
-
         border-radius: 10px;
-
         background: #e8f2fc;
         color: #155a98;
-
         font-size: 23px;
     }
-
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
 
     @media (max-width: 768px) {
 
@@ -250,10 +173,7 @@
 <div class="dashboard-wrapper">
 
 
-    {{-- =====================================================
-         WELCOME
-    ====================================================== --}}
-
+    {{-- WELCOME --}}
     <div class="welcome-section">
 
         <h3>
@@ -267,17 +187,12 @@
     </div>
 
 
-
-    {{-- =====================================================
-         STATISTIK
-    ====================================================== --}}
-
+    {{-- STATISTIK --}}
     <div class="row g-4 mb-4">
 
 
         {{-- TOTAL GURU --}}
-
-        <div class="col-xl-3 col-md-16">
+        <div class="col-xl-3 col-md-6">
 
             <div class="stat-card h-100">
 
@@ -292,15 +207,13 @@
                             </div>
 
                             <h3 class="stat-number">
-                                {{ $jumlahGuru ?? 0 }}
+                                {{ $jumlahGuru }}
                             </h3>
 
                         </div>
 
                         <div class="stat-icon">
-
                             <i class="bi bi-person-badge"></i>
-
                         </div>
 
                     </div>
@@ -312,9 +225,7 @@
         </div>
 
 
-
         {{-- TOTAL SISWA --}}
-
         <div class="col-xl-3 col-md-6">
 
             <div class="stat-card h-100">
@@ -330,15 +241,13 @@
                             </div>
 
                             <h3 class="stat-number">
-                                {{ $jumlahSiswa ?? 0 }}
+                                {{ $jumlahSiswa }}
                             </h3>
 
                         </div>
 
                         <div class="stat-icon">
-
                             <i class="bi bi-people"></i>
-
                         </div>
 
                     </div>
@@ -350,9 +259,7 @@
         </div>
 
 
-
         {{-- TOTAL BERITA --}}
-
         <div class="col-xl-3 col-md-6">
 
             <div class="stat-card h-100">
@@ -368,15 +275,13 @@
                             </div>
 
                             <h3 class="stat-number">
-                                {{ $jumlahBerita ?? 0 }}
+                                {{ $jumlahBerita }}
                             </h3>
 
                         </div>
 
                         <div class="stat-icon">
-
                             <i class="bi bi-newspaper"></i>
-
                         </div>
 
                     </div>
@@ -388,9 +293,7 @@
         </div>
 
 
-
-        {{-- EKSTRAKURIKULER --}}
-
+        {{-- TOTAL EKSTRAKURIKULER --}}
         <div class="col-xl-3 col-md-6">
 
             <div class="stat-card h-100">
@@ -406,15 +309,13 @@
                             </div>
 
                             <h3 class="stat-number">
-                                {{ $jumlahEkskul ?? 0 }}
+                                {{ $jumlahEkskul }}
                             </h3>
 
                         </div>
 
                         <div class="stat-icon">
-
                             <i class="bi bi-trophy"></i>
-
                         </div>
 
                     </div>
@@ -428,16 +329,11 @@
     </div>
 
 
-
-    {{-- =====================================================
-         BARIS PROFIL + FLEXy
-    ====================================================== --}}
-
+    {{-- INFORMASI SEKOLAH --}}
     <div class="row g-4 mb-4">
 
 
         {{-- PROFIL SEKOLAH --}}
-
         <div class="col-lg-6">
 
             <div class="dashboard-card h-100">
@@ -473,7 +369,6 @@
 
                             </div>
 
-
                             <div class="mb-3">
 
                                 <div class="profile-label">
@@ -485,7 +380,6 @@
                                 </div>
 
                             </div>
-
 
                             <div>
 
@@ -520,9 +414,7 @@
         </div>
 
 
-
-        {{-- INFORMASI SISTEM --}}
-
+        {{-- SISTEM --}}
         <div class="col-lg-6">
 
             <div class="dashboard-card h-100">
@@ -545,9 +437,7 @@
                     <div class="flexy-info">
 
                         <div class="flexy-icon">
-
                             <i class="bi bi-mortarboard-fill"></i>
-
                         </div>
 
                         <div>
@@ -583,18 +473,11 @@
     </div>
 
 
-
-    {{-- =====================================================
-         DATA TERBARU
-    ====================================================== --}}
-
+    {{-- DATA TERBARU --}}
     <div class="row g-4">
 
 
-        {{-- =================================================
-             GURU TERBARU
-        ================================================== --}}
-
+        {{-- GURU TERBARU --}}
         <div class="col-lg-6">
 
             <div class="dashboard-card">
@@ -602,11 +485,8 @@
                 <div class="dashboard-card-header">
 
                     <h5>
-
                         <i class="bi bi-person-badge me-2"></i>
-
                         Guru Terbaru
-
                     </h5>
 
                     <p>
@@ -614,7 +494,6 @@
                     </p>
 
                 </div>
-
 
                 <div class="dashboard-card-body p-0">
 
@@ -638,10 +517,9 @@
 
                             </thead>
 
-
                             <tbody>
 
-                                @forelse($guruTerbaru ?? [] as $guru)
+                                @forelse($guruTerbaru as $guru)
 
                                     <tr>
 
@@ -688,11 +566,7 @@
         </div>
 
 
-
-        {{-- =================================================
-             SISWA TERBARU
-        ================================================== --}}
-
+        {{-- SISWA TERBARU --}}
         <div class="col-lg-6">
 
             <div class="dashboard-card">
@@ -700,11 +574,8 @@
                 <div class="dashboard-card-header">
 
                     <h5>
-
                         <i class="bi bi-people me-2"></i>
-
                         Siswa Terbaru
-
                     </h5>
 
                     <p>
@@ -712,7 +583,6 @@
                     </p>
 
                 </div>
-
 
                 <div class="dashboard-card-body p-0">
 
@@ -736,10 +606,9 @@
 
                             </thead>
 
-
                             <tbody>
 
-                                @forelse($siswaTerbaru ?? [] as $siswa)
+                                @forelse($siswaTerbaru as $siswa)
 
                                     <tr>
 

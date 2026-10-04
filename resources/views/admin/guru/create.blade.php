@@ -33,6 +33,7 @@
     .form-card h5 {
         color: #17365d;
         font-weight: 600;
+        margin-bottom: 5px;
     }
 
     .form-card hr {
@@ -58,6 +59,17 @@
     .form-control:focus {
         border-color: #155a98;
         box-shadow: 0 0 0 0.15rem rgba(21, 90, 152, 0.12);
+    }
+
+    .is-invalid {
+        border-color: #dc3545 !important;
+    }
+
+    .invalid-feedback {
+        display: block;
+        color: #dc3545;
+        font-size: 12px;
+        margin-top: 5px;
     }
 
     .btn-tambah {
@@ -98,125 +110,216 @@
         background: #e5eaf0;
         color: #17365d;
     }
+
+    .alert-danger {
+        border-radius: 8px;
+        font-size: 13px;
+    }
+
+    .required {
+        color: #dc3545;
+    }
+
+    .file-info {
+        font-size: 12px;
+        color: #7890a8;
+        margin-top: 6px;
+    }
 </style>
+
 
 <div class="row">
 
-    <div class="col-lg-12">
+    <div class="col-lg-18">
 
         <div class="form-card">
 
-           
+
             {{-- PESAN ERROR --}}
             @if ($errors->any())
+
                 <div class="alert alert-danger">
+
                     <strong>
+                        <i class="bi bi-exclamation-circle me-1"></i>
                         Terjadi kesalahan!
                     </strong>
 
                     <ul class="mb-0 mt-2">
+
                         @foreach ($errors->all() as $error)
+
                             <li>
                                 {{ $error }}
                             </li>
+
                         @endforeach
+
                     </ul>
+
                 </div>
+
             @endif
 
+
             {{-- FORM --}}
-            <form action="{{ url('/admin/guru/store') }}"
+            <form action="{{ route('admin.guru.store') }}"
                   method="POST"
                   enctype="multipart/form-data">
 
                 @csrf
+
 
                 {{-- NAMA GURU --}}
                 <div class="mb-3">
 
                     <label for="nama_guru"
                            class="form-label">
+
                         Nama Guru
+                        <span class="required">*</span>
+
                     </label>
 
-                    <input type="text"
-                           class="form-control"
-                           id="nama_guru"
-                           name="nama_guru"
-                           value="{{ old('nama_guru') }}"
-                           placeholder="Masukkan nama guru"
-                           required>
+                    <input
+                        type="text"
+                        class="form-control @error('nama_guru') is-invalid @enderror"
+                        id="nama_guru"
+                        name="nama_guru"
+                        value="{{ old('nama_guru') }}"
+                        placeholder="Masukkan nama guru"
+                    >
+
+                    @error('nama_guru')
+
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+
+                    @enderror
 
                 </div>
+
 
                 {{-- NIP --}}
                 <div class="mb-3">
 
                     <label for="nip"
                            class="form-label">
+
                         NIP
+
                     </label>
 
-                    <input type="text"
-                           class="form-control"
-                           id="nip"
-                           name="nip"
-                           value="{{ old('nip') }}"
-                           placeholder="Masukkan NIP">
+                    <input
+                        type="text"
+                        class="form-control @error('nip') is-invalid @enderror"
+                        id="nip"
+                        name="nip"
+                        value="{{ old('nip') }}"
+                        placeholder="Masukkan NIP"
+                    >
+
+                    @error('nip')
+
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+
+                    @enderror
+
+                    <div class="file-info">
+                        NIP maksimal 15 karakter.
+                    </div>
 
                 </div>
+
 
                 {{-- MAPEL --}}
                 <div class="mb-3">
 
                     <label for="mapel"
                            class="form-label">
+
                         Mata Pelajaran
+                        <span class="required">*</span>
+
                     </label>
 
-                    <input type="text"
-                           class="form-control"
-                           id="mapel"
-                           name="mapel"
-                           value="{{ old('mapel') }}"
-                           placeholder="Masukkan mata pelajaran"
-                           required>
+                    <input
+                        type="text"
+                        class="form-control @error('mapel') is-invalid @enderror"
+                        id="mapel"
+                        name="mapel"
+                        value="{{ old('mapel') }}"
+                        placeholder="Masukkan mata pelajaran"
+                    >
+
+                    @error('mapel')
+
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+
+                    @enderror
 
                 </div>
+
 
                 {{-- FOTO --}}
                 <div class="mb-4">
 
                     <label for="foto"
                            class="form-label">
+
                         Foto Guru
+
                     </label>
 
-                    <input type="file"
-                           class="form-control"
-                           id="foto"
-                           name="foto"
-                           accept="image/*">
+                    <input
+                        type="file"
+                        class="form-control @error('foto') is-invalid @enderror"
+                        id="foto"
+                        name="foto"
+                        accept="image/jpeg,image/jpg,image/png"
+                    >
 
-                   
+                    @error('foto')
+
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+
+                    @enderror
+
+                    <div class="file-info">
+                        Format JPG, JPEG, atau PNG. Maksimal 2 MB.
+                    </div>
 
                 </div>
 
+
                 {{-- BUTTON --}}
-                <button type="submit"
-                        class="btn-tambah">
+                <div>
 
-                    <i class="bi bi-save me-1"></i>
-                    Simpan
+                    <button type="submit"
+                            class="btn-tambah">
 
-                </button>
+                        <i class="bi bi-save me-1"></i>
+                        Simpan
 
-                <a href="{{ url('/admin/guru') }}"
-                   class="btn-kembali ms-2">
+                    </button>
 
-                    Batal
 
-                </a>
+                    <a href="{{ route('admin.guru') }}"
+                       class="btn-kembali ms-2">
+
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Batal
+
+                    </a>
+
+                </div>
 
             </form>
 

@@ -5,6 +5,7 @@
 @section('content')
 
 <style>
+
     .top-header {
         margin-bottom: 22px;
     }
@@ -136,6 +137,15 @@
         background: #fbd5d5;
         color: #b02a37;
     }
+
+    .alert-success {
+        background: #d1e7dd;
+        border: 1px solid #badbcc;
+        color: #0f5132;
+        border-radius: 8px;
+        padding: 15px 18px;
+    }
+
 </style>
 
 
@@ -143,9 +153,48 @@
 
     <div class="col-12">
 
+
+        {{-- NOTIFIKASI BERHASIL --}}
+
+        @if (session('success'))
+
+            <div class="alert alert-success d-flex align-items-center mb-4">
+
+                <i class="bi bi-check-circle-fill me-2"></i>
+
+                <span>
+                    {{ session('success') }}
+                </span>
+
+            </div>
+
+        @endif
+
+
+        {{-- NOTIFIKASI ERROR --}}
+
+        @if (session('error'))
+
+            <div class="alert alert-danger d-flex align-items-center mb-4">
+
+                <i class="bi bi-exclamation-circle-fill me-2"></i>
+
+                <span>
+                    {{ session('error') }}
+                </span>
+
+            </div>
+
+        @endif
+
+
+        {{-- DATA CARD --}}
+
         <div class="data-card">
 
+
             {{-- HEADER DAFTAR SISWA --}}
+
             <div class="data-card-header">
 
                 <div class="d-flex justify-content-between align-items-center">
@@ -156,16 +205,20 @@
                             Daftar Siswa
                         </h4>
 
-                       
+                        <p>
+                            Data siswa yang terdaftar dalam sistem
+                        </p>
 
                     </div>
 
 
                     {{-- TOMBOL TAMBAH --}}
+
                     <a href="{{ route('admin.siswa.create') }}"
                        class="btn-tambah">
 
                         <i class="bi bi-plus-lg me-2"></i>
+
                         Tambah Siswa
 
                     </a>
@@ -176,6 +229,7 @@
 
 
             {{-- TABEL --}}
+
             <div class="table-responsive">
 
                 <table class="table align-middle mb-0">
@@ -215,19 +269,31 @@
 
                     <tbody>
 
+
                         @forelse ($siswas as $siswa)
 
                             <tr>
 
+
+                                {{-- NOMOR --}}
+
                                 <td>
+
                                     {{ $loop->iteration }}
+
                                 </td>
 
+
+                                {{-- NISN --}}
 
                                 <td>
+
                                     {{ $siswa->nisn }}
+
                                 </td>
 
+
+                                {{-- NAMA --}}
 
                                 <td>
 
@@ -238,18 +304,24 @@
                                 </td>
 
 
+                                {{-- JENIS KELAMIN --}}
+
                                 <td>
 
                                     @if ($siswa->jenis_kelamin == 'Laki-Laki')
 
                                         <span class="badge-laki">
+
                                             Laki-Laki
+
                                         </span>
 
                                     @else
 
                                         <span class="badge-perempuan">
+
                                             Perempuan
+
                                         </span>
 
                                     @endif
@@ -257,18 +329,26 @@
                                 </td>
 
 
+                                {{-- TAHUN MASUK --}}
+
                                 <td>
 
                                     <span class="badge-tahun">
+
                                         {{ $siswa->tahun_masuk }}
+
                                     </span>
 
                                 </td>
 
 
+                                {{-- AKSI --}}
+
                                 <td>
 
+
                                     {{-- EDIT --}}
+
                                     <a href="{{ route('admin.siswa.edit', $siswa->id_siswa) }}"
                                        class="btn-edit">
 
@@ -278,12 +358,15 @@
 
 
                                     {{-- HAPUS --}}
+
                                     <form action="{{ route('admin.siswa.delete', $siswa->id_siswa) }}"
                                           method="POST"
                                           class="d-inline">
 
                                         @csrf
+
                                         @method('DELETE')
+
 
                                         <button type="submit"
                                                 class="btn-hapus"
@@ -295,11 +378,15 @@
 
                                     </form>
 
+
                                 </td>
+
 
                             </tr>
 
+
                         @empty
+
 
                             <tr>
 
@@ -312,7 +399,9 @@
 
                             </tr>
 
+
                         @endforelse
+
 
                     </tbody>
 
@@ -320,10 +409,12 @@
 
             </div>
 
+
         </div>
 
     </div>
 
 </div>
+
 
 @endsection

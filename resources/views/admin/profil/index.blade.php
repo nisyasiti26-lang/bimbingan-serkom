@@ -5,6 +5,7 @@
 @section('content')
 
 <style>
+
     /* =========================================
        PROFIL SEKOLAH
     ========================================= */
@@ -14,6 +15,52 @@
         padding: 0 0 30px;
     }
 
+
+    /* =========================================
+       ALERT SUCCESS
+    ========================================= */
+
+    .alert-success-profil {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        background: #d1e7dd;
+        border: 1px solid #badbcc;
+        color: #0f5132;
+
+        padding: 13px 16px;
+        border-radius: 8px;
+
+        margin-bottom: 20px;
+
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .alert-success-profil i {
+        font-size: 18px;
+    }
+
+
+    /* =========================================
+       ALERT ERROR
+    ========================================= */
+
+    .alert-error-profil {
+        background: #f8d7da;
+        border: 1px solid #f5c2c7;
+        color: #842029;
+
+        padding: 13px 16px;
+        border-radius: 8px;
+
+        margin-bottom: 20px;
+
+        font-size: 14px;
+    }
+
+
     /* =========================================
        HEADER PROFIL
     ========================================= */
@@ -22,6 +69,7 @@
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 10px;
+
         padding: 20px 24px;
 
         display: flex;
@@ -33,16 +81,21 @@
 
     .profil-header h3 {
         margin: 0;
+
         font-size: 22px;
         font-weight: 700;
+
         color: #12365d;
     }
 
     .profil-header p {
         margin: 5px 0 0;
+
         font-size: 13px;
+
         color: #6b7f95;
     }
+
 
     /* =========================================
        BUTTON EDIT
@@ -74,6 +127,7 @@
         color: #ffffff;
     }
 
+
     /* =========================================
        CARD PROFIL
     ========================================= */
@@ -81,9 +135,12 @@
     .profil-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
+
         border-radius: 10px;
+
         overflow: hidden;
     }
+
 
     /* =========================================
        LOGO DAN FOTO
@@ -91,7 +148,9 @@
 
     .profil-media {
         display: grid;
+
         grid-template-columns: 1fr 1.3fr;
+
         gap: 25px;
 
         padding: 25px;
@@ -112,6 +171,7 @@
         color: #243b53;
     }
 
+
     /* =========================================
        LOGO
     ========================================= */
@@ -128,6 +188,7 @@
         background: #fafcff;
 
         border: 1px solid #e2e8f0;
+
         border-radius: 7px;
     }
 
@@ -137,6 +198,7 @@
 
         object-fit: contain;
     }
+
 
     /* =========================================
        FOTO SEKOLAH
@@ -152,6 +214,7 @@
         background: #fafcff;
 
         border: 1px solid #e2e8f0;
+
         border-radius: 7px;
 
         overflow: hidden;
@@ -163,6 +226,7 @@
 
         object-fit: cover;
     }
+
 
     /* =========================================
        DATA SEKOLAH
@@ -183,6 +247,7 @@
 
     .data-table {
         width: 100%;
+
         border-collapse: collapse;
     }
 
@@ -224,6 +289,7 @@
         line-height: 1.6;
     }
 
+
     /* =========================================
        DATA KOSONG
     ========================================= */
@@ -232,6 +298,7 @@
         min-height: 150px;
 
         display: flex;
+
         flex-direction: column;
 
         align-items: center;
@@ -250,6 +317,7 @@
         color: #b2bfcd;
     }
 
+
     /* =========================================
        RESPONSIVE
     ========================================= */
@@ -258,10 +326,12 @@
 
         .profil-media {
             grid-template-columns: 1fr;
+
             gap: 25px;
         }
 
     }
+
 
     @media (max-width: 600px) {
 
@@ -275,6 +345,7 @@
 
         .btn-edit-profil {
             width: 100%;
+
             justify-content: center;
         }
 
@@ -295,10 +366,48 @@
         }
 
     }
+
 </style>
 
 
 <div class="profil-wrapper">
+
+
+    {{-- =========================================
+         NOTIFIKASI BERHASIL
+    ========================================== --}}
+
+    @if(session('success'))
+
+        <div class="alert-success-profil">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span>
+                {{ session('success') }}
+            </span>
+
+        </div>
+
+    @endif
+
+
+    {{-- =========================================
+         NOTIFIKASI ERROR
+    ========================================== --}}
+
+    @if(session('error'))
+
+        <div class="alert-error-profil">
+
+            <i class="bi bi-exclamation-circle-fill"></i>
+
+            {{ session('error') }}
+
+        </div>
+
+    @endif
+
 
     {{-- =========================================
          HEADER PROFIL
@@ -321,8 +430,9 @@
 
         {{-- TOMBOL EDIT --}}
 
-        <a href="{{ route('admin.profil.edit') }}"
-           class="btn-edit-profil">
+        <a
+            href="{{ route('admin.profil.edit') }}"
+            class="btn-edit-profil">
 
             <i class="bi bi-pencil-square"></i>
 
@@ -433,6 +543,7 @@
             @if($profil)
 
                 <table class="data-table">
+
 
                     {{-- NAMA SEKOLAH --}}
 
