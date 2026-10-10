@@ -6,18 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Galeri extends Model
 {
-    protected $table = 'galeri';
-    protected $primaryKey = 'id_galeri';
-    public $timestamps = false;
+    protected $table = 'galeris';
+
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'judul',
         'keterangan',
-        'file',
         'kategori',
         'tanggal',
-    ];
-
-    protected $casts = [
-        'tanggal' => 'date',
+        'file',
+        'sumber_video',
+        'link_video',
     ];
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\Siswa;
-// Kalau model berita/ekskul/galeri sudah ada, bisa ditambahkan nanti
 
 class DashboardController extends Controller
 {

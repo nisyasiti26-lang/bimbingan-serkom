@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ekstrakurikuler extends Model
 {
-    protected $table = 'ekstrakurikuler';
-    protected $primaryKey = 'id_ekskul';
-    public $timestamps = false;
+    protected $table = 'ekstrakulikulers';
+
+    protected $primaryKey = 'id';
+
+    public $timestamps = true;
+
     protected $fillable = [
         'nama_ekskul',
+        'slug',
         'pembina',
         'jadwal_latihan',
         'deskripsi',

@@ -8,7 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('profil_sekolahs', function (Blueprint $table) {
+        Schema::create('profil_sekolahs', function (Blueprint $table) {
+            $table->id();
 
             $table->string('nama_sekolah')->nullable();
             $table->string('kepala_sekolah')->nullable();
@@ -20,27 +21,11 @@ return new class extends Migration
             $table->text('visi_misi')->nullable();
             $table->string('tahun_berdiri')->nullable();
             $table->text('deskripsi')->nullable();
-
         });
     }
 
     public function down(): void
     {
-        Schema::table('profil_sekolahs', function (Blueprint $table) {
-
-            $table->dropColumn([
-                'nama_sekolah',
-                'kepala_sekolah',
-                'foto',
-                'logo',
-                'npsn',
-                'alamat',
-                'kontak',
-                'visi_misi',
-                'tahun_berdiri',
-                'deskripsi',
-            ]);
-
-        });
+        Schema::dropIfExists('profil_sekolahs');
     }
 };

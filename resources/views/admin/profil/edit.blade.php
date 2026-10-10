@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Edit Profil Sekolah - SMK Singaparna')
+@section('title', 'Edit Profil Sekolah - MTsN 10 Tasikmalay')
 
 @section('content')
 
@@ -31,7 +31,7 @@
         margin: 0;
         font-size: 26px;
         font-weight: 700;
-        color: #1f2937;
+        color: #164e32;
     }
 
 
@@ -43,7 +43,8 @@
         background: #ffffff;
         border-radius: 12px;
         padding: 30px;
-        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 3px 15px rgba(25, 135, 84, 0.08);
+        border: 1px solid #e1eee6;
     }
 
 
@@ -65,7 +66,7 @@
     .form-control {
         width: 100%;
         padding: 11px 13px;
-        border: 1px solid #d1d5db;
+        border: 1px solid #d1ddd6;
         border-radius: 7px;
         font-size: 14px;
         outline: none;
@@ -73,8 +74,8 @@
     }
 
     .form-control:focus {
-        border-color: #176db0;
-        box-shadow: 0 0 0 3px rgba(23, 109, 176, 0.1);
+        border-color: #198754;
+        box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.10);
     }
 
     textarea.form-control {
@@ -102,7 +103,7 @@
         height: 120px;
         object-fit: cover;
         border-radius: 8px;
-        border: 1px solid #ddd;
+        border: 1px solid #d7e5dc;
     }
 
     .file-info {
@@ -176,7 +177,7 @@
 
         padding: 0 25px;
 
-        background: #176db0;
+        background: #198754;
         color: #ffffff;
 
         border: none;
@@ -191,7 +192,7 @@
     }
 
     .btn-simpan:hover {
-        background: #155a98;
+        background: #157347;
     }
 
 
@@ -285,18 +286,6 @@
          HEADER
     ========================================== -->
 
-    <div class="profil-edit-header">
-
-        <div>
-
-            <h2>
-                Edit Profil Sekolah
-            </h2>
-
-        </div>
-
-    </div>
-
 
     <!-- =========================================
          SUCCESS MESSAGE
@@ -351,7 +340,7 @@
     <div class="profil-form-card">
 
         <form
-            action="{{ route('admin.profile.update') }}"
+            action="{{ route('profile.sekolah.update') }}"
             method="POST"
             enctype="multipart/form-data"
         >
@@ -689,7 +678,7 @@
                 <!-- BUTTON BATAL -->
 
                 <a
-                    href="{{ route('admin.profile') }}"
+                    href="{{ route('profile.sekolah') }}"
                     class="btn-batal"
                 >
 
@@ -707,8 +696,7 @@
                     class="btn-simpan"
                 >
 
-                    <i class="bi bi-save"></i>
-
+                   
                     Simpan Perubahan
 
                 </button>

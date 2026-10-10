@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfilSekolah extends Model
 {
-    protected $table = 'profil_sekolah';
-    protected $primaryKey = 'id_profil';
+    protected $table = 'profil_sekolahs';
+    protected $primaryKey = 'id';
     public $timestamps = false;
+
     protected $fillable = [
         'nama_sekolah',
         'kepala_sekolah',

@@ -1,143 +1,104 @@
 @extends('index')
 
-@section('title', 'Edit Berita - SMKS Singaparna')
+@section('title', 'Edit Berita - MTsN 10 Tasikmalaya')
 
 @section('content')
 
 <style>
-
     .edit-berita-wrapper {
         width: 100%;
         margin-top: 10px;
     }
 
     .edit-card {
-        background: #ffffff;
+        background: #fff;
         border: 1px solid #e2eaf3;
         border-radius: 14px;
-        box-shadow: 0 4px 18px rgba(31, 70, 110, 0.07);
+        box-shadow: 0 4px 18px rgba(31, 70, 110, .07);
         overflow: hidden;
     }
 
-    .edit-card-header {
-        padding: 22px 28px;
-        border-bottom: 1px solid #e8eef5;
-        background: #fbfdff;
-    }
-
-    .edit-card-header h5 {
-        margin: 0 0 5px 0;
-        color: #17365d;
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    .edit-card-header h5 i {
-        color: #1769aa;
-    }
-
-    .edit-card-header p {
-        margin: 0;
-        font-size: 13px;
-        color: #8291a5;
-    }
-
     .edit-card-body {
-        padding: 28px;
+        padding: 24px;
     }
 
     .form-group {
-        margin-bottom: 21px;
+        margin-bottom: 18px;
     }
 
     .form-label {
         display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
+        margin-bottom: 7px;
+        font-size: 13px;
         font-weight: 600;
         color: #263b55;
     }
 
-    .form-label i {
-        color: #1769aa;
-        margin-right: 5px;
-    }
-
-    .form-control,
-    .form-select {
+    .edit-card .form-control,
+    .edit-card .form-select {
         width: 100%;
-        height: 45px;
+        min-height: 43px;
         border: 1px solid #d9e3ee;
         border-radius: 8px;
-        padding: 0 14px;
-        font-size: 14px;
+        padding: 9px 13px;
+        font-size: 13px;
         color: #34495e;
-        background-color: #ffffff;
-        transition: all 0.2s ease;
+        background-color: #fff;
         box-shadow: none;
     }
 
-    textarea.form-control {
-        height: 160px;
-        padding: 12px 14px;
+    .edit-card textarea.form-control {
+        min-height: 140px;
         resize: vertical;
         line-height: 1.6;
     }
 
-    .form-control:focus,
-    .form-select:focus {
-        border-color: #3182c4;
-        box-shadow: 0 0 0 3px rgba(49, 130, 196, 0.10);
+    .edit-card .form-control:focus,
+    .edit-card .form-select:focus {
+        border-color: #198754;
+        box-shadow: 0 0 0 3px rgba(25, 135, 84, .10);
         outline: none;
-    }
-
-    .form-control::placeholder {
-        color: #a0adbb;
     }
 
     .form-actions {
         display: flex;
         align-items: center;
         gap: 10px;
-        padding-top: 20px;
-        margin-top: 8px;
+        padding-top: 18px;
+        margin-top: 5px;
         border-top: 1px solid #edf1f5;
     }
 
-    .btn-simpan {
-        height: 42px;
-        padding: 0 20px;
-        border: none;
+    .btn-simpan,
+    .btn-batal {
+        min-height: 40px;
+        padding: 0 18px;
         border-radius: 8px;
-        background: #1769aa;
-        color: #ffffff;
         font-size: 13px;
         font-weight: 600;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: 0.2s;
+        text-decoration: none;
+        transition: .2s;
+    }
+
+    .btn-simpan {
+        border: none;
+        background: #198754;
+        color: #fff;
     }
 
     .btn-simpan:hover {
-        background: #12568d;
-        color: #ffffff;
+        background: #146c43;
+        color: #fff;
     }
 
     .btn-batal {
-        height: 42px;
-        padding: 0 18px;
         border: 1px solid #d9e2ec;
-        border-radius: 8px;
-        background: #ffffff;
+        background: #fff;
         color: #64748b;
-        font-size: 13px;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: 0.2s;
     }
 
     .btn-batal:hover {
@@ -146,12 +107,12 @@
     }
 
     .current-image {
-        margin-top: 8px;
+        margin-top: 7px;
     }
 
     .current-image img {
-        width: 180px;
-        height: 110px;
+        width: 170px;
+        height: 105px;
         object-fit: cover;
         border-radius: 8px;
         border: 1px solid #d9e3ee;
@@ -159,24 +120,19 @@
     }
 
     .image-info {
-        margin-top: 7px;
+        margin-top: 6px;
         font-size: 12px;
         color: #8291a5;
     }
 
-    .alert-danger {
+    .edit-card .alert {
         border-radius: 8px;
         font-size: 13px;
     }
 
     @media (max-width: 768px) {
-
         .edit-card-body {
-            padding: 20px;
-        }
-
-        .edit-card-header {
-            padding: 20px;
+            padding: 18px;
         }
 
         .form-actions {
@@ -193,92 +149,39 @@
             width: 150px;
             height: 100px;
         }
-
     }
-
 </style>
 
-
 <div class="edit-berita-wrapper">
-
     <div class="edit-card">
-
-
-        {{-- HEADER --}}
-        <div class="edit-card-header">
-
-            <h5>
-                <i class="bi bi-newspaper me-2"></i>
-                Edit Data Berita
-            </h5>
-
-            <p>
-                Perbarui informasi berita sekolah
-            </p>
-
-        </div>
-
-
-        {{-- BODY --}}
         <div class="edit-card-body">
 
-
-            {{-- ERROR VALIDASI --}}
+            {{-- PESAN ERROR VALIDASI --}}
             @if ($errors->any())
-
                 <div class="alert alert-danger mb-4">
-
-                    <strong>
-                        Terjadi kesalahan!
-                    </strong>
-
+                    <strong>Terjadi kesalahan!</strong>
                     <ul class="mb-0 mt-2">
-
                         @foreach ($errors->all() as $error)
-
-                            <li>
-                                {{ $error }}
-                            </li>
-
+                            <li>{{ $error }}</li>
                         @endforeach
-
                     </ul>
-
                 </div>
-
             @endif
 
-
-            {{-- FORM --}}
+            {{-- FORM EDIT BERITA --}}
             <form
-                action="{{ route('admin.berita.update', $berita->id_berita) }}"
+                action="{{ route('admin.berita.update', ['id_berita' => $berita->id]) }}"
                 method="POST"
                 enctype="multipart/form-data"
             >
-
                 @csrf
-
                 @method('PUT')
 
-
-                {{-- BARIS PERTAMA --}}
+                {{-- JUDUL DAN TANGGAL --}}
                 <div class="row">
-
-
-                    {{-- JUDUL --}}
                     <div class="col-md-8">
-
                         <div class="form-group">
-
-                            <label
-                                for="judul"
-                                class="form-label"
-                            >
-
-                                <i class="bi bi-newspaper"></i>
-                                Judul Berita
-
-                            </label>
+                            <label for="judul" class="form-label">Judul Berita</label>
 
                             <input
                                 type="text"
@@ -292,69 +195,34 @@
                             >
 
                             @error('judul')
-
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-
                         </div>
-
                     </div>
 
-
-                    {{-- TANGGAL --}}
                     <div class="col-md-4">
-
                         <div class="form-group">
-
-                            <label
-                                for="tanggal"
-                                class="form-label"
-                            >
-
-                                <i class="bi bi-calendar3"></i>
-                                Tanggal
-
-                            </label>
+                            <label for="tanggal" class="form-label">Tanggal</label>
 
                             <input
                                 type="date"
                                 class="form-control @error('tanggal') is-invalid @enderror"
                                 id="tanggal"
                                 name="tanggal"
-                                value="{{ old('tanggal', $berita->tanggal) }}"
+                                value="{{ old('tanggal', $berita->tanggal ? \Illuminate\Support\Carbon::parse($berita->tanggal)->format('Y-m-d') : '') }}"
                                 required
                             >
 
                             @error('tanggal')
-
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-
                         </div>
-
                     </div>
-
                 </div>
-
 
                 {{-- USER --}}
                 <div class="form-group">
-
-                    <label
-                        for="id_user"
-                        class="form-label"
-                    >
-
-                        <i class="bi bi-person"></i>
-                        User
-
-                    </label>
+                    <label for="id_user" class="form-label">User</label>
 
                     <select
                         class="form-select @error('id_user') is-invalid @enderror"
@@ -362,47 +230,58 @@
                         name="id_user"
                         required
                     >
-
-                        <option value="">
-                            -- Pilih User --
-                        </option>
+                        <option value="">-- Pilih User --</option>
 
                         @foreach ($users as $user)
-
                             <option
                                 value="{{ $user->id_user }}"
                                 {{ old('id_user', $berita->id_user) == $user->id_user ? 'selected' : '' }}
                             >
                                 {{ $user->username }}
                             </option>
-
                         @endforeach
-
                     </select>
 
                     @error('id_user')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-
                 </div>
 
+                {{-- STATUS --}}
+                <div class="form-group">
+                    <label for="status" class="form-label">Status</label>
+
+                    <select
+                        class="form-select @error('status') is-invalid @enderror"
+                        id="status"
+                        name="status"
+                        required
+                    >
+                        <option value="">-- Pilih Status --</option>
+
+                        <option
+                            value="draft"
+                            {{ old('status', $berita->status) == 'draft' ? 'selected' : '' }}
+                        >
+                            Draft
+                        </option>
+
+                        <option
+                            value="publikasi"
+                            {{ old('status', $berita->status) == 'publikasi' ? 'selected' : '' }}
+                        >
+                            Publikasi
+                        </option>
+                    </select>
+
+                    @error('status')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 {{-- ISI BERITA --}}
                 <div class="form-group">
-
-                    <label
-                        for="isi"
-                        class="form-label"
-                    >
-
-                        <i class="bi bi-file-text"></i>
-                        Isi Berita
-
-                    </label>
+                    <label for="isi" class="form-label">Isi Berita</label>
 
                     <textarea
                         class="form-control @error('isi') is-invalid @enderror"
@@ -413,35 +292,20 @@
                     >{{ old('isi', $berita->isi) }}</textarea>
 
                     @error('isi')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-
                 </div>
 
-
-                {{-- GAMBAR --}}
+                {{-- GANTI GAMBAR --}}
                 <div class="form-group">
-
-                    <label
-                        for="gambar"
-                        class="form-label"
-                    >
-
-                        <i class="bi bi-image"></i>
-                        Gambar Berita
-
-                    </label>
+                    <label for="gambar" class="form-label">Gambar Berita</label>
 
                     <input
                         type="file"
                         class="form-control @error('gambar') is-invalid @enderror"
                         id="gambar"
                         name="gambar"
-                        accept="image/jpeg,image/png,image/jpg,image/webp"
+                        accept=".jpg,.jpeg,.png,.webp"
                     >
 
                     <div class="image-info">
@@ -449,78 +313,41 @@
                     </div>
 
                     @error('gambar')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-
                 </div>
 
-
-                {{-- GAMBAR LAMA --}}
+                {{-- GAMBAR SAAT INI --}}
                 @if (!empty($berita->gambar))
-
                     <div class="form-group">
-
-                        <label class="form-label">
-
-                            <i class="bi bi-eye"></i>
-                            Gambar Saat Ini
-
-                        </label>
+                        <label class="form-label">Gambar Saat Ini</label>
 
                         <div class="current-image">
-
                             <img
                                 src="{{ asset('storage/' . $berita->gambar) }}"
-                                alt="Gambar Berita"
+                                alt="Gambar berita: {{ $berita->judul }}"
                             >
-
                         </div>
-
                     </div>
-
                 @endif
 
-
-                {{-- BUTTON --}}
+                {{-- TOMBOL --}}
                 <div class="form-actions">
-
-                    <button
-                        type="submit"
-                        class="btn-simpan"
-                    >
-
-                        <i class="bi bi-save me-2"></i>
-
+                    <button type="submit" class="btn-simpan">
                         Simpan Perubahan
-
                     </button>
-
 
                     <a
                         href="{{ route('admin.berita.index') }}"
                         class="btn-batal"
                     >
-
-                        <i class="bi bi-arrow-left me-2"></i>
-
                         Batal
-
                     </a>
-
                 </div>
-
-
             </form>
 
         </div>
-
     </div>
-
 </div>
-
 
 @endsection

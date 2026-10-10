@@ -1,562 +1,592 @@
 @extends('index')
 
-@section('title', 'Edit Data Galeri - SMKS Singaparna')
+@section('title', 'Edit Data Galeri - MTsN 10 Tasikmalaya')
 
 @section('content')
 
-<style>
-
-    .edit-galeri-wrapper {
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .edit-card {
-        background: #ffffff;
-        border: 1px solid #e2eaf3;
-        border-radius: 14px;
-        box-shadow: 0 4px 18px rgba(31, 70, 110, 0.07);
-        overflow: hidden;
-    }
-
-    .edit-card-header {
-        padding: 22px 28px;
-        border-bottom: 1px solid #e8eef5;
-        background: #fbfdff;
-    }
-
-    .edit-card-header h5 {
-        margin: 0 0 5px 0;
-        color: #17365d;
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    .edit-card-header h5 i {
-        color: #1769aa;
-    }
-
-    .edit-card-header p {
-        margin: 0;
-        font-size: 13px;
-        color: #8291a5;
-    }
-
-    .edit-card-body {
-        padding: 28px;
-    }
-
-    .form-group {
-        margin-bottom: 21px;
-    }
-
-    .form-label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        color: #263b55;
-    }
-
-    .form-label i {
-        color: #1769aa;
-        margin-right: 5px;
-    }
-
-    .form-control,
-    .form-select {
-        width: 100%;
-        height: 45px;
-        border: 1px solid #d9e3ee;
-        border-radius: 8px;
-        padding: 0 14px;
-        font-size: 14px;
-        color: #34495e;
-        background-color: #ffffff;
-        transition: all 0.2s ease;
-        box-shadow: none;
-    }
-
-    textarea.form-control {
-        height: 150px;
-        padding: 12px 14px;
-        resize: vertical;
-        line-height: 1.6;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-        border-color: #3182c4;
-        box-shadow: 0 0 0 3px rgba(49, 130, 196, 0.10);
-        outline: none;
-    }
-
-    .form-control::placeholder {
-        color: #a0adbb;
-    }
-
-    .form-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding-top: 20px;
-        margin-top: 8px;
-        border-top: 1px solid #edf1f5;
-    }
-
-    .btn-simpan {
-        height: 42px;
-        padding: 0 20px;
-        border: none;
-        border-radius: 8px;
-        background: #1769aa;
-        color: #ffffff;
-        font-size: 13px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .btn-simpan:hover {
-        background: #12568d;
-        color: #ffffff;
-    }
-
-    .btn-batal {
-        height: 42px;
-        padding: 0 18px;
-        border: 1px solid #d9e2ec;
-        border-radius: 8px;
-        background: #ffffff;
-        color: #64748b;
-        font-size: 13px;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: 0.2s;
-    }
-
-    .btn-batal:hover {
-        background: #f5f8fb;
-        color: #334155;
-    }
-
-    .current-file {
-        margin-top: 8px;
-    }
-
-    .current-file img {
-        width: 180px;
-        height: 110px;
-        object-fit: cover;
-        border-radius: 8px;
-        border: 1px solid #d9e3ee;
-        display: block;
-    }
-
-    .current-file video {
-        width: 300px;
-        height: 170px;
-        object-fit: cover;
-        border-radius: 8px;
-        border: 1px solid #d9e3ee;
-        display: block;
-        background: #000;
-    }
-
-    .file-info {
-        margin-top: 7px;
-        font-size: 12px;
-        color: #8291a5;
-    }
-
-    .alert-danger {
-        border-radius: 8px;
-        font-size: 13px;
-    }
-
-    @media (max-width: 768px) {
-
-        .edit-card-body {
-            padding: 20px;
+    <style>
+        .edit-galeri-wrapper {
+            width: 100%;
+            margin-top: 10px;
         }
 
-        .edit-card-header {
-            padding: 20px;
+        .edit-card {
+            background: #fff;
+            border: 1px solid #e2eaf3;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(31, 70, 110, .07);
+            overflow: hidden;
+        }
+
+        .edit-card-body {
+            padding: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 21px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #17365d;
+        }
+
+        .form-control,
+        .form-select {
+            width: 100%;
+            min-height: 45px;
+            border: 1px solid #d9e3ee;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #17365d;
+            background: #fff;
+            box-shadow: none;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 3px rgba(25, 135, 84, .10);
+            outline: none;
+        }
+
+        .file-info {
+            margin-top: 7px;
+            font-size: 12px;
+            color: #6c757d;
+            line-height: 1.7;
+        }
+
+        .current-file img,
+        .current-file video,
+        .current-file iframe,
+        .preview-container img,
+        .preview-container video {
+            display: block;
+            width: 100%;
+            max-width: 550px;
+            max-height: 350px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        .current-file img,
+        .preview-container img {
+            object-fit: contain;
+        }
+
+        .current-file video,
+        .preview-container video {
+            background: #000;
+        }
+
+        .current-file iframe {
+            aspect-ratio: 16 / 9;
+            height: auto;
+            border: 0;
+        }
+
+        .preview-container {
+            margin-top: 12px;
+            padding: 15px;
+            border: 1px dashed #cbd8e6;
+            border-radius: 10px;
+            background: #f8fafc;
         }
 
         .form-actions {
-            flex-direction: column;
-            align-items: stretch;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-top: 20px;
+            margin-top: 8px;
+            border-top: 1px solid #edf1f5;
         }
 
         .btn-simpan,
         .btn-batal {
-            width: 100%;
+            min-height: 42px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        .current-file img {
-            width: 150px;
-            height: 100px;
+        .btn-simpan {
+            border: none;
+            background: #198754;
+            color: #fff;
         }
 
-        .current-file video {
-            width: 100%;
-            height: auto;
+        .btn-simpan:hover {
+            background: #146c43;
+            color: #fff;
         }
 
-    }
+        .btn-batal {
+            border: 1px solid #d9e2ec;
+            background: #fff;
+            color: #17365d;
+        }
 
-</style>
+        .btn-batal:hover {
+            background: #f5f8fb;
+            color: #17365d;
+        }
 
+        @media (max-width: 768px) {
+            .edit-card-body {
+                padding: 18px;
+            }
 
-<div class="edit-galeri-wrapper">
+            .form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
 
-    <div class="edit-card">
+            .btn-simpan,
+            .btn-batal {
+                width: 100%;
+            }
+        }
+    </style>
 
+    <div class="edit-galeri-wrapper">
+        <div class="edit-card">
+            <div class="edit-card-body">
 
-        {{-- HEADER --}}
-        <div class="edit-card-header">
+                {{-- PESAN ERROR --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger mb-4">
+                        <strong>Terjadi kesalahan!</strong>
+                        <ul class="mb-0 mt-2">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-            <h5>
-                <i class="bi bi-images me-2"></i>
-                Edit Data Galeri
-            </h5>
+                {{-- FORM EDIT DENGAN ID TERENKRIPSI --}}
+                <form
+                    action="{{ route('admin.galeri.update', \Illuminate\Support\Facades\Crypt::encryptString((string) $galeri->id)) }}"
+                    method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-            <p>
-                Perbarui informasi galeri sekolah
-            </p>
+                    <div class="row">
 
-        </div>
+                        {{-- JUDUL --}}
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="judul" class="form-label">
+                                    Judul Galeri
+                                </label>
 
+                                <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul"
+                                    name="judul" value="{{ old('judul', $galeri->judul) }}" maxlength="50"
+                                    placeholder="Masukkan judul galeri" required>
 
-        {{-- BODY --}}
-        <div class="edit-card-body">
+                                @error('judul')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
+                        {{-- TANGGAL --}}
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tanggal" class="form-label">
+                                    Tanggal Kegiatan
+                                </label>
 
-            {{-- ERROR VALIDASI --}}
-            @if ($errors->any())
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal"
+                                    name="tanggal"
+                                    value="{{ old('tanggal', $galeri->tanggal ? \Illuminate\Support\Carbon::parse($galeri->tanggal)->format('Y-m-d') : '') }}"
+                                    required>
 
-                <div class="alert alert-danger mb-4">
+                                @error('tanggal')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                    <strong>
-                        Terjadi kesalahan!
-                    </strong>
+                        {{-- KATEGORI --}}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="kategori" class="form-label">
+                                    Kategori Galeri
+                                </label>
 
-                    <ul class="mb-0 mt-2">
+                                <select class="form-select @error('kategori') is-invalid @enderror" id="kategori"
+                                    name="kategori" required>
+                                    <option value="">-- Pilih Kategori --</option>
 
-                        @foreach ($errors->all() as $error)
+                                    <option value="Foto" {{ old('kategori', $galeri->kategori) == 'Foto' ? 'selected' : '' }}>
+                                        Foto
+                                    </option>
 
-                            <li>
-                                {{ $error }}
-                            </li>
+                                    <option value="Video" {{ old('kategori', $galeri->kategori) == 'Video' ? 'selected' : '' }}>
+                                        Video
+                                    </option>
+                                </select>
 
-                        @endforeach
+                                @error('kategori')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                    </ul>
+                        {{-- SUMBER VIDEO --}}
+                        <div class="col-md-6" id="sumberVideoWrapper" style="display:none;">
 
-                </div>
+                            <div class="form-group">
+                                <label for="sumber_video" class="form-label">
+                                    Jenis Video
+                                </label>
 
-            @endif
+                                <select class="form-select @error('sumber_video') is-invalid @enderror" id="sumber_video"
+                                    name="sumber_video">
+                                    <option value="">-- Pilih Jenis Video --</option>
 
+                                    <option value="file" {{ old('sumber_video', $galeri->sumber_video ?? '') == 'file' ? 'selected' : '' }}>
+                                        Upload File Video
+                                    </option>
 
-            {{-- FORM --}}
-            <form
-                action="{{ route('admin.galeri.update', $galeri->id_galeri) }}"
-                method="POST"
-                enctype="multipart/form-data"
-            >
+                                    <option value="link" {{ old('sumber_video', $galeri->sumber_video ?? '') == 'link' ? 'selected' : '' }}>
+                                        Link YouTube
+                                    </option>
+                                </select>
 
-                @csrf
+                                @error('sumber_video')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                @method('PUT')
+                        {{-- UPLOAD FOTO / VIDEO --}}
+                        <div class="col-md-6" id="fileWrapper" style="display:none;">
 
+                            <div class="form-group">
+                                <label for="file" class="form-label" id="labelFile">
+                                    Ganti File
+                                </label>
 
-                {{-- BARIS PERTAMA --}}
-                <div class="row">
+                                <input type="file" class="form-control @error('file') is-invalid @enderror" id="file"
+                                    name="file" accept=".jpg,.jpeg,.png,.webp,.mp4,.mov,.avi,.mkv">
 
-
-                    {{-- JUDUL --}}
-                    <div class="col-md-8">
-
-                        <div class="form-group">
-
-                            <label
-                                for="judul"
-                                class="form-label"
-                            >
-
-                                <i class="bi bi-card-heading"></i>
-                                Judul
-
-                            </label>
-
-                            <input
-                                type="text"
-                                class="form-control @error('judul') is-invalid @enderror"
-                                id="judul"
-                                name="judul"
-                                value="{{ old('judul', $galeri->judul) }}"
-                                placeholder="Masukkan judul galeri"
-                                maxlength="50"
-                                required
-                            >
-
-                            @error('judul')
-
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                                <div class="file-info" id="fileInfo">
+                                    Kosongkan jika tidak ingin mengganti file.
                                 </div>
 
-                            @enderror
-
+                                @error('file')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
-                    </div>
+                        {{-- LINK YOUTUBE --}}
+                        <div class="col-md-6" id="linkVideoWrapper" style="display:none;">
 
+                            <div class="form-group">
+                                <label for="link_video" class="form-label">
+                                    Link Video YouTube
+                                </label>
 
-                    {{-- TANGGAL --}}
-                    <div class="col-md-4">
+                                <input type="url" class="form-control @error('link_video') is-invalid @enderror"
+                                    id="link_video" name="link_video"
+                                    value="{{ old('link_video', $galeri->link_video ?? '') }}"
+                                    placeholder="https://www.youtube.com/watch?v=..." disabled>
 
-                        <div class="form-group">
-
-                            <label
-                                for="tanggal"
-                                class="form-label"
-                            >
-
-                                <i class="bi bi-calendar3"></i>
-                                Tanggal
-
-                            </label>
-
-                            <input
-                                type="date"
-                                class="form-control @error('tanggal') is-invalid @enderror"
-                                id="tanggal"
-                                name="tanggal"
-                                value="{{ old('tanggal', $galeri->tanggal) }}"
-                                required
-                            >
-
-                            @error('tanggal')
-
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                                <div class="file-info">
+                                    Kosongkan jika ingin mempertahankan link lama.
                                 </div>
 
-                            @enderror
-
+                                @error('link_video')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                     </div>
 
-                </div>
-
-
-                {{-- KATEGORI --}}
-                <div class="form-group">
-
-                    <label
-                        for="kategori"
-                        class="form-label"
-                    >
-
-                        <i class="bi bi-grid"></i>
-                        Kategori
-
-                    </label>
-
-                    <select
-                        class="form-select @error('kategori') is-invalid @enderror"
-                        id="kategori"
-                        name="kategori"
-                        required
-                    >
-
-                        <option value="">
-                            -- Pilih Kategori --
-                        </option>
-
-                        <option
-                            value="Foto"
-                            {{ old('kategori', $galeri->kategori) == 'Foto' ? 'selected' : '' }}
-                        >
-                            Foto
-                        </option>
-
-                        <option
-                            value="Video"
-                            {{ old('kategori', $galeri->kategori) == 'Video' ? 'selected' : '' }}
-                        >
-                            Video
-                        </option>
-
-                    </select>
-
-                    @error('kategori')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
-                </div>
-
-
-                {{-- KETERANGAN --}}
-                <div class="form-group">
-
-                    <label
-                        for="keterangan"
-                        class="form-label"
-                    >
-
-                        <i class="bi bi-file-text"></i>
-                        Keterangan
-
-                    </label>
-
-                    <textarea
-                        class="form-control @error('keterangan') is-invalid @enderror"
-                        id="keterangan"
-                        name="keterangan"
-                        placeholder="Masukkan keterangan galeri"
-                        required
-                    >{{ old('keterangan', $galeri->keterangan) }}</textarea>
-
-                    @error('keterangan')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
-                </div>
-
-
-                {{-- FILE BARU --}}
-                <div class="form-group">
-
-                    <label
-                        for="file"
-                        class="form-label"
-                    >
-
-                        <i class="bi bi-cloud-arrow-up"></i>
-                        Ganti File
-
-                    </label>
-
-                    <input
-                        type="file"
-                        class="form-control @error('file') is-invalid @enderror"
-                        id="file"
-                        name="file"
-                        accept="image/jpeg,image/png,image/jpg,image/webp,video/mp4,video/webm,video/quicktime,video/x-msvideo"
-                    >
-
-                    <div class="file-info">
-                        Kosongkan jika tidak ingin mengganti file.
-                        Foto: JPG, JPEG, PNG, WEBP.
-                        Video: MP4, MOV, AVI, MKV.
-                    </div>
-
-                    @error('file')
-
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-
-                    @enderror
-
-                </div>
-
-
-                {{-- FILE LAMA --}}
-                @if (!empty($galeri->file))
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-
-                            <i class="bi bi-eye"></i>
-                            File Saat Ini
-
-                        </label>
-
+                    {{-- MEDIA SAAT INI --}}
+                    <div class="form-group" id="mediaSaatIni">
+                        <label class="form-label">Media Saat Ini</label>
 
                         <div class="current-file">
 
-                            @if ($galeri->kategori === 'Foto')
+                            @if ($galeri->kategori === 'Foto' && $galeri->file)
+                                <img src="{{ asset('storage/' . $galeri->file) }}" alt="{{ $galeri->judul }}">
 
-                                <img
-                                    src="{{ asset('storage/' . $galeri->file) }}"
-                                    alt="{{ $galeri->judul }}"
-                                >
+                            @elseif ($galeri->kategori === 'Video' && !empty($galeri->link_video))
+                                <iframe id="youtubeLama" src="" title="Video YouTube saat ini"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
 
-                            @elseif ($galeri->kategori === 'Video')
-
+                            @elseif ($galeri->kategori === 'Video' && $galeri->file)
                                 <video controls>
-
-                                    <source
-                                        src="{{ asset('storage/' . $galeri->file) }}"
-                                    >
-
+                                    <source src="{{ asset('storage/' . $galeri->file) }}">
                                     Browser Anda tidak mendukung video.
-
                                 </video>
 
+                            @else
+                                <p class="text-muted small">
+                                    Media lama tidak ditemukan. Periksa file atau link di database.
+                                </p>
                             @endif
 
                         </div>
-
                     </div>
 
-                @endif
+                    {{-- PREVIEW FOTO BARU --}}
+                    <div class="form-group" id="previewFoto" style="display:none;">
+                        <div class="preview-container">
+                            <strong>Preview Foto Baru</strong>
+                            <img id="gambarPreview" src="" alt="Preview foto baru">
+                        </div>
+                    </div>
 
+                    {{-- PREVIEW VIDEO BARU --}}
+                    <div class="form-group" id="previewVideo" style="display:none;">
+                        <div class="preview-container">
+                            <strong>Preview Video Baru</strong>
+                            <video id="videoPreview" controls>
+                                Browser Anda tidak mendukung video.
+                            </video>
+                        </div>
+                    </div>
 
-                {{-- BUTTON --}}
-                <div class="form-actions">
+                    {{-- KETERANGAN --}}
+                    <div class="form-group">
+                        <label for="keterangan" class="form-label">
+                            Keterangan
+                        </label>
 
-                    <button
-                        type="submit"
-                        class="btn-simpan"
-                    >
+                        <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
+                            name="keterangan" rows="4" placeholder="Masukkan keterangan galeri"
+                            required>{{ old('keterangan', $galeri->keterangan) }}</textarea>
 
-                        <i class="bi bi-save me-2"></i>
+                        @error('keterangan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                        Simpan Perubahan
+                    {{-- TOMBOL --}}
+                    <div class="form-actions">
+                        <button type="submit" class="btn-simpan">
+                            Simpan Perubahan
+                        </button>
 
-                    </button>
+                        <a href="{{ route('admin.galeri.index') }}" class="btn-batal">
+                            Batal
+                        </a>
+                    </div>
 
-
-                    <a
-                        href="{{ route('admin.galeri.index') }}"
-                        class="btn-batal"
-                    >
-
-                        <i class="bi bi-arrow-left me-2"></i>
-
-                        Batal
-
-                    </a>
-
-                </div>
-
-
-            </form>
-
+                </form>
+            </div>
         </div>
-
     </div>
 
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const kategori = document.getElementById('kategori');
+            const sumberVideo = document.getElementById('sumber_video');
+
+            const sumberWrapper = document.getElementById('sumberVideoWrapper');
+            const fileWrapper = document.getElementById('fileWrapper');
+            const linkWrapper = document.getElementById('linkVideoWrapper');
+
+            const fileInput = document.getElementById('file');
+            const fileInfo = document.getElementById('fileInfo');
+            const labelFile = document.getElementById('labelFile');
+            const linkInput = document.getElementById('link_video');
+
+            const previewFoto = document.getElementById('previewFoto');
+            const gambarPreview = document.getElementById('gambarPreview');
+            const previewVideo = document.getElementById('previewVideo');
+            const videoPreview = document.getElementById('videoPreview');
+
+            const mediaSaatIni = document.getElementById('mediaSaatIni');
+            const youtubeLama = document.getElementById('youtubeLama');
+
+            const linkLama = @json($galeri->link_video ?? '');
+            const sumberLama = @json($galeri->sumber_video ?? '');
+
+            let previewUrl = null;
+
+            function bersihkanPreview() {
+                previewFoto.style.display = 'none';
+                previewVideo.style.display = 'none';
+
+                gambarPreview.removeAttribute('src');
+
+                videoPreview.pause();
+                videoPreview.removeAttribute('src');
+                videoPreview.load();
+
+                if (previewUrl) {
+                    URL.revokeObjectURL(previewUrl);
+                    previewUrl = null;
+                }
+            }
+
+            function youtubeEmbedUrl(url) {
+                try {
+                    const parsed = new URL(url);
+                    let id = '';
+
+                    if (parsed.hostname === 'youtu.be') {
+                        id = parsed.pathname.split('/').filter(Boolean)[0] || '';
+                    } else if (
+                        parsed.hostname === 'youtube.com' ||
+                        parsed.hostname.endsWith('.youtube.com')
+                    ) {
+                        if (parsed.pathname === '/watch') {
+                            id = parsed.searchParams.get('v') || '';
+                        } else {
+                            const parts = parsed.pathname.split('/').filter(Boolean);
+
+                            if (['embed', 'shorts', 'live'].includes(parts[0])) {
+                                id = parts[1] || '';
+                            }
+                        }
+                    }
+
+                    if (!/^[a-zA-Z0-9_-]{11}$/.test(id)) {
+                        return '';
+                    }
+
+                    return 'https://www.youtube.com/embed/' + id;
+                } catch (error) {
+                    return '';
+                }
+            }
+
+            function aturForm() {
+                const isFoto = kategori.value === 'Foto';
+                const isVideo = kategori.value === 'Video';
+                const pakaiLink = isVideo && sumberVideo.value === 'link';
+                const pakaiFile = isFoto ||
+                    (isVideo && sumberVideo.value === 'file');
+
+                sumberWrapper.style.display = isVideo ? 'block' : 'none';
+                fileWrapper.style.display = pakaiFile ? 'block' : 'none';
+                linkWrapper.style.display = pakaiLink ? 'block' : 'none';
+
+                fileInput.disabled = !pakaiFile;
+                linkInput.disabled = !pakaiLink;
+
+                fileInput.required = false;
+                linkInput.required = false;
+
+                if (isFoto) {
+                    labelFile.textContent = 'Ganti Foto';
+                    fileInput.accept = '.jpg,.jpeg,.png,.webp';
+
+                    fileInfo.innerHTML =
+                        'Format: JPG, JPEG, PNG, WEBP.<br>' +
+                        'Kosongkan jika tidak ingin mengganti foto.';
+                } else {
+                    labelFile.textContent = 'Ganti File Video';
+                    fileInput.accept = '.mp4,.mov,.avi,.mkv';
+
+                    fileInfo.innerHTML =
+                        'Format: MP4, MOV, AVI, MKV.<br>' +
+                        'Kosongkan jika tidak ingin mengganti video.';
+                }
+
+                bersihkanPreview();
+
+                mediaSaatIni.style.display =
+                    fileInput.files.length > 0 ? 'none' : 'block';
+            }
+
+            kategori.addEventListener('change', function () {
+                fileInput.value = '';
+
+                if (kategori.value === 'Foto') {
+                    sumberVideo.value = '';
+                    linkInput.value = '';
+                } else if (
+                    kategori.value === 'Video' &&
+                    !sumberVideo.value
+                ) {
+                    sumberVideo.value = sumberLama || '';
+                }
+
+                aturForm();
+            });
+
+            sumberVideo.addEventListener('change', function () {
+                fileInput.value = '';
+
+                if (sumberVideo.value === 'file') {
+                    linkInput.value = '';
+                } else if (
+                    sumberVideo.value === 'link' &&
+                    !linkInput.value
+                ) {
+                    linkInput.value = linkLama;
+                }
+
+                aturForm();
+            });
+
+            fileInput.addEventListener('change', function () {
+                bersihkanPreview();
+
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    mediaSaatIni.style.display = 'block';
+                    return;
+                }
+
+                mediaSaatIni.style.display = 'none';
+                previewUrl = URL.createObjectURL(file);
+
+                if (
+                    kategori.value === 'Foto' &&
+                    file.type.startsWith('image/')
+                ) {
+                    gambarPreview.src = previewUrl;
+                    previewFoto.style.display = 'block';
+                } else if (
+                    kategori.value === 'Video' &&
+                    file.type.startsWith('video/')
+                ) {
+                    videoPreview.src = previewUrl;
+                    previewVideo.style.display = 'block';
+                }
+            });
+
+            if (youtubeLama && linkLama) {
+                const embedLama = youtubeEmbedUrl(linkLama);
+
+                if (embedLama) {
+                    youtubeLama.src = embedLama;
+                }
+            }
+
+            aturForm();
+        });
+    </script>
 
 @endsection
