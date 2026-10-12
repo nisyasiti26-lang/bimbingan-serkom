@@ -226,9 +226,8 @@
     }
 
     .galeri-back-bottom {
-        padding: 0 0 40px;
-        background: #f3f8f5;
-        text-align: center;
+        padding: 0 0 45px;
+        text-align:right;
     }
 
     .btn-back-dashboard {
@@ -490,11 +489,14 @@
 </section>
 
 {{-- TOMBOL KEMBALI --}}
+
+<div class="container">
 <div class="galeri-back-bottom">
     <a href="{{ route('home') }}" class="btn-back-dashboard">
         <i class="bi bi-arrow-left"></i>
         Kembali ke Beranda
     </a>
 </div>
+</div>  
 
 @endsection

@@ -7,9 +7,7 @@
 
 @push('styles')
 <style>
-    /* =========================
-       HEADER
-    ========================= */
+    /* HEADER */
     .guru-header {
         padding: 55px 0 35px;
         text-align: center;
@@ -38,9 +36,7 @@
         font-size: 14px;
     }
 
-    /* =========================
-       GURU SECTION
-    ========================= */
+    /* GURU SECTION */
     .guru-section {
         min-height: 70vh;
         padding: 10px 0 35px;
@@ -53,9 +49,7 @@
         gap: 22px;
     }
 
-    /* =========================
-       CARD GURU
-    ========================= */
+    /* CARD GURU */
     .guru-card {
         display: block;
         overflow: hidden;
@@ -73,9 +67,7 @@
         box-shadow: 0 10px 24px rgba(25, 135, 84, 0.15);
     }
 
-    /* =========================
-       FOTO GURU
-    ========================= */
+    /* FOTO GURU */
     .guru-photo {
         display: flex;
         width: 100%;
@@ -108,9 +100,7 @@
         font-size: 70px;
     }
 
-    /* =========================
-       INFORMASI GURU
-    ========================= */
+    /* INFORMASI GURU */
     .guru-info {
         padding: 17px 18px 20px;
     }
@@ -169,9 +159,7 @@
         overflow-wrap: anywhere;
     }
 
-    /* =========================
-       DATA KOSONG
-    ========================= */
+    /* DATA KOSONG */
     .guru-empty {
         grid-column: 1 / -1;
         padding: 45px 20px;
@@ -189,13 +177,10 @@
         font-size: 45px;
     }
 
-    /* =========================
-       TOMBOL KEMBALI
-    ========================= */
+    /* TOMBOL KEMBALI */
     .guru-back-bottom {
         padding: 0 0 45px;
-        background: #f3f8f5;
-        text-align: center;
+        text-align: right;
     }
 
     .btn-back-dashboard {
@@ -219,9 +204,7 @@
         color: #fff;
     }
 
-    /* =========================
-       RESPONSIVE
-    ========================= */
+    /* RESPONSIVE */
     @media (max-width: 991px) {
         .guru-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -275,9 +258,7 @@
             @forelse ($guru as $item)
 
                 <a
-                    href="{{ route('guru.show', [
-                        'encryptedId' => \Illuminate\Support\Facades\Crypt::encrypt($item->id_guru)
-                    ]) }}"
+                    href="{{ route('guru.show', ['slug' => $item->slug]) }}"
                     class="guru-card"
                 >
 
@@ -312,10 +293,7 @@
                                 </div>
 
                                 <div class="guru-data-text">
-                                    <span class="guru-data-label">
-                                        NIP
-                                    </span>
-
+                                    <span class="guru-data-label">NIP</span>
                                     <span class="guru-data-value">
                                         {{ $item->nip ?: '-' }}
                                     </span>
@@ -358,11 +336,13 @@
 </section>
 
 {{-- TOMBOL KEMBALI --}}
-<div class="guru-back-bottom">
-    <a href="{{ route('home') }}" class="btn-back-dashboard">
-        <i class="bi bi-arrow-left"></i>
-        Kembali ke Beranda
-    </a>
+<div class="container">
+    <div class="guru-back-bottom">
+        <a href="{{ route('home') }}" class="btn-back-dashboard">
+            <i class="bi bi-arrow-left"></i>
+            Kembali ke Beranda
+        </a>
+    </div>
 </div>
 
 @endsection

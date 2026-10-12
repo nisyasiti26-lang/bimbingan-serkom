@@ -28,12 +28,11 @@ public function index()
             ->take(6)
             ->get(),
 
-        // Ambil data galeri terbaru dari database
         
-// Ambil data galeri terbaru untuk landing page
-'galeri' => \App\Models\Galeri::orderBy('id', 'desc')
-    ->take(3)
-    ->get(),
+        // Ambil data galeri terbaru untuk landing page
+        'galeri' => \App\Models\Galeri::orderBy('id', 'desc')
+            ->take(3)
+            ->get(),
 
 
         'ekstrakurikuler' => \App\Models\Ekstrakurikuler::orderBy('id', 'desc')

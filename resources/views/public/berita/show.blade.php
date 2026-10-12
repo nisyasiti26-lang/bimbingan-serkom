@@ -1,258 +1,258 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $berita->judul }} - {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
+    {{ $berita->judul ?? 'Detail Berita' }} -
+    {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
 @endsection
 
-
 @push('styles')
+    <style>
+        .berita-detail-section {
+            background: #f3f8f5;
+            padding: 55px 0;
+            min-height: 75vh;
+        }
 
-<style>
+        .berita-detail-card {
+            background: #ffffff;
+            border: 1px solid #dfebe3;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .05);
+        }
 
-/* =====================================================
-   DETAIL BERITA
-===================================================== */
+        .berita-detail-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+        }
 
-.berita-detail-section {
-    background: #f3f8f5;
-    padding: 70px 0;
-    min-height: 70vh;
-}
+        .berita-detail-media {
+            width: 100%;
+            max-width: 420px;
+            flex-shrink: 0;
+        }
 
-.berita-detail-header {
-    margin-bottom: 35px;
-}
+        .berita-detail-image {
+            display: block;
+            width: 100%;
+            max-height: 320px;
+            object-fit: contain;
+            background: #f3f8f5;
+            border-radius: 12px;
+        }
 
-.berita-detail-label {
-    color: #198754;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
+        .berita-detail-placeholder {
+            width: 100%;
+            min-height: 230px;
+            background: #e9f5ee;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.berita-detail-title {
-    color: #14532d;
-    font-size: 34px;
-    font-weight: 800;
-    line-height: 1.3;
-    margin-bottom: 12px;
-}
+        .berita-detail-placeholder i {
+            font-size: 65px;
+            color: #198754;
+        }
 
-.berita-detail-date {
-    color: #71827b;
-    font-size: 13px;
-}
+        .berita-detail-info {
+            flex: 1;
+            min-width: 0;
+        }
 
-.berita-detail-date i {
-    color: #198754;
-    margin-right: 5px;
-}
+        .berita-detail-title {
+            color: #14532d;
+            font-size: 27px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 22px;
+            overflow-wrap: anywhere;
+        }
 
+        .berita-detail-meta {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
 
-/* =====================================================
-   CONTENT CARD
-===================================================== */
+        .berita-detail-meta i {
+            color: #198754;
+            font-size: 19px;
+            margin-top: 2px;
+        }
 
-.berita-detail-card {
-    background: #ffffff;
-    border: 1px solid #dfebe3;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,.05);
-}
+        .berita-detail-meta small {
+            display: block;
+            color: #71827b;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
 
-.berita-detail-image {
-    width: 100%;
-    max-width: 850px;
-    max-height: 420px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
-    background: #f3f8f5;
-}
+        .berita-detail-meta strong {
+            display: block;
+            color: #17365d;
+            font-size: 14px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
 
-.berita-detail-placeholder {
-    width: 100%;
-    height: 350px;
-    background: #e9f5ee;
+        .berita-detail-content {
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid #e6eee8;
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .berita-detail-content h5 {
+            color: #17365d;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
 
-.berita-detail-placeholder i {
-    font-size: 80px;
-    color: #198754;
-}
+        .berita-detail-content p {
+            color: #52685f;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 18px;
+            overflow-wrap: anywhere;
+        }
 
+        .berita-detail-content img {
+            max-width: 100%;
+            height: auto;
+        }
 
-/* =====================================================
-   ISI BERITA
-===================================================== */
+        .btn-kembali-berita {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #198754;
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: .2s ease;
+        }
 
-.berita-detail-content {
-    padding: 35px;
-}
+        .btn-kembali-berita:hover {
+            background: #146c43;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
 
-.berita-detail-content p {
-    color: #52685f;
-    font-size: 15px;
-    line-height: 1.9;
-    margin-bottom: 18px;
-}
+        @media (max-width: 767px) {
+            .berita-detail-section {
+                padding: 30px 0;
+            }
 
-.berita-detail-content img {
-    max-width: 100%;
-    height: auto;
-}
+            .berita-detail-card {
+                padding: 20px;
+            }
 
+            .berita-detail-top {
+                flex-direction: column;
+                gap: 25px;
+            }
 
-/* =====================================================
-   BUTTON KEMBALI
-===================================================== */
+            .berita-detail-media {
+                max-width: 100%;
+            }
 
-.btn-kembali-berita {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
+            .berita-detail-image {
+                max-height: 350px;
+            }
 
-    background: #198754;
-    color: #ffffff;
-
-    padding: 10px 18px;
-    border-radius: 9px;
-
-    text-decoration: none;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    margin-top: 30px;
-
-    transition: .2s ease;
-}
-
-.btn-kembali-berita:hover {
-    background: #146c43;
-    color: #ffffff;
-    transform: translateY(-2px);
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 768px) {
-
-    .berita-detail-section {
-        padding: 50px 0;
-    }
-
-    .berita-detail-title {
-        font-size: 27px;
-    }
-
-    .berita-detail-content {
-        padding: 25px;
-    }
-
-    .berita-detail-placeholder {
-        height: 250px;
-    }
-
-}
-
-</style>
-
+            .berita-detail-title {
+                font-size: 23px;
+            }
+        }
+    </style>
 @endpush
-
 
 @section('content')
 
-<section class="berita-detail-section">
+    <section class="berita-detail-section">
+        <div class="container">
 
-    <div class="container">
+            {{-- KARTU DETAIL BERITA --}}
+            <div class="berita-detail-card">
 
-        {{-- HEADER --}}
-        <div class="berita-detail-header">
+                <div class="berita-detail-top">
 
-            
+                    {{-- GAMBAR BERITA --}}
+                    <div class="berita-detail-media">
 
-            <h1 class="berita-detail-title">
-                {{ $berita->judul }}
-            </h1>
+                        @if(!empty($berita->gambar))
 
-            <div class="berita-detail-date">
+                            <img src="{{ asset('storage/' . ltrim($berita->gambar, '/')) }}" class="berita-detail-image"
+                                alt="{{ $berita->judul ?? 'Foto berita' }}"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 
-                <i class="bi bi-calendar3"></i>
+                            <div class="berita-detail-placeholder" style="display:none;">
+                                <i class="bi bi-newspaper"></i>
+                            </div>
 
-                {{ $berita->tanggal ?? '-' }}
+                        @else
 
-            </div>
+                            <div class="berita-detail-placeholder">
+                                <i class="bi bi-newspaper"></i>
+                            </div>
 
-        </div>
+                        @endif
 
-
-        {{-- CARD BERITA --}}
-        <div class="berita-detail-card">
-
-            {{-- GAMBAR --}}
-            @if($berita->gambar)
-
-                <img
-                    src="{{ asset('storage/' . $berita->gambar) }}"
-                    class="berita-detail-image"
-                    alt="{{ $berita->judul }}"
-                >
-
-            @else
-
-                <div class="berita-detail-placeholder">
-
-                    <i class="bi bi-newspaper"></i>
-
-                </div>
-
-            @endif
+                    </div>
 
 
-            {{-- ISI --}}
-            <div class="berita-detail-content">
+                    {{-- INFORMASI BERITA --}}
+                    <div class="berita-detail-info">
 
-                {!! nl2br(e(
-                    $berita->isi
-                    ?? $berita->deskripsi
-                    ?? $berita->konten
-                    ?? 'Isi berita belum tersedia.'
-                )) !!}
+                        <h1 class="berita-detail-title">
+                            {{ $berita->judul ?? 'Berita Sekolah' }}
+                        </h1>
+
+                        {{-- TANGGAL PUBLIKASI --}}
+                        <div class="berita-detail-meta">
+                            <i class="bi bi-calendar3"></i>
+                            <div>
+                                <small>Tanggal Publikasi</small>
+                                <strong>
+                                    {{ $berita->tanggal ?? 'Belum tersedia' }}
+                                </strong>
+                            </div>
+                        </div>
+
+                        {{-- ISI BERITA DI BAWAH TANGGAL --}}
+                        <div class="berita-detail-content">
+                            <h5>
+                                <i class="bi bi-info-circle"></i>
+                                Isi Berita
+                            </h5>
+
+                            <p>
+                                {!! nl2br(e(
+                                $berita->isi
+                                ?? $berita->deskripsi
+                                ?? $berita->konten
+                                ?? 'Isi berita belum tersedia.'
+                            )) !!}
+                            </p>
+                        </div>
+
+                        {{-- TOMBOL KEMBALI --}}
+                        <div class="mt-4 d-flex justify-content-end">
+                            <a href="{{ route('berita.public') }}" class="btn btn-success">
+                                <i class="bi bi-arrow-left"></i>
+                                Kembali ke Berita
+                            </a>
+                        </div>
 
 
-                <div>
-
-                    <a
-                        href="{{ route('home') }}#berita"
-                        class="btn-kembali-berita"
-                    >
-
-                        <i class="bi bi-arrow-left"></i>
-
-                        Kembali ke Berita
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
+                    </div>
+    </section>
 
 @endsection

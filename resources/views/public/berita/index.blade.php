@@ -191,8 +191,7 @@
 /* BUTTON KEMBALI */
 .berita-back-bottom {
     padding: 0 0 45px;
-    background: #f3f8f5;
-    text-align: center;
+    text-align: right;
 }
 
 .btn-back-dashboard {
@@ -301,14 +300,7 @@
                             {{ $item->isi ?? 'Isi berita belum tersedia.' }}
                         </p>
 
-                        {{-- DETAIL BERITA MENGGUNAKAN SLUG --}}
-                        <a
-                            href="{{ route('berita.show', ['slug' => $item->slug]) }}"
-                            class="btn-baca-berita"
-                        >
-                            Baca Selengkapnya
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
+                       
 
                     </div>
 
@@ -328,14 +320,16 @@
 </section>
 
 {{-- KEMBALI KE BERANDA --}}
+
+<div class="container">
 <div class="berita-back-bottom">
     <a
         href="{{ route('home') }}"
-        class="btn-back-dashboard"
-    >
+        class="btn-back-dashboard">
         <i class="bi bi-arrow-left"></i>
         Kembali ke Beranda
     </a>
+</div>
 </div>
 
 @endsection

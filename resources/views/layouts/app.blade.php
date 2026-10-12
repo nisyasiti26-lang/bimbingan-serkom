@@ -5,358 +5,457 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        @yield(
-            'title',
-            isset($profil)
-                ? ($profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya')
-                : 'MTsN 10 Tasikmalaya'
-        )
-    </title>
+    <title>@yield('title', 'MTsN 10 Tasikmalaya')</title>
 
-    {{-- BOOTSTRAP --}}
+    {{-- Bootstrap CSS --}}
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-    {{-- BOOTSTRAP ICONS --}}
+    {{-- Bootstrap Icons --}}
     <link
-        rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
     >
 
-    {{-- GLOBAL CSS --}}
     <style>
         * {
             box-sizing: border-box;
         }
 
         html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 75px;
+            min-height: 100%;
         }
 
         body {
+            min-height: 100vh;
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
             background: #f3f8f5;
-            color: #17365d;
+            color: #263b2e;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* NAVBAR */
-        .main-navbar {
-            background: #ffffff;
+        /* =========================
+           NAVBAR
+        ========================= */
+        .navbar-sekolah {
+            position: relative;
+            z-index: 1000;
+            flex-shrink: 0;
+            min-height: 96px;
+            padding: 12px 0;
+            background: #fff;
             border-bottom: 1px solid #e5eee8;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            min-height: 72px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .03);
         }
 
-        .main-navbar .navbar-brand {
+        .navbar-sekolah .container-fluid {
+            padding-left: 3%;
+            padding-right: 3%;
+        }
+
+        .brand-sekolah {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            color: #14532d !important;
+            gap: 14px;
+            flex-shrink: 0;
+            margin-right: 20px;
             text-decoration: none;
         }
 
-        /* LOGO SEKOLAH */
-        .main-navbar .navbar-brand img {
-            width: 42px !important;
-            height: 42px !important;
-            max-width: 42px !important;
-            max-height: 42px !important;
-            min-width: 42px;
-            min-height: 42px;
+        .logo-sekolah {
+            display: block;
+            width: 56px;
+            height: 56px;
             object-fit: contain;
-            display: block;
+            flex-shrink: 0;
         }
 
-        /* LOGO DEFAULT */
-        .navbar-brand-icon {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
-            min-height: 42px;
-            border-radius: 10px;
-            background: #198754;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .navbar-brand-icon i {
-            font-size: 21px;
-        }
-
-        /* NAMA SEKOLAH */
-        .navbar-brand-text strong {
-            display: block;
-            font-size: 14px;
-            line-height: 1.2;
+        .nama-sekolah {
+            margin: 0;
             color: #14532d;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            white-space: nowrap;
         }
 
-        .navbar-brand-text span {
+        .deskripsi-sekolah {
             display: block;
-            font-size: 9px;
-            color: #78908a;
             margin-top: 2px;
+            color: #52645a;
+            font-size: 12px;
         }
 
-        /* MENU NAVBAR */
-        .navbar-nav .nav-link {
-            color: #4e655c !important;
-            font-size: 13px;
+        .navbar-sekolah .navbar-nav {
+            gap: 4px;
+        }
+
+        .navbar-sekolah .nav-link {
+            padding: 12px 10px;
+            color: #43554a;
+            font-size: 15px;
             font-weight: 600;
-            padding: 8px 12px !important;
+            white-space: nowrap;
             transition: color .2s ease;
         }
 
-        .navbar-nav .nav-link:hover {
-            color: #198754 !important;
+        .navbar-sekolah .nav-link:hover,
+        .navbar-sekolah .nav-link.active {
+            color: #198754;
         }
 
-        /* FOOTER */
-        .footer-new {
+        .navbar-sekolah .navbar-toggler {
+            border: 1px solid #dce8df;
+            padding: 7px 10px;
+        }
+
+        .navbar-sekolah .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(25, 135, 84, .15);
+        }
+
+        /* =========================
+           KONTEN HALAMAN
+        ========================= */
+        main {
+            flex: 1 0 auto;
             width: 100%;
-            margin: 0;
-            padding: 45px 0 20px;
-            background: linear-gradient(
-                105deg,
-                #0f4d2b 0%,
-                #14532d 45%,
-                #198754 100%
-            );
-            color: #ffffff;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.7fr .8fr 1fr;
-            column-gap: 55px;
-            padding-bottom: 25px;
-        }
-
-        .footer-description,
-        .footer-links,
-        .footer-contact-new {
-            padding-top: 5px;
-        }
-
-        .footer-description h3 {
-            margin: 0 0 12px;
-            color: #ffffff;
-            font-size: 17px;
-            line-height: 1.3;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .footer-description p {
-            margin: 0;
-            max-width: 500px;
-            color: rgba(255, 255, 255, .75);
-            font-size: 13px;
-            line-height: 1.65;
-        }
-
-        .footer-links h4,
-        .footer-contact-new h4 {
-            margin: 0 0 14px;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .footer-links a {
+        /* =========================
+           FOOTER HIJAU
+        ========================= */
+        .footer-sekolah {
             display: block;
-            width: max-content;
-            max-width: 100%;
-            margin-bottom: 8px;
-            color: rgba(255, 255, 255, .80);
-            text-decoration: none;
+            width: 100%;
+            margin-top: auto;
+            padding: 38px 0 18px;
+            background: linear-gradient(
+                110deg,
+                #14532d 0%,
+                #198754 55%,
+                #229c68 100%
+            );
+            color: #fff;
+        }
+
+        .footer-container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr .8fr 1fr;
+            gap: 50px;
+            padding-bottom: 30px;
+        }
+
+        .footer-column h5 {
+            margin: 0 0 15px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Identitas sekolah */
+        .footer-identitas {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .footer-logo {
+            display: block;
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            object-fit: contain;
+        }
+
+        .footer-identitas h5 {
+            margin: 0 0 4px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .footer-identitas p {
+            margin: 0;
+            color: rgba(255, 255, 255, .78);
+            font-size: 12px;
+        }
+
+        .footer-deskripsi {
+            margin: 0;
+            color: rgba(255, 255, 255, .8);
             font-size: 13px;
-            line-height: 1.45;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Menu footer */
+        .footer-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .footer-menu a {
+            width: fit-content;
+            color: rgba(255, 255, 255, .88);
+            font-size: 13px;
+            text-decoration: none;
             transition: .2s ease;
         }
 
-        .footer-links a:hover {
-            color: #ffffff;
+        .footer-menu a:hover {
+            color: #fff;
             padding-left: 4px;
         }
 
-        .footer-contact-row {
+        /* Kontak footer */
+        .footer-kontak p {
             display: flex;
             align-items: flex-start;
-            gap: 11px;
-            margin-bottom: 12px;
-            color: rgba(255, 255, 255, .82);
+            gap: 10px;
+            margin: 0 0 12px;
+            color: rgba(255, 255, 255, .9);
             font-size: 13px;
-            line-height: 1.55;
+            line-height: 1.7;
         }
 
-        .footer-contact-row i {
-            width: 18px;
-            min-width: 18px;
+        .footer-kontak i {
             margin-top: 3px;
-            color: #ffffff;
+            color: #fff;
             font-size: 14px;
+            flex-shrink: 0;
         }
 
-        .footer-contact-row span {
-            display: block;
-            max-width: 270px;
-            overflow-wrap: anywhere;
-        }
-
-        .footer-copyright-new {
-            width: 100%;
+        /* Copyright */
+        .footer-bottom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 17px;
             border-top: 1px solid rgba(255, 255, 255, .22);
-            padding-top: 15px;
-            text-align: center;
-            color: rgba(255, 255, 255, .65);
+            color: rgba(255, 255, 255, .75);
             font-size: 12px;
-            line-height: 1.5;
+            text-align: center;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 991px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
+        /* =========================
+           RESPONSIVE NAVBAR
+        ========================= */
+        @media (max-width: 1399px) {
+            .navbar-sekolah .container-fluid {
+                padding-right: 20px;
+                padding-left: 20px;
             }
 
-            .footer-description {
-                grid-column: 1 / -1;
+            .brand-sekolah {
+                margin-right: 10px;
             }
 
-            .main-navbar .navbar-collapse {
-                padding: 10px 0 15px;
+            .navbar-sekolah .nav-link {
+                padding: 10px 7px;
+                font-size: 14px;
             }
 
-            .navbar-nav .nav-link {
-                padding: 10px 0 !important;
+            .nama-sekolah {
+                font-size: 18px;
             }
         }
 
-        @media (max-width: 575px) {
-            .footer-grid {
-                display: block;
+        @media (max-width: 1199px) {
+            .navbar-sekolah .navbar-collapse {
+                padding-top: 15px;
             }
 
-            .footer-description,
-            .footer-links,
-            .footer-contact-new {
-                margin-bottom: 28px;
+            .navbar-sekolah .navbar-nav {
+                align-items: stretch !important;
+                gap: 0;
             }
 
-            .footer-description h3 {
-                font-size: 16px;
+            .navbar-sekolah .nav-link {
+                padding: 11px 0;
+                border-bottom: 1px solid #f0f3f0;
+            }
+        }
+
+        /* =========================
+           RESPONSIVE MOBILE
+        ========================= */
+        @media (max-width: 768px) {
+            .footer-sekolah {
+                padding-top: 30px;
             }
 
-            .footer-description p,
-            .footer-links a,
-            .footer-contact-row {
-                font-size: 12px;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 27px;
+                padding-bottom: 25px;
             }
 
-            .footer-copyright-new {
-                font-size: 11px;
+            .footer-deskripsi {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar-sekolah .container-fluid {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            .brand-sekolah {
+                gap: 9px;
+                margin-right: 8px;
+            }
+
+            .logo-sekolah {
+                width: 45px;
+                height: 45px;
+            }
+
+            .nama-sekolah {
+                font-size: 15px;
+            }
+
+            .deskripsi-sekolah {
+                font-size: 10px;
+            }
+
+            .footer-container {
+                padding-right: 20px;
+                padding-left: 20px;
             }
         }
     </style>
 
-    {{-- CSS KHUSUS HALAMAN --}}
+    {{-- CSS tambahan dari halaman --}}
     @stack('styles')
 </head>
 
 <body>
 
-    {{-- NAVBAR --}}
-    <nav class="navbar navbar-expand-lg main-navbar">
-        <div class="container">
+    {{-- =========================
+         NAVBAR UTAMA
+    ========================= --}}
+    <nav class="navbar navbar-expand-xl navbar-light navbar-sekolah">
+        <div class="container-fluid">
 
-            {{-- LOGO + NAMA SEKOLAH --}}
-            <a href="{{ route('home') }}" class="navbar-brand">
+            {{-- LOGO DAN IDENTITAS SEKOLAH --}}
+            <a class="brand-sekolah" href="{{ route('home') }}">
 
-                @if(isset($profil) && $profil->logo)
-                    <img
-                        src="{{ asset('storage/' . $profil->logo) }}"
-                        alt="Logo {{ $profil->nama_sekolah ?? 'Sekolah' }}"
-                    >
-                @else
-                    <div class="navbar-brand-icon">
-                        <i class="bi bi-mortarboard-fill"></i>
+                <img
+                    src="{{ asset('images/logo.png') }}"
+                    alt="Logo MTsN 10 Tasikmalaya"
+                    class="logo-sekolah"
+                >
+
+                <div>
+                    <div class="nama-sekolah">
+                        MTsN 10 Tasikmalaya
                     </div>
-                @endif
 
-                <div class="navbar-brand-text">
-                    <strong>
-                        {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
-                    </strong>
-                    <span>Sistem Informasi Sekolah</span>
+                    <span class="deskripsi-sekolah">
+                        Sistem Informasi Sekolah
+                    </span>
                 </div>
-
             </a>
 
-            {{-- TOGGLE MOBILE --}}
+            {{-- TOMBOL MENU RESPONSIF --}}
             <button
                 class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarMenu"
-                aria-controls="navbarMenu"
+                data-bs-target="#navbarSekolah"
+                aria-controls="navbarSekolah"
                 aria-expanded="false"
-                aria-label="Toggle navigation"
+                aria-label="Buka navigasi"
             >
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            {{-- MENU NAVBAR --}}
-            <div class="collapse navbar-collapse" id="navbarMenu">
-                <ul class="navbar-nav ms-auto">
+            {{-- MENU NAVIGASI --}}
+            <div class="collapse navbar-collapse" id="navbarSekolah">
+                <ul class="navbar-nav ms-auto align-items-xl-center">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">
+                        <a
+                            class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
+                            href="{{ route('home') }}"
+                        >
                             Beranda
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profil.public') }}">
+                        <a
+                            class="nav-link {{ request()->is('profil-sekolah*') ? 'active' : '' }}"
+                            href="{{ url('/profil-sekolah') }}"
+                        >
                             Profil Sekolah
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('guru.public') }}">
-                            Staf & Guru
+                        <a
+                            class="nav-link {{ request()->is('guru*') ? 'active' : '' }}"
+                            href="{{ url('/guru') }}"
+                        >
+                            Staf &amp; Guru
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('berita.public') }}">
+                        <a
+                            class="nav-link {{ request()->is('siswa*') ? 'active' : '' }}"
+                            href="{{ url('/siswa') }}"
+                        >
+                            Siswa
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {{ request()->is('berita*') ? 'active' : '' }}"
+                            href="{{ url('/berita') }}"
+                        >
                             Berita
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('galeri.public') }}">
+                        <a
+                            class="nav-link {{ request()->is('galeri*') ? 'active' : '' }}"
+                            href="{{ url('/galeri') }}"
+                        >
                             Galeri
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a
-                            class="nav-link"
-                            href="{{ route('home') }}#ekstrakurikuler"
+                            class="nav-link {{ request()->is('ekstrakurikuler*') ? 'active' : '' }}"
+                            href="{{ url('/ekstrakurikuler') }}"
                         >
                             Ekstrakurikuler
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {{ request()->routeIs('profil_pembuat.public') ? 'active' : '' }}"
+                            href="{{ route('profil_pembuat.public') }}"
+                        >
+                            Profil Pembuat
                         </a>
                     </li>
 
@@ -366,95 +465,95 @@
         </div>
     </nav>
 
-    {{-- KONTEN HALAMAN --}}
+    {{-- =========================
+         KONTEN SETIAP HALAMAN
+    ========================= --}}
     <main>
         @yield('content')
     </main>
 
-    {{-- FOOTER --}}
-    <footer class="footer-new">
-        <div class="container">
+    {{-- =========================
+         FOOTER HIJAU MTsN 10
+    ========================= --}}
+    <footer class="footer-sekolah">
+        <div class="footer-container">
 
-            <div class="footer-grid">
+            <div class="footer-content">
 
-                {{-- DESKRIPSI SEKOLAH --}}
-                <div class="footer-description">
-                    <h3>
-                        {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
-                    </h3>
+                {{-- KOLOM 1: IDENTITAS SEKOLAH --}}
+                <div class="footer-column">
+
+                    <div class="footer-identitas">
+                        <img
+                            src="{{ asset('images/logo.png') }}"
+                            alt="Logo MTsN 10 Tasikmalaya"
+                            class="footer-logo"
+                        >
+
+                        <div>
+                            <h5>MTsN 10 TASIKMALAYA</h5>
+                            <p>Sistem Informasi Sekolah</p>
+                        </div>
+                    </div>
+
+                    <p class="footer-deskripsi">
+                        MTsN 10 Tasikmalaya berkomitmen memberikan pendidikan
+                        berkualitas, membangun karakter peserta didik,
+                        meningkatkan prestasi, serta membentuk generasi
+                        yang berilmu, mandiri, dan berakhlak mulia.
+                    </p>
+
+                </div>
+
+                {{-- KOLOM 2: MENU --}}
+                <div class="footer-column">
+                    <h5>Menu</h5>
+
+                    <div class="footer-menu">
+                        <a href="{{ route('home') }}">Beranda</a>
+                        <a href="{{ url('/profil-sekolah') }}">Profil Sekolah</a>
+                        <a href="{{ url('/guru') }}">Staf &amp; Guru</a>
+                        <a href="{{ url('/siswa') }}">Siswa</a>
+                        <a href="{{ url('/berita') }}">Berita</a>
+                        <a href="{{ url('/galeri') }}">Galeri</a>
+                        <a href="{{ url('/ekstrakurikuler') }}">Ekstrakurikuler</a>
+                        <a href="{{ route('profil_pembuat.public') }}">Profil Pembuat</a>
+                    </div>
+                </div>
+
+                {{-- KOLOM 3: KONTAK --}}
+                <div class="footer-column footer-kontak">
+                    <h5>Kontak</h5>
 
                     <p>
-                        {{ $profil->deskripsi ??
-                            'MTsN 10 Tasikmalaya merupakan lembaga pendidikan yang berkomitmen memberikan pendidikan berkualitas dengan memadukan ilmu pengetahuan, pendidikan agama, akhlak, kedisiplinan, serta pengembangan prestasi siswa.'
-                        }}
-                    </p>
-                </div>
-
-                {{-- MENU FOOTER --}}
-                <div class="footer-links">
-                    <h4>Menu</h4>
-
-                    <a href="{{ route('home') }}">
-                        Beranda
-                    </a>
-
-                    <a href="{{ route('profil.public') }}">
-                        Profil Sekolah
-                    </a>
-
-                    <a href="{{ route('guru.public') }}">
-                        Staf & Guru
-                    </a>
-
-                    <a href="{{ route('berita.public') }}">
-                        Berita
-                    </a>
-
-                    <a href="{{ route('galeri.public') }}">
-                        Galeri
-                    </a>
-
-                    <a href="{{ route('home') }}#ekstrakurikuler">
-                        Ekstrakurikuler
-                    </a>
-                </div>
-
-                {{-- KONTAK --}}
-                <div class="footer-contact-new">
-                    <h4>Kontak</h4>
-
-                    <div class="footer-contact-row">
                         <i class="bi bi-geo-alt-fill"></i>
                         <span>
-                            {{ $profil->alamat ?? 'Alamat sekolah belum tersedia' }}
+                            MTsN 10 Tasikmalaya<br>
+                            Tasikmalaya, Jawa Barat, Indonesia
                         </span>
-                    </div>
+                    </p>
 
-                    <div class="footer-contact-row">
-                        <i class="bi bi-telephone-fill"></i>
-                        <span>
-                            {{ $profil->kontak ?? $profil->telepon ?? '-' }}
-                        </span>
-                    </div>
+                    <p>
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>Informasi sekolah</span>
+                    </p>
                 </div>
 
             </div>
 
             {{-- COPYRIGHT --}}
-            <div class="footer-copyright-new">
-                &copy; {{ date('Y') }}
-                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
-                — Sistem Informasi Sekolah
+            <div class="footer-bottom">
+                &copy; {{ date('Y') }} MTsN 10 Tasikmalaya.
+                Seluruh hak cipta dilindungi.
             </div>
 
         </div>
     </footer>
 
-    {{-- BOOTSTRAP JS --}}
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+    {{-- BOOTSTRAP JAVASCRIPT --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    {{-- JavaScript tambahan dari halaman --}}
     @stack('scripts')
 
 </body>

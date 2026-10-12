@@ -9,6 +9,26 @@ use Illuminate\Support\Facades\Storage;
 
 class EkstrakurikulerController extends Controller
 {
+
+    /*
+    |--------------------------------------------------------------------------
+    | HALAMAN PUBLIK EKSTRAKURIKULER
+    |--------------------------------------------------------------------------
+    */
+
+    public function publicIndex()
+    {
+        $ekstrakurikuler = Ekstrakurikuler::all();
+        $profil = \App\Models\ProfilSekolah::first();
+
+
+        return view('public.ekstrakurikuler.index', compact(
+            'ekstrakurikuler',
+            'profil'
+        ));
+
+    }
+
     /*
     |--------------------------------------------------------------------------
     | DAFTAR EKSTRAKURIKULER
@@ -203,4 +223,15 @@ class EkstrakurikulerController extends Controller
 
         return $slug;
     }
+
+    public function publicShow($id)
+{
+    $ekstrakurikuler = Ekstrakurikuler::findOrFail($id);
+    $profil = \App\Models\ProfilSekolah::first();
+
+    return view(
+        'public.ekstrakurikuler.show',
+        compact('ekstrakurikuler', 'profil')
+    );
+}
 }

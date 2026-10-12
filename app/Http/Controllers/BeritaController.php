@@ -188,14 +188,14 @@ class BeritaController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function show($encryptedId)
-    {
-        $id_berita = $this->decryptId($encryptedId);
+    // public function show($encryptedId)
+    // {
+    //     $id_berita = $this->decryptId($encryptedId);
 
-        $berita = Berita::with('user')->findOrFail($id_berita);
+    //     $berita = Berita::with('user')->findOrFail($id_berita);
 
-        return view('admin.berita.show', compact('berita'));
-    }
+    //     return view('admin.berita.show', compact('berita'));
+    // }
 
     /*
     |--------------------------------------------------------------------------
@@ -235,12 +235,12 @@ class BeritaController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    private function decryptId($encryptedId)
-    {
-        try {
-            return Crypt::decrypt($encryptedId);
-        } catch (DecryptException $e) {
-            abort(404);
-        }
-    }
+    // private function decryptId($encryptedId)
+    // {
+    //     try {
+    //         return Crypt::decrypt($encryptedId);
+    //     } catch (DecryptException $e) {
+    //         abort(404);
+    //     }
+    // }
 }

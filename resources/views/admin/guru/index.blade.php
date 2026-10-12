@@ -1,7 +1,6 @@
-
 @extends('index')
 
-@section('title', 'Data Guru - MTsN 10 Tasikmalaya')
+@section('title', 'Data Pembina - MTsN 10 Tasikmalaya')
 
 @section('content')
 
@@ -57,7 +56,7 @@
         overflow: hidden;
     }
 
-    /* HEADER CARD */
+    /* HEADER */
     .guru-card-header {
         padding: 20px 24px;
         border-bottom: 1px solid #e4eee7;
@@ -88,7 +87,7 @@
         flex-shrink: 0;
     }
 
-    /* PENCARIAN */
+    /* SEARCH */
     .search-guru-box {
         position: relative;
         width: 300px;
@@ -188,6 +187,7 @@
         color: #000000;
         text-align: left;
         border-bottom: 1px solid #dce9df;
+        white-space: nowrap;
     }
 
     .guru-table td {
@@ -240,6 +240,28 @@
     .nama-guru {
         font-weight: 600;
         color: #000000 !important;
+    }
+
+    /* KATEGORI */
+    .badge-kategori {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 11px;
+        border-radius: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    .badge-guru {
+        background: #e8f5e9;
+        color: #198754;
+    }
+
+    .badge-staf {
+        background: #e8f0fe;
+        color: #3568a8;
     }
 
     /* MAPEL */
@@ -387,10 +409,11 @@
         }
 
         .guru-table {
-            min-width: 700px;
+            min-width: 900px;
         }
     }
 </style>
+
 
 <div class="guru-wrapper">
 
@@ -402,152 +425,268 @@
         </div>
     @endif
 
+
     {{-- PESAN ERROR --}}
     @if($errors->any())
+
         <div class="alert-danger">
+
             <strong>
                 <i class="bi bi-exclamation-triangle-fill"></i>
                 Terjadi kesalahan:
             </strong>
 
             <ul>
+
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
+
             </ul>
+
         </div>
+
     @endif
 
-    {{-- CARD DATA GURU --}}
+
+    {{-- CARD DATA PEMBINA --}}
     <div class="guru-card">
 
         {{-- HEADER --}}
         <div class="guru-card-header">
+
             <div>
-                <div class="guru-card-title">Daftar Guru</div>
-                <div class="guru-card-subtitle">
-                    Data guru yang terdaftar dalam sistem
+
+                <div class="guru-card-title">
+                    Daftar Pembina
                 </div>
+
+                <div class="guru-card-subtitle">
+                    Data Guru dan Staf yang terdaftar dalam sistem
+                </div>
+
             </div>
 
-            {{-- PENCARIAN DAN TOMBOL TAMBAH --}}
+
+            {{-- SEARCH + TAMBAH --}}
             <div class="guru-header-action">
 
                 @if(isset($gurus) && $gurus->count() > 0)
+
                     <div class="search-guru-box">
+
                         <i class="bi bi-search"></i>
 
                         <input
                             type="text"
                             id="searchGuru"
                             class="search-guru-input"
-                            placeholder="Cari nama, NIP, atau mata pelajaran..."
-                            autocomplete="off">
+                            placeholder="Cari nama, NIP, mapel, atau kategori..."
+                            autocomplete="off"
+                        >
 
                         <button
                             type="button"
                             id="resetSearchGuru"
                             class="btn-reset-search"
-                            title="Hapus pencarian">
+                            title="Hapus pencarian"
+                        >
                             <i class="bi bi-x-circle-fill"></i>
                         </button>
+
                     </div>
+
                 @endif
 
-                {{-- TOMBOL TAMBAH KHUSUS ADMIN --}}
+
+                {{-- TOMBOL TAMBAH --}}
                 @auth
+
                     @if(strtolower(Auth::user()->role) === 'admin')
-                        <a href="{{ route('admin.guru.create') }}" class="btn-tambah">
+
+                        <a
+                            href="{{ route('admin.guru.create') }}"
+                            class="btn-tambah"
+                        >
                             <i class="bi bi-plus-lg"></i>
-                            Tambah Guru
+                            Tambah Pembina
                         </a>
+
                     @endif
+
                 @endauth
+
             </div>
+
         </div>
 
-        {{-- CEK DATA GURU --}}
+
+        {{-- CEK DATA --}}
         @if(isset($gurus) && $gurus->count() > 0)
 
             <div class="guru-table-wrapper">
-                <table class="guru-table">
-                    <thead>
-                        <tr>
-                            <th class="nomor">No</th>
-                            <th>Foto</th>
-                            <th>Nama Guru</th>
-                            <th>NIP</th>
-                            <th>Mata Pelajaran</th>
 
-                            {{-- KOLOM AKSI KHUSUS ADMIN --}}
+                <table class="guru-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="nomor">
+                                No
+                            </th>
+
+                            <th>
+                                Foto
+                            </th>
+
+                            <th>
+                                Nama Pembina
+                            </th>
+
+                            <th>
+                                NIP
+                            </th>
+
+                            <th>
+                                Mata Pelajaran
+                            </th>
+
+                            <th>
+                                Kategori
+                            </th>
+
+
+                            {{-- AKSI --}}
                             @auth
+
                                 @if(strtolower(Auth::user()->role) === 'admin')
-                                    <th>Aksi</th>
+
+                                    <th>
+                                        Aksi
+                                    </th>
+
                                 @endif
+
                             @endauth
+
                         </tr>
+
                     </thead>
 
+
                     <tbody id="guruTableBody">
+
                         @foreach($gurus as $guru)
+
                             <tr class="guru-row">
 
                                 {{-- NOMOR --}}
-                                <td class="nomor">{{ $loop->iteration }}</td>
+                                <td class="nomor">
+                                    {{ $loop->iteration }}
+                                </td>
+
 
                                 {{-- FOTO --}}
                                 <td>
+
                                     @if($guru->foto)
+
                                         <img
                                             src="{{ asset('storage/' . $guru->foto) }}"
                                             alt="{{ $guru->nama_guru }}"
-                                            class="guru-foto">
+                                            class="guru-foto"
+                                        >
+
                                     @else
+
                                         <div class="foto-kosong">
                                             <i class="bi bi-person"></i>
                                         </div>
+
                                     @endif
+
                                 </td>
 
-                                {{-- NAMA --}}
+
+                                {{-- NAMA PEMBINA --}}
                                 <td class="nama-guru">
                                     {{ $guru->nama_guru }}
                                 </td>
 
+
                                 {{-- NIP --}}
-                                <td>{{ $guru->nip ?? '-' }}</td>
+                                <td>
+                                    {{ $guru->nip ?? '-' }}
+                                </td>
+
 
                                 {{-- MATA PELAJARAN --}}
                                 <td>
+
                                     @if($guru->mapel)
+
                                         <span class="badge-mapel">
                                             {{ $guru->mapel }}
                                         </span>
+
                                     @else
+
                                         -
+
                                     @endif
+
                                 </td>
 
-                                {{-- AKSI KHUSUS ADMIN --}}
+
+                                {{-- KATEGORI --}}
+                                <td>
+
+                                    @if($guru->kategori === 'staf')
+
+                                        <span class="badge-kategori badge-staf">
+                                            <i class="bi bi-person-badge me-1"></i>
+                                            Staf
+                                        </span>
+
+                                    @else
+
+                                        <span class="badge-kategori badge-guru">
+                                            <i class="bi bi-person-workspace me-1"></i>
+                                            Guru
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+                                {{-- AKSI ADMIN --}}
                                 @auth
+
                                     @if(strtolower(Auth::user()->role) === 'admin')
+
                                         <td>
+
                                             <div class="aksi">
 
-                                                {{-- EDIT MENGGUNAKAN NAMA GURU --}}
+                                                {{-- EDIT --}}
                                                 <a
                                                     href="{{ route('admin.guru.edit', ['nama_guru' => $guru->nama_guru]) }}"
                                                     class="btn-aksi btn-edit"
-                                                    title="Edit">
+                                                    title="Edit"
+                                                >
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
 
-                                                {{-- HAPUS TETAP MENGGUNAKAN ID --}}
+
+                                                {{-- HAPUS --}}
                                                 <form
                                                     action="{{ route('admin.guru.delete', $guru->id_guru) }}"
                                                     method="POST"
-                                                    style="display: inline;"
-                                                    onsubmit="return confirm('Yakin ingin menghapus data guru ini?');">
+                                                    style="display:inline;"
+                                                    onsubmit="return confirm('Yakin ingin menghapus data pembina ini?');"
+                                                >
 
                                                     @csrf
                                                     @method('DELETE')
@@ -555,45 +694,79 @@
                                                     <button
                                                         type="submit"
                                                         class="btn-aksi btn-hapus"
-                                                        title="Hapus">
+                                                        title="Hapus"
+                                                    >
                                                         <i class="bi bi-trash"></i>
                                                     </button>
+
                                                 </form>
 
                                             </div>
+
                                         </td>
+
                                     @endif
+
                                 @endauth
 
                             </tr>
+
                         @endforeach
+
                     </tbody>
+
                 </table>
 
-                {{-- HASIL PENCARIAN KOSONG --}}
-                <div class="no-search-result" id="noSearchResult">
+
+                {{-- HASIL PENCARIAN --}}
+                <div
+                    class="no-search-result"
+                    id="noSearchResult"
+                >
+
                     <i class="bi bi-search"></i>
-                    <h5>Data Tidak Ditemukan</h5>
-                    <p>Tidak ada data guru yang sesuai dengan pencarian.</p>
+
+                    <h5>
+                        Data Tidak Ditemukan
+                    </h5>
+
+                    <p>
+                        Tidak ada data pembina yang sesuai dengan pencarian.
+                    </p>
+
                 </div>
+
             </div>
+
 
         @else
 
             {{-- DATA KOSONG --}}
             <div class="empty-guru">
+
                 <i class="bi bi-person-workspace"></i>
-                <h5>Belum Ada Data Guru</h5>
-                <p>Silakan tambahkan data guru terlebih dahulu.</p>
+
+                <h5>
+                    Belum Ada Data Pembina
+                </h5>
+
+                <p>
+                    Silakan tambahkan data Guru atau Staf terlebih dahulu.
+                </p>
+
             </div>
 
         @endif
+
     </div>
+
 </div>
+
 
 {{-- JAVASCRIPT PENCARIAN --}}
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+
     const searchInput = document.getElementById('searchGuru');
     const resetButton = document.getElementById('resetSearchGuru');
     const rows = document.querySelectorAll('.guru-row');
@@ -603,12 +776,28 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
+
     function cariGuru() {
-        const keyword = searchInput.value.toLowerCase().trim();
+
+        const keyword = searchInput.value
+            .toLowerCase()
+            .trim();
+
         let jumlahDitemukan = 0;
 
+
         rows.forEach(function (row) {
-            // 0 = No, 1 = Foto, 2 = Nama, 3 = NIP, 4 = Mata Pelajaran
+
+            /*
+             * Kolom:
+             * 0 = No
+             * 1 = Foto
+             * 2 = Nama
+             * 3 = NIP
+             * 4 = Mata Pelajaran
+             * 5 = Kategori
+             */
+
             const nama = row.cells[2]
                 ? row.cells[2].textContent.toLowerCase()
                 : '';
@@ -621,34 +810,65 @@ document.addEventListener('DOMContentLoaded', function () {
                 ? row.cells[4].textContent.toLowerCase()
                 : '';
 
+            const kategori = row.cells[5]
+                ? row.cells[5].textContent.toLowerCase()
+                : '';
+
+
             const cocok =
                 nama.includes(keyword) ||
                 nip.includes(keyword) ||
-                mapel.includes(keyword);
+                mapel.includes(keyword) ||
+                kategori.includes(keyword);
+
 
             if (cocok) {
+
                 row.style.display = '';
                 jumlahDitemukan++;
+
             } else {
+
                 row.style.display = 'none';
+
             }
+
         });
 
-        resetButton.style.display = keyword !== '' ? 'block' : 'none';
+
+        resetButton.style.display =
+            keyword !== ''
+                ? 'block'
+                : 'none';
+
 
         noSearchResult.style.display =
             jumlahDitemukan === 0 && keyword !== ''
                 ? 'block'
                 : 'none';
+
     }
 
-    searchInput.addEventListener('input', cariGuru);
 
-    resetButton.addEventListener('click', function () {
-        searchInput.value = '';
-        cariGuru();
-        searchInput.focus();
-    });
+    searchInput.addEventListener(
+        'input',
+        cariGuru
+    );
+
+
+    resetButton.addEventListener(
+        'click',
+        function () {
+
+            searchInput.value = '';
+
+            cariGuru();
+
+            searchInput.focus();
+
+        }
+    );
+
 });
 </script>
 

@@ -7,11 +7,7 @@
 
 @push('styles')
 <style>
-
-/* =====================================================
-   HEADER
-===================================================== */
-
+/* HEADER */
 .ekskul-header {
     padding: 55px 0 35px;
     text-align: center;
@@ -40,30 +36,40 @@
     margin: 0;
 }
 
-/* =====================================================
-   SECTION
-===================================================== */
-
+/* SECTION */
 .ekskul-section {
     padding: 35px 0 55px;
     background: #f3f8f5;
     min-height: 70vh;
 }
 
-/* =====================================================
-   GRID
-===================================================== */
-
+/* GRID */
 .ekskul-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
 }
 
-/* =====================================================
-   CARD
-===================================================== */
+/* LINK KARTU */
+.ekskul-card-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 15px;
+}
 
+.ekskul-card-link:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ekskul-card-link:focus-visible {
+    outline: 3px solid #198754;
+    outline-offset: 4px;
+}
+
+/* CARD */
 .ekskul-card {
     display: flex;
     flex-direction: column;
@@ -76,16 +82,13 @@
     transition: .2s ease;
 }
 
-.ekskul-card:hover {
+.ekskul-card-link:hover .ekskul-card {
     transform: translateY(-5px);
     border-color: #198754;
     box-shadow: 0 10px 24px rgba(25, 135, 84, .13);
 }
 
-/* =====================================================
-   GAMBAR
-===================================================== */
-
+/* GAMBAR */
 .ekskul-photo {
     width: 100%;
     height: 220px;
@@ -105,7 +108,7 @@
     transition: .3s ease;
 }
 
-.ekskul-card:hover .ekskul-photo img {
+.ekskul-card-link:hover .ekskul-photo img {
     transform: scale(1.04);
 }
 
@@ -123,10 +126,7 @@
     color: #7daa8b;
 }
 
-/* =====================================================
-   CONTENT
-===================================================== */
-
+/* CONTENT */
 .ekskul-info {
     display: flex;
     flex-direction: column;
@@ -178,10 +178,18 @@
     overflow-wrap: anywhere;
 }
 
-/* =====================================================
-   EMPTY
-===================================================== */
+/* PETUNJUK DETAIL */
+.ekskul-detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 16px;
+    color: #198754;
+    font-size: 12px;
+    font-weight: 700;
+}
 
+/* EMPTY */
 .ekskul-empty {
     grid-column: 1 / -1;
     background: #ffffff;
@@ -199,14 +207,11 @@
     margin-bottom: 12px;
 }
 
-/* =====================================================
-   BUTTON KEMBALI
-===================================================== */
-
+/* TOMBOL KEMBALI */
 .ekskul-back-bottom {
     padding: 0 0 45px;
-    background: #f3f8f5;
-    text-align: center;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .btn-back-home {
@@ -230,10 +235,7 @@
     transform: translateY(-1px);
 }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
+/* RESPONSIVE */
 @media (max-width: 991px) {
     .ekskul-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -256,20 +258,19 @@
     .ekskul-photo {
         height: 240px;
     }
-}
 
+    .ekskul-back-bottom {
+        padding-bottom: 30px;
+    }
+}
 </style>
 @endpush
 
 @section('content')
 
-{{-- =====================================================
-     HEADER
-===================================================== --}}
-
+{{-- HEADER --}}
 <section class="ekskul-header">
     <div class="container">
-
         <div class="section-label">
             Pengembangan Minat dan Bakat
         </div>
@@ -280,77 +281,75 @@
             Berbagai kegiatan ekstrakurikuler
             {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
         </p>
-
     </div>
 </section>
 
-{{-- =====================================================
-     DAFTAR EKSTRAKURIKULER
-===================================================== --}}
-
+{{-- DAFTAR EKSTRAKURIKULER --}}
 <section class="ekskul-section">
     <div class="container">
-
         <div class="ekskul-grid">
 
             @forelse($ekstrakurikuler as $item)
 
-                <article class="ekskul-card">
+                <a
+                    href="{{ route('ekstrakurikuler.show', $item->id) }}"
+                    class="ekskul-card-link"
+                    aria-label="Lihat detail {{ $item->nama_ekskul ?? $item->nama ?? 'Ekstrakurikuler' }}"
+                >
+                    <article class="ekskul-card">
 
-                    {{-- GAMBAR --}}
+                        {{-- GAMBAR --}}
+                        <div class="ekskul-photo">
+                            @if(!empty($item->gambar))
+                                <img
+                                    src="{{ asset('storage/' . ltrim($item->gambar, '/')) }}"
+                                    alt="{{ $item->nama_ekskul ?? $item->nama ?? 'Ekstrakurikuler' }}"
+                                    loading="lazy"
+                                >
+                            @else
+                                <div class="ekskul-placeholder">
+                                    <i class="bi bi-stars"></i>
+                                </div>
+                            @endif
+                        </div>
 
-                    <div class="ekskul-photo">
+                        {{-- INFORMASI --}}
+                        <div class="ekskul-info">
 
-                        @if(!empty($item->gambar))
-
-                            <img
-                                src="{{ asset('storage/' . $item->gambar) }}"
-                                alt="{{ $item->nama_ekskul ?? $item->nama ?? 'Ekstrakurikuler' }}"
-                            >
-
-                        @else
-
-                            <div class="ekskul-placeholder">
+                            <div class="ekskul-icon">
                                 <i class="bi bi-stars"></i>
                             </div>
 
-                        @endif
+                            <h2 class="ekskul-title">
+                                {{ $item->nama_ekskul ?? $item->nama ?? 'Ekstrakurikuler' }}
+                            </h2>
 
-                    </div>
+                            @if(!empty($item->pembina))
+                                <div class="ekskul-meta">
+                                    <i class="bi bi-person-badge"></i>
+                                    Pembina: {{ $item->pembina }}
+                                </div>
+                            @endif
 
-                    {{-- INFORMASI --}}
+                            @if(!empty($item->jadwal_latihan))
+                                <div class="ekskul-meta">
+                                    <i class="bi bi-calendar-week"></i>
+                                    {{ $item->jadwal_latihan }}
+                                </div>
+                            @endif
 
-                    <div class="ekskul-info">
+                            <p class="ekskul-description">
+                                {{ $item->deskripsi ?? $item->keterangan ?? 'Deskripsi kegiatan belum tersedia.' }}
+                            </p>
 
-                        <div class="ekskul-icon">
-                            <i class="bi bi-stars"></i>
+                            <span class="ekskul-detail-link">
+                                Lihat Detail
+                                <i class="bi bi-arrow-right"></i>
+                            </span>
+
                         </div>
-
-                        <h2 class="ekskul-title">
-                            {{ $item->nama_ekskul ?? $item->nama ?? 'Ekstrakurikuler' }}
-                        </h2>
-
-                        @if(!empty($item->pembina))
-                            <div class="ekskul-meta">
-                                <i class="bi bi-person-badge"></i>
-                                Pembina: {{ $item->pembina }}
-                            </div>
-                        @endif
-
-                        @if(!empty($item->jadwal_latihan))
-                            <div class="ekskul-meta">
-                                <i class="bi bi-calendar-week"></i>
-                                {{ $item->jadwal_latihan }}
-                            </div>
-                        @endif
-
-                        <p class="ekskul-description">
-                            {{ $item->deskripsi ?? $item->keterangan ?? 'Deskripsi kegiatan belum tersedia.' }}
-                        </p>
-
-                    </div>
-
-                </article>
+                    </article>
+                </a>
 
             @empty
 
@@ -365,19 +364,17 @@
             @endforelse
 
         </div>
-
     </div>
 </section>
 
-{{-- =====================================================
-     KEMBALI KE BERANDA
-===================================================== --}}
-
-<div class="ekskul-back-bottom">
-    <a href="{{ route('home') }}" class="btn-back-home">
-        <i class="bi bi-arrow-left"></i>
-        Kembali ke Beranda
-    </a>
+{{-- KEMBALI KE BERANDA --}}
+<div class="container">
+    <div class="ekskul-back-bottom">
+        <a href="{{ route('home') }}" class="btn-back-home">
+            <i class="bi bi-arrow-left"></i>
+            Kembali ke Beranda
+        </a>
+    </div>
 </div>
 
 @endsection

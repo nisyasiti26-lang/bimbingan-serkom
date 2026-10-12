@@ -28,6 +28,24 @@ use App\Models\ProfilSekolah;
 Route::get('/', [LandingController::class, 'index'])
     ->name('home');
 
+
+/*
+|--------------------------------------------------------------------------
+| PUBLIC SISWA
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/siswa', function () {
+
+    $siswa = Siswa::orderBy('id', 'desc')->get();
+
+    $profil = ProfilSekolah::first();
+
+    return view('public.siswa.index', compact('siswa', 'profil'));
+
+})->name('siswa.public');
+
+
 /*
 |--------------------------------------------------------------------------
 | PUBLIC GURU
@@ -41,9 +59,20 @@ Route::get('/guru', function () {
     return view('public.guru.guru', compact('guru', 'profil'));
 })->name('guru.public');
 
-Route::get('/guru/{encryptedId}', [GuruController::class, 'show'])
+Route::get('/guru/{slug}', [GuruController::class, 'show'])
     ->name('guru.show');
 
+
+/*
+|--------------------------------------------------------------------------
+| PUBLIC PROFIL PEMBUAT
+|--------------------------------------------------------------------------
+*/
+
+
+Route::get('/profil-pembuat', function () {
+    return view('public.profil-pembuat.index');
+})->name('profil_pembuat.public');
 /*
 |--------------------------------------------------------------------------
 | PUBLIC BERITA
@@ -105,6 +134,11 @@ Route::get('/ekstrakurikuler', function () {
         compact('ekstrakurikuler', 'profil')
     );
 })->name('ekstrakurikuler.public');
+
+Route::get('/ekstrakurikuler/{id}', [
+    EkstrakurikulerController::class,
+    'publicShow'
+])->name('ekstrakurikuler.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -346,3 +380,6 @@ Route::get('/profil', function () {
 
     return view('public.profil.index', compact('profil'));
 })->name('profil.public');
+
+
+

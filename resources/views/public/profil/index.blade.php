@@ -158,6 +158,35 @@
         white-space: pre-line;
     }
 
+    /* =========================
+       TOMBOL KEMBALI
+    ========================= */
+    .guru-back-bottom {
+        padding: 0 0 45px;
+        text-align: right;
+    }
+
+    .btn-back-dashboard {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 9px;
+        background: #198754;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s ease;
+    }
+
+    .btn-back-dashboard:hover {
+        transform: translateY(-1px);
+        background: #146c43;
+        color: #fff;
+    }
+
     /* ==============================
        TAMPILAN RESPONSIF
     ============================== */
@@ -307,14 +336,6 @@
                         </tr>
 
                         <tr>
-                            <th>Akreditasi</th>
-                            <td class="kolom-titik">:</td>
-                            <td>
-                                {{ $profil->akreditasi ?? 'Belum diisi' }}
-                            </td>
-                        </tr>
-
-                        <tr>
                             <th>Alamat</th>
                             <td class="kolom-titik">:</td>
                             <td class="profil-keterangan">
@@ -327,14 +348,6 @@
                             <td class="kolom-titik">:</td>
                             <td>
                                 {{ $profil->kontak ?? $profil->telepon ?? '-' }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>Email</th>
-                            <td class="kolom-titik">:</td>
-                            <td>
-                                {{ $profil->email ?? '-' }}
                             </td>
                         </tr>
 
@@ -360,6 +373,15 @@
 
         </div>
     </div>
+</div>
+
+<div class="container">
+<div class="guru-back-bottom">
+    <a href="{{ route('home') }}" class="btn-back-dashboard">
+        <i class="bi bi-arrow-left"></i>
+        Kembali ke Beranda
+    </a>
+</div>
 </div>
 
 @endsection

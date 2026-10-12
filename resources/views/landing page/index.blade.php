@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title')
@@ -57,10 +58,7 @@
         position: relative;
         overflow: hidden;
         background:
-            linear-gradient(
-                rgba(20, 83, 45, .78),
-                rgba(25, 135, 84, .72)
-            ),
+            linear-gradient(rgba(20, 83, 45, .78), rgba(25, 135, 84, .72)),
             url('{{ asset('images/latar.jpg') }}') center/cover no-repeat;
     }
 
@@ -108,7 +106,7 @@
         transform: translateY(-3px);
     }
 
-    /* PROFIL SEKOLAH */
+    /* PROFIL */
     .profile-section {
         padding: 35px 0 30px;
         background: var(--latar-hijau);
@@ -138,17 +136,6 @@
 
     .welcome-content {
         padding: 10px 0;
-    }
-
-    .welcome-label {
-        display: inline-block;
-        color: var(--hijau-gelap);
-        background: #dff2e6;
-        padding: 8px 15px;
-        border-radius: 30px;
-        font-size: 13px;
-        font-weight: 600;
-        margin-bottom: 18px;
     }
 
     .welcome-content h3 {
@@ -201,17 +188,7 @@
         margin-top: 5px;
     }
 
-    /* JARAK ANTARBAGIAN */
-    .guru-section {
-        padding: 50px 0;
-    }
-
-    .berita-section,
-    .galeri-section,
-    .ekstrakurikuler-section {
-        padding: 30px 0 50px;
-    }
-
+    /* SECTION */
     .guru-section,
     .galeri-section {
         background: var(--latar-hijau);
@@ -222,20 +199,14 @@
         background: var(--putih);
     }
 
-    .guru-section .row,
-    .berita-section .row,
-    .galeri-section .row,
-    .ekstrakurikuler-section .row {
-        align-items: stretch;
+    .guru-section,
+    .berita-section,
+    .galeri-section,
+    .ekstrakurikuler-section {
+        padding: 50px 0;
     }
 
-    .guru-section .row > [class*="col-"],
-    .berita-section .row > [class*="col-"],
-    .galeri-section .row > [class*="col-"],
-    .ekstrakurikuler-section .row > [class*="col-"] {
-        display: flex;
-    }
-
+    /* CARD */
     .guru-card,
     .berita-card,
     .ekskul-card {
@@ -250,11 +221,6 @@
         transition: transform .25s ease, box-shadow .25s ease;
     }
 
-    .guru-card {
-        text-decoration: none;
-        color: inherit;
-    }
-
     .guru-card:hover,
     .berita-card:hover,
     .ekskul-card:hover {
@@ -263,6 +229,11 @@
     }
 
     /* GURU */
+    .guru-card {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .guru-photo {
         width: 100%;
         height: 260px;
@@ -271,8 +242,7 @@
         overflow: hidden;
     }
 
-    .guru-photo img,
-    .ekskul-photo img {
+    .guru-photo img {
         display: block;
         width: 100%;
         height: 100%;
@@ -280,18 +250,13 @@
         object-position: center;
     }
 
-    .guru-placeholder,
-    .berita-placeholder,
-    .ekskul-photo-placeholder {
+    .guru-placeholder {
+        width: 100%;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         background: var(--hijau-muda);
-    }
-
-    .guru-placeholder {
-        width: 100%;
-        height: 100%;
     }
 
     .guru-placeholder i {
@@ -334,7 +299,7 @@
         transition: .2s ease;
     }
 
-    /* TOMBOL */
+    /* BUTTON */
     .btn-section,
     .btn-berita-more,
     .btn-galeri-more {
@@ -353,15 +318,12 @@
         transition: .2s ease;
     }
 
-    .btn-section {
-        margin-top: 35px;
-    }
-
     .btn-section:hover,
     .btn-berita-more:hover,
     .btn-galeri-more:hover,
     .guru-detail-button:hover,
-    .berita-detail-button:hover {
+    .berita-detail-button:hover,
+    .ekskul-detail-button:hover {
         background: var(--hijau-gelap);
         color: var(--putih);
         transform: translateY(-2px);
@@ -370,20 +332,150 @@
     .berita-more-wrap,
     .galeri-more-wrap,
     .ekskul-more-wrap {
-        text-align: center;
+        text-align: right;
         margin-top: 35px;
+    }
+
+    /* SISWA */
+    .siswa-section {
+        padding: 20px 0 100px;
+        background: var(--putih);
+    }
+
+    .siswa-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .siswa-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 22px;
+        background: #fff;
+        border: 1px solid var(--border-hijau);
+        border-radius: 15px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, .05);
+        transition: .25s ease;
+    }
+
+    .siswa-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--hijau-utama);
+        box-shadow: 0 10px 25px rgba(25, 135, 84, .15);
+    }
+
+    .siswa-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        background: var(--hijau-muda);
+        color: var(--hijau-utama);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .siswa-icon i {
+        font-size: 27px;
+    }
+
+    .siswa-name {
+        min-height: 45px;
+        margin-bottom: 15px;
+        color: var(--hijau-tua);
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .siswa-data {
+        padding-top: 13px;
+        border-top: 1px solid var(--border-hijau);
+    }
+
+    .siswa-data-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 9px;
+    }
+
+    .siswa-data-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .siswa-data-item i {
+        width: 18px;
+        color: var(--hijau-utama);
+        text-align: center;
+    }
+
+    .siswa-data-item span {
+        color: #71827b;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+    }
+
+    .siswa-detail-wrap {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: auto;
+        padding-top: 18px;
+    }
+
+    .siswa-detail-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 7px;
+        background: var(--hijau-utama);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: .2s ease;
+    }
+
+    .siswa-detail-button:hover,
+    .siswa-all-button:hover {
+        background: var(--hijau-gelap);
+        color: #fff;
+    }
+
+    .siswa-all-wrap {
+        margin-top: 30px;
+        text-align: right;
+    }
+
+    .siswa-all-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 18px;
+        border-radius: 8px;
+        background: var(--hijau-utama);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: .2s ease;
     }
 
     /* BERITA */
     .berita-image,
     .berita-placeholder {
-        display: block;
         width: 100%;
         height: 190px;
         flex-shrink: 0;
     }
 
     .berita-image {
+        display: block;
         object-fit: cover;
         object-position: center;
     }
@@ -392,6 +484,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background: var(--hijau-muda);
     }
 
     .berita-placeholder i {
@@ -439,7 +532,6 @@
         text-decoration: none;
         font-size: 11px;
         font-weight: 600;
-        transition: .2s ease;
     }
 
     /* GALERI */
@@ -462,97 +554,46 @@
         box-shadow: 0 14px 28px rgba(20, 83, 45, .18);
     }
 
-    
-/* MEDIA GALERI */
-.galeri-media {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #eaf6ef;
-}
+    .galeri-media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #eaf6ef;
+    }
 
-.galeri-media img,
-.galeri-media video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform .4s ease;
-}
-
-.galeri-card:hover .galeri-media img,
-.galeri-card:hover .galeri-media video {
-    transform: scale(1.06);
-}
-
-.galeri-placeholder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: 100%;
-    color: #198754;
-    background: #eaf6ef;
-}
-
-.galeri-placeholder i {
-    font-size: 52px;
-}
-
-.galeri-placeholder span {
-    font-size: 13px;
-}
-
-.galeri-play {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background: rgba(0, 0, 0, .12);
-    pointer-events: none;
-}
-
-.galeri-play i {
-    font-size: 56px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, .5);
-}
-
-.galeri-empty h5 {
-    color: #14532d;
-    font-weight: 700;
-}
-
-.galeri-empty p {
-    margin-bottom: 0;
-    font-size: 13px;
-}
-
-
-    .galeri-card img,
-    .galeri-card video {
+    .galeri-media img,
+    .galeri-media video,
+    .galeri-media iframe {
         display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center;
-        transition: transform .4s ease;
+        border: none;
     }
 
-    .galeri-card:hover img,
-    .galeri-card:hover video {
-        transform: scale(1.06);
+    .galeri-placeholder {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+        color: #198754;
+        background: #eaf6ef;
+    }
+
+    .galeri-placeholder i {
+        font-size: 52px;
     }
 
     .galeri-overlay {
         position: absolute;
         inset: 0;
+        z-index: 3;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -565,16 +606,7 @@
             rgba(8, 35, 20, .55) 45%,
             rgba(8, 35, 20, .03) 100%
         );
-        transition: background .3s ease;
-    }
-
-    .galeri-card:hover .galeri-overlay {
-        background: linear-gradient(
-            to top,
-            rgba(8, 35, 20, .97) 0%,
-            rgba(8, 35, 20, .62) 48%,
-            rgba(8, 35, 20, .12) 100%
-        );
+        pointer-events: none;
     }
 
     .galeri-category {
@@ -602,22 +634,13 @@
     .galeri-detail {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
         gap: 9px;
         padding: 9px 14px;
-        border: 1px solid rgba(255, 255, 255, .7);
         border-radius: 9px;
         background: var(--hijau-utama);
         color: var(--putih);
         font-size: 12px;
         font-weight: 700;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
-        transition: background .25s ease, transform .25s ease;
-    }
-
-    .galeri-card:hover .galeri-detail {
-        background: var(--hijau-gelap);
-        transform: translateX(3px);
     }
 
     .galeri-empty {
@@ -647,6 +670,20 @@
         overflow: hidden;
     }
 
+    .ekskul-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .ekskul-photo-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .ekskul-photo-placeholder i {
         font-size: 55px;
         color: var(--hijau-utama);
@@ -656,24 +693,7 @@
         display: flex;
         flex-direction: column;
         flex: 1;
-        padding: 22px;
-    }
-
-    .ekskul-icon {
-        width: 42px;
-        height: 42px;
-        flex-shrink: 0;
-        border-radius: 10px;
-        background: var(--hijau-muda);
-        color: var(--hijau-utama);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 13px;
-    }
-
-    .ekskul-icon i {
-        font-size: 20px;
+        padding: 18px;
     }
 
     .ekskul-card h5 {
@@ -681,22 +701,42 @@
         font-size: 15px;
         font-weight: 700;
         line-height: 1.5;
-        margin-bottom: 10px;
-        overflow-wrap: anywhere;
+        margin-bottom: 20px;
     }
 
-    .ekskul-meta {
-        color: var(--hijau-utama);
-        font-size: 12px;
-        line-height: 1.6;
-        margin-bottom: 7px;
+    .ekskul-detail-wrap {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: auto;
     }
 
-    .ekskul-content p {
-        color: #71827b;
+    .ekskul-detail-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 13px;
+        border-radius: 8px;
+        background: var(--hijau-utama);
+        color: #fff;
         font-size: 12px;
-        line-height: 1.8;
-        margin: 10px 0 0;
+        font-weight: 600;
+        transition: .2s ease;
+    }
+
+    .ekskul-card-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .ekskul-card-link:hover {
+        color: inherit;
+    }
+
+    .ekskul-card-link:hover .ekskul-detail-button {
+        background: var(--hijau-gelap);
     }
 
     /* RESPONSIVE */
@@ -705,22 +745,16 @@
             font-size: 34px;
         }
 
-        .guru-photo {
-            height: 240px;
-        }
-
         .welcome-image-wrapper {
             height: 350px;
         }
 
-        .welcome-content h3 {
-            font-size: 22px;
+        .guru-photo {
+            height: 240px;
         }
-    }
 
-    @media (max-width: 767px) {
-        .hero-content h1 {
-            font-size: 30px;
+        .siswa-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
 
@@ -753,24 +787,23 @@
             height: 260px;
         }
 
-        .welcome-content p {
-            font-size: 14px;
-        }
-
         .guru-photo {
             height: 230px;
+        }
+
+        .siswa-grid {
+            grid-template-columns: 1fr;
         }
 
         .galeri-card {
             height: 240px;
         }
 
-        .galeri-overlay {
-            padding: 17px 14px;
-        }
-
-        .galeri-overlay strong {
-            font-size: 15px;
+        .berita-more-wrap,
+        .galeri-more-wrap,
+        .ekskul-more-wrap,
+        .siswa-all-wrap {
+            text-align: center;
         }
     }
 </style>
@@ -782,12 +815,16 @@
 <section id="beranda" class="hero-section">
     <div class="container">
         <div class="hero-content">
-            <h1>{{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}</h1>
+            <h1>
+                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
+            </h1>
+
             <p>
                 Selamat datang di Sistem Informasi Sekolah.
                 Temukan informasi terbaru mengenai profil, guru,
-                berita, galeri, dan kegiatan sekolah.
+                siswa, berita, galeri, dan kegiatan sekolah.
             </p>
+
             <a href="#profil" class="hero-button">
                 <i class="bi bi-arrow-down-circle"></i>
                 Jelajahi Sekolah
@@ -796,7 +833,7 @@
     </div>
 </section>
 
-{{-- SAMBUTAN KEPALA SEKOLAH --}}
+{{-- PROFIL SEKOLAH --}}
 <section id="profil" class="section profile-section">
     <div class="container">
         <div class="section-title">
@@ -809,19 +846,17 @@
                     <img
                         src="{{ asset('images/kepala sekolah.jpeg') }}"
                         class="welcome-image"
-                        alt="Kepala Sekolah MTsN 10 Tasikmalaya"
-                        loading="lazy">
+                        alt="Kepala Sekolah"
+                        loading="lazy"
+                    >
                 </div>
             </div>
 
             <div class="col-lg-7">
                 <div class="welcome-content">
-                    <span class="welcome-label">
-                        <i class="bi bi-mortarboard-fill"></i>
-                        MTsN 10 Tasikmalaya
-                    </span>
-
-                    <h3>Assalamu'alaikum Warahmatullahi Wabarakatuh</h3>
+                    <h3>
+                        Assalamu'alaikum Warahmatullahi Wabarakatuh
+                    </h3>
 
                     <p>
                         Puji syukur kita panjatkan ke hadirat Allah SWT atas
@@ -831,11 +866,11 @@
                     </p>
 
                     <p>
-                        Selamat datang di website MTsN 10 Tasikmalaya. Website
-                        ini diharapkan dapat memberikan informasi mengenai profil
-                        sekolah, kegiatan peserta didik, prestasi, tenaga pendidik,
-                        serta berbagai program sekolah kepada masyarakat secara
-                        mudah dan transparan.
+                        Selamat datang di website MTsN 10 Tasikmalaya.
+                        Website ini diharapkan dapat memberikan informasi
+                        mengenai profil sekolah, kegiatan peserta didik,
+                        prestasi, tenaga pendidik, serta berbagai program
+                        sekolah kepada masyarakat secara mudah dan transparan.
                     </p>
 
                     <p>
@@ -856,6 +891,7 @@
 
                     <div class="welcome-principal">
                         <div class="principal-line"></div>
+
                         <div>
                             <strong>
                                 {{ $profil->kepala_sekolah ?? 'Kepala MTsN 10 Tasikmalaya' }}
@@ -874,21 +910,39 @@
     <div class="container">
         <div class="section-title">
             <h2>Staf &amp; Guru</h2>
-            <p>Tenaga pendidik {{ $profil->nama_sekolah ?? 'sekolah' }}</p>
+            <p>
+                Tenaga pendidik
+                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
+            </p>
         </div>
 
         <div class="row g-4">
-            @forelse(($guru ?? collect()) as $item)
+            @forelse(($guru ?? collect())->take(4) as $item)
+                @php
+                    $slugGuru = $item->slug ?? null;
+                    $namaGuru = $item->nama_guru ?? 'Nama Guru';
+                @endphp
+
                 <div class="col-lg-3 col-md-6">
-                    <a href="{{ route('guru.show', [
-                        'encryptedId' => \Illuminate\Support\Facades\Crypt::encrypt($item->id_guru)
-                    ]) }}" class="guru-card">
+                    @if(!empty($slugGuru))
+                        <a
+                            href="{{ route('guru.show', ['slug' => $slugGuru]) }}"
+                            class="guru-card"
+                        >
+                    @else
+                        <a
+                            href="{{ route('guru.public') }}"
+                            class="guru-card"
+                        >
+                    @endif
+
                         <div class="guru-photo">
-                            @if($item->foto)
+                            @if(!empty($item->foto))
                                 <img
                                     src="{{ asset('storage/' . $item->foto) }}"
-                                    alt="{{ $item->nama_guru }}"
-                                    loading="lazy">
+                                    alt="{{ $namaGuru }}"
+                                    loading="lazy"
+                                >
                             @else
                                 <div class="guru-placeholder">
                                     <i class="bi bi-person-badge-fill"></i>
@@ -897,7 +951,10 @@
                         </div>
 
                         <div class="guru-info">
-                            <div class="guru-name">{{ $item->nama_guru }}</div>
+                            <div class="guru-name">
+                                {{ $namaGuru }}
+                            </div>
+
                             <div class="guru-detail-wrap">
                                 <span class="guru-detail-button">
                                     Lihat Detail
@@ -909,14 +966,99 @@
                 </div>
             @empty
                 <div class="col-12">
-                    <p class="text-muted text-center">Data guru belum tersedia.</p>
+                    <p class="text-muted text-center">
+                        Data guru belum tersedia.
+                    </p>
                 </div>
             @endforelse
         </div>
 
-        <div class="text-end">
+        <div class="text-end mt-4">
             <a href="{{ route('guru.public') }}" class="btn-section">
                 Lihat Semua Guru
+                <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+{{-- SISWA --}}
+<section id="siswa" class="section siswa-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Siswa</h2>
+            <p>
+                Daftar Siswa
+                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
+            </p>
+        </div>
+
+        <div class="siswa-grid">
+            @forelse(($siswa ?? collect())->take(4) as $item)
+                <div class="siswa-card">
+                    <div class="siswa-icon">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
+                    <div class="siswa-name">
+                        {{ $item->nama_siswa ?? 'Nama Siswa' }}
+                    </div>
+
+                    <div class="siswa-data">
+                        <div class="siswa-data-item">
+                            <i class="bi bi-person-vcard-fill"></i>
+                            <span>NISN: {{ $item->nisn ?? '-' }}</span>
+                        </div>
+
+                        <div class="siswa-data-item">
+                            <i class="bi bi-person-fill"></i>
+                            <span>{{ $item->jenis_kelamin ?? '-' }}</span>
+                        </div>
+
+                        <div class="siswa-data-item">
+                            <i class="bi bi-calendar3"></i>
+                            <span>
+                                Tahun Masuk: {{ $item->tahun_masuk ?? '-' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="siswa-detail-wrap">
+                        <a
+                            href="{{ route('siswa.public') }}"
+                            class="siswa-detail-button"
+                        >
+                            Lihat Detail
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @empty
+                <div style="
+                    grid-column:1/-1;
+                    padding:45px 20px;
+                    text-align:center;
+                    background:#fff;
+                    border:1px solid var(--border-hijau);
+                    border-radius:12px;
+                    color:#71827b;
+                ">
+                    <i class="bi bi-people" style="
+                        display:block;
+                        color:var(--hijau-utama);
+                        font-size:45px;
+                        margin-bottom:10px;
+                    "></i>
+                    Belum ada data siswa.
+                </div>
+            @endforelse
+        </div>
+
+        <div class="siswa-all-wrap">
+            <a href="{{ route('siswa.public') }}" class="siswa-all-button">
+                Lihat Semua Siswa
                 <i class="bi bi-arrow-right"></i>
             </a>
         </div>
@@ -932,15 +1074,21 @@
         </div>
 
         <div class="row g-4">
-            @forelse(($berita ?? collect()) as $item)
+            @forelse(($berita ?? collect())->take(3) as $item)
+                @php
+                    $slugBerita = $item->slug ?? null;
+                    $judulBerita = $item->judul ?? 'Berita Sekolah';
+                @endphp
+
                 <div class="col-lg-4 col-md-6">
                     <div class="berita-card">
-                        @if($item->gambar)
+                        @if(!empty($item->gambar))
                             <img
                                 src="{{ asset('storage/' . $item->gambar) }}"
                                 class="berita-image"
-                                alt="{{ $item->judul }}"
-                                loading="lazy">
+                                alt="{{ $judulBerita }}"
+                                loading="lazy"
+                            >
                         @else
                             <div class="berita-placeholder">
                                 <i class="bi bi-newspaper"></i>
@@ -953,27 +1101,42 @@
                                 {{ $item->tanggal ?? '-' }}
                             </div>
 
-                            <div class="berita-title">{{ $item->judul }}</div>
+                            <div class="berita-title">
+                                {{ $judulBerita }}
+                            </div>
 
                             <div class="berita-detail-wrap">
-                                <a
-                                    href="{{ route('berita.show', ['slug' => $item->slug]) }}"
-                                    class="berita-detail-button">
-                                    Baca Selengkapnya
-                                    <i class="bi bi-arrow-right"></i>
-                                </a>
+                                @if(!empty($slugBerita))
+                                    <a
+                                        href="{{ route('berita.show', ['slug' => $slugBerita]) }}"
+                                        class="berita-detail-button"
+                                    >
+                                        Baca Selengkapnya
+                                        <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                @else
+                                    <a
+                                        href="{{ route('berita.public') }}"
+                                        class="berita-detail-button"
+                                    >
+                                        Lihat Berita
+                                        <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="col-12">
-                    <p class="text-muted text-center">Belum ada berita.</p>
+                    <p class="text-muted text-center">
+                        Belum ada berita.
+                    </p>
                 </div>
             @endforelse
         </div>
 
-        <div class="berita-more-wrap text-end">
+        <div class="berita-more-wrap">
             <a href="{{ route('berita.public') }}" class="btn-berita-more">
                 Lihat Semua Berita
                 <i class="bi bi-arrow-right"></i>
@@ -982,113 +1145,139 @@
     </div>
 </section>
 
-
 {{-- GALERI --}}
 <section id="galeri" class="section galeri-section">
     <div class="container">
-
         <div class="section-title">
             <h2>Galeri</h2>
-            <p>Dokumentasi foto dan video kegiatan MTsN 10 Tasikmalaya</p>
+            <p>
+                Dokumentasi foto dan video kegiatan MTsN 10 Tasikmalaya
+            </p>
         </div>
 
         <div class="row g-4">
-            @forelse(($galeri ?? collect()) as $item)
-                <div class="col-lg-4 col-md-6">
+            @forelse(($galeri ?? collect())->take(6) as $item)
+                @php
+                    $idGaleri = $item->id ?? null;
+                    $judulGaleri = $item->judul ?? 'Dokumentasi Sekolah';
+                    $kategoriGaleri = $item->kategori ?? 'Foto';
+                    $fileGaleri = $item->file ?? null;
+                @endphp
 
-                    <a href="{{ route('galeri.show', ['id' => $item->id]) }}"
-                       class="galeri-card">
+                <div class="col-lg-4 col-md-6">
+                    @if($idGaleri !== null)
+                        <a
+                            href="{{ route('galeri.show', ['id' => $idGaleri]) }}"
+                            class="galeri-card"
+                        >
+                    @else
+                        <a
+                            href="{{ route('galeri.public') }}"
+                            class="galeri-card"
+                        >
+                    @endif
 
                         <div class="galeri-media">
+                            @if($kategoriGaleri === 'Video')
+                                @if(!empty($fileGaleri))
+                                    <video
+                                        src="{{ asset('storage/' . $fileGaleri) }}"
+                                        controls
+                                        playsinline
+                                        preload="metadata"
+                                    >
+                                        Browser Anda tidak mendukung pemutaran video.
+                                    </video>
+                                @elseif(!empty($item->link_video))
+                                    @php
+                                        $videoUrl = trim($item->link_video);
 
-                            @if(($item->kategori ?? 'Foto') === 'Video'
-                                && !empty($item->link_video))
+                                        if (str_contains($videoUrl, 'youtube.com/watch')) {
+                                            parse_str(
+                                                parse_url($videoUrl, PHP_URL_QUERY) ?? '',
+                                                $videoQuery
+                                            );
 
-                                <div class="galeri-placeholder">
-                                    <i class="bi bi-play-circle-fill"></i>
-                                    <span>Video kegiatan sekolah</span>
-                                </div>
+                                            if (!empty($videoQuery['v'])) {
+                                                $videoUrl = 'https://www.youtube.com/embed/' . $videoQuery['v'];
+                                            }
+                                        } elseif (str_contains($videoUrl, 'youtu.be/')) {
+                                            $videoId = trim(
+                                                parse_url($videoUrl, PHP_URL_PATH) ?? '',
+                                                '/'
+                                            );
 
-                            @elseif(($item->kategori ?? 'Foto') === 'Video'
-                                && !empty($item->file))
+                                            if ($videoId !== '') {
+                                                $videoUrl = 'https://www.youtube.com/embed/' . $videoId;
+                                            }
+                                        }
+                                    @endphp
 
-                                <video
-                                    src="{{ asset('storage/' . $item->file) }}"
-                                    muted
-                                    playsinline
-                                    preload="metadata">
-                                </video>
-
-                                <div class="galeri-play">
-                                    <i class="bi bi-play-circle-fill"></i>
-                                </div>
-
-                            @elseif(!empty($item->file))
-
+                                    <iframe
+                                        src="{{ $videoUrl }}"
+                                        title="{{ $judulGaleri }}"
+                                        loading="lazy"
+                                        allowfullscreen
+                                    ></iframe>
+                                @else
+                                    <div class="galeri-placeholder">
+                                        <i class="bi bi-play-circle"></i>
+                                        <span>Video belum tersedia</span>
+                                    </div>
+                                @endif
+                            @elseif(!empty($fileGaleri))
                                 <img
-                                    src="{{ asset('storage/' . $item->file) }}"
-                                    alt="{{ $item->judul ?? 'Dokumentasi sekolah' }}"
+                                    src="{{ asset('storage/' . $fileGaleri) }}"
+                                    alt="{{ $judulGaleri }}"
                                     loading="lazy"
-                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-
-                                <div class="galeri-placeholder"
-                                     style="display:none;">
-                                    <i class="bi bi-image"></i>
-                                    <span>Foto tidak ditemukan</span>
-                                </div>
-
+                                >
                             @else
-
                                 <div class="galeri-placeholder">
                                     <i class="bi bi-images"></i>
                                     <span>Dokumentasi sekolah</span>
                                 </div>
-
                             @endif
-
                         </div>
 
                         <div class="galeri-overlay">
-
                             <span class="galeri-category">
-                                @if(($item->kategori ?? 'Foto') === 'Video')
-                                    <i class="bi bi-play-circle-fill"></i> Video
+                                @if($kategoriGaleri === 'Video')
+                                    <i class="bi bi-play-circle-fill"></i>
+                                    Video
                                 @else
-                                    <i class="bi bi-image-fill"></i> Foto
+                                    <i class="bi bi-image-fill"></i>
+                                    Foto
                                 @endif
                             </span>
 
-                            <strong>
-                                {{ $item->judul ?? 'Dokumentasi Sekolah' }}
-                            </strong>
+                            <strong>{{ $judulGaleri }}</strong>
 
                             <span class="galeri-detail">
                                 Lihat Detail
                                 <i class="bi bi-arrow-right"></i>
                             </span>
-
                         </div>
                     </a>
-
                 </div>
             @empty
                 <div class="col-12">
                     <div class="galeri-empty">
                         <i class="bi bi-images"></i>
                         <h5>Galeri Belum Tersedia</h5>
-                        <p>Dokumentasi kegiatan sekolah akan ditampilkan di sini.</p>
+                        <p>
+                            Dokumentasi kegiatan sekolah akan ditampilkan di sini.
+                        </p>
                     </div>
                 </div>
             @endforelse
         </div>
 
-        <div class="galeri-more-wrap text-end">
+        <div class="galeri-more-wrap">
             <a href="{{ route('galeri.public') }}" class="btn-galeri-more">
                 Lihat Semua Galeri
                 <i class="bi bi-arrow-right"></i>
             </a>
         </div>
-
     </div>
 </section>
 
@@ -1104,48 +1293,55 @@
         </div>
 
         <div class="row g-4">
-            @forelse(($ekstrakurikuler ?? collect()) as $item)
+            @forelse(($ekstrakurikuler ?? collect())->take(3) as $item)
+                @php
+                    $idEkskul = $item->id ?? null;
+                    $namaEkskul = $item->nama_ekskul
+                        ?? $item->nama
+                        ?? 'Ekstrakurikuler';
+                    $gambarEkskul = $item->gambar ?? null;
+                @endphp
+
                 <div class="col-lg-4 col-md-6">
-                    <div class="ekskul-card">
-                        @if(!empty($item->gambar))
-                            <div class="ekskul-photo">
-                                <img
-                                    src="{{ asset('storage/' . $item->gambar) }}"
-                                    alt="{{ $item->nama_ekskul ?? $item->nama ?? 'Ekstrakurikuler' }}"
-                                    loading="lazy">
-                            </div>
-                        @else
-                            <div class="ekskul-photo-placeholder">
-                                <i class="bi bi-stars"></i>
-                            </div>
-                        @endif
+                    @if($idEkskul !== null)
+                        <a
+                            href="{{ route('ekstrakurikuler.show', ['id' => $idEkskul]) }}"
+                            class="ekskul-card-link"
+                        >
+                    @else
+                        <a
+                            href="{{ route('ekstrakurikuler.public') }}"
+                            class="ekskul-card-link"
+                        >
+                    @endif
 
-                        <div class="ekskul-content">
-                            <div class="ekskul-icon">
-                                <i class="bi bi-stars"></i>
-                            </div>
-
-                            <h5>{{ $item->nama_ekskul ?? $item->nama ?? '-' }}</h5>
-
-                            @if(!empty($item->pembina))
-                                <div class="ekskul-meta">
-                                    <i class="bi bi-person-badge"></i>
-                                    Pembina: {{ $item->pembina }}
+                        <div class="ekskul-card">
+                            @if(!empty($gambarEkskul))
+                                <div class="ekskul-photo">
+                                    <img
+                                        src="{{ asset('storage/' . $gambarEkskul) }}"
+                                        alt="{{ $namaEkskul }}"
+                                        loading="lazy"
+                                    >
+                                </div>
+                            @else
+                                <div class="ekskul-photo-placeholder">
+                                    <i class="bi bi-stars"></i>
                                 </div>
                             @endif
 
-                            @if(!empty($item->jadwal_latihan))
-                                <div class="ekskul-meta">
-                                    <i class="bi bi-calendar-week"></i>
-                                    Jadwal: {{ $item->jadwal_latihan }}
-                                </div>
-                            @endif
+                            <div class="ekskul-content">
+                                <h5>{{ $namaEkskul }}</h5>
 
-                            <p>
-                                {{ $item->deskripsi ?? $item->keterangan ?? 'Deskripsi kegiatan belum tersedia.' }}
-                            </p>
+                                <div class="ekskul-detail-wrap">
+                                    <span class="ekskul-detail-button">
+                                        Lihat Detail
+                                        <i class="bi bi-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @empty
                 <div class="col-12">
@@ -1156,8 +1352,11 @@
             @endforelse
         </div>
 
-        <div class="ekskul-more-wrap text-end">
-            <a href="{{ route('ekstrakurikuler.public') }}" class="btn-section">
+        <div class="ekskul-more-wrap">
+            <a
+                href="{{ route('ekstrakurikuler.public') }}"
+                class="btn-section"
+            >
                 Lihat Semua Ekstrakurikuler
                 <i class="bi bi-arrow-right"></i>
             </a>
