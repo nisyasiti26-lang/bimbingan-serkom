@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,6 @@ use App\Models\ProfilSekolah;
 Route::get('/', [LandingController::class, 'index'])
     ->name('home');
 
-
 /*
 |--------------------------------------------------------------------------
 | PUBLIC SISWA
@@ -36,15 +36,16 @@ Route::get('/', [LandingController::class, 'index'])
 */
 
 Route::get('/siswa', function () {
-
     $siswa = Siswa::orderBy('id', 'desc')->get();
-
     $profil = ProfilSekolah::first();
 
     return view('public.siswa.index', compact('siswa', 'profil'));
-
 })->name('siswa.public');
 
+/* Detail siswa publik */
+Route::get('/siswa/{id_siswa}', [SiswaController::class, 'publicShow'])
+    ->whereNumber('id_siswa')
+    ->name('siswa.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -59,9 +60,9 @@ Route::get('/guru', function () {
     return view('public.guru.guru', compact('guru', 'profil'));
 })->name('guru.public');
 
-Route::get('/guru/{slug}', [GuruController::class, 'show'])
+Route::get('/guru/{id_guru}', [GuruController::class, 'show'])
+    ->whereNumber('id_guru')
     ->name('guru.show');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -69,10 +70,10 @@ Route::get('/guru/{slug}', [GuruController::class, 'show'])
 |--------------------------------------------------------------------------
 */
 
-
 Route::get('/profil-pembuat', function () {
     return view('public.profil-pembuat.index');
 })->name('profil_pembuat.public');
+
 /*
 |--------------------------------------------------------------------------
 | PUBLIC BERITA
@@ -117,7 +118,7 @@ Route::get('/galeri/{id}', function ($id) {
     $profil = ProfilSekolah::first();
 
     return view('public.galeri.show', compact('galeri', 'profil'));
-})->name('galeri.show');
+})->whereNumber('id')->name('galeri.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -138,7 +139,7 @@ Route::get('/ekstrakurikuler', function () {
 Route::get('/ekstrakurikuler/{id}', [
     EkstrakurikulerController::class,
     'publicShow'
-])->name('ekstrakurikuler.show');
+])->whereNumber('id')->name('ekstrakurikuler.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -163,10 +164,7 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 Route::middleware('role:admin,operator')->group(function () {
 
-    /*
-    | DASHBOARD
-    */
-
+    /* Dashboard */
     Route::get('/admin/dashboard', function () {
         $jumlahGuru = Guru::count();
         $jumlahSiswa = Siswa::count();
@@ -183,43 +181,28 @@ Route::middleware('role:admin,operator')->group(function () {
 
         $profil = ProfilSekolah::first();
 
-        return view(
-            'admin.dashboard.index',
-            compact(
-                'jumlahGuru',
-                'jumlahSiswa',
-                'jumlahBerita',
-                'jumlahEkskul',
-                'guruTerbaru',
-                'siswaTerbaru',
-                'profil'
-            )
-        );
+        return view('admin.dashboard.index', compact(
+            'jumlahGuru',
+            'jumlahSiswa',
+            'jumlahBerita',
+            'jumlahEkskul',
+            'guruTerbaru',
+            'siswaTerbaru',
+            'profil'
+        ));
     })->name('dashboard');
 
-    /*
-    | PROFIL SEKOLAH
-    */
+    /* Profil Sekolah */
+    Route::get('/profile-sekolah', [ProfilSekolahController::class, 'index'])
+        ->name('profile.sekolah');
 
-    Route::get(
-        '/profile-sekolah',
-        [ProfilSekolahController::class, 'index']
-    )->name('profile.sekolah');
+    Route::get('/profile-sekolah/edit', [ProfilSekolahController::class, 'edit'])
+        ->name('profile.sekolah.edit');
 
-    Route::get(
-        '/profile-sekolah/edit',
-        [ProfilSekolahController::class, 'edit']
-    )->name('profile.sekolah.edit');
+    Route::put('/profile-sekolah/update', [ProfilSekolahController::class, 'update'])
+        ->name('profile.sekolah.update');
 
-    Route::put(
-        '/profile-sekolah/update',
-        [ProfilSekolahController::class, 'update']
-    )->name('profile.sekolah.update');
-
-    /*
-    | GURU ADMIN
-    */
-
+    /* Guru */
     Route::get('/admin/guru', [GuruController::class, 'index'])
         ->name('admin.guru');
 
@@ -238,10 +221,7 @@ Route::middleware('role:admin,operator')->group(function () {
     Route::delete('/admin/guru/delete/{id_guru}', [GuruController::class, 'delete'])
         ->name('admin.guru.delete');
 
-    /*
-    | SISWA ADMIN
-    */
-
+    /* Siswa */
     Route::get('/admin/siswa', [SiswaController::class, 'index'])
         ->name('admin.siswa.index');
 
@@ -260,10 +240,7 @@ Route::middleware('role:admin,operator')->group(function () {
     Route::delete('/admin/siswa/delete/{id_siswa}', [SiswaController::class, 'destroy'])
         ->name('admin.siswa.delete');
 
-    /*
-    | BERITA ADMIN
-    */
-
+    /* Berita */
     Route::get('/admin/berita', [BeritaController::class, 'index'])
         ->name('admin.berita.index');
 
@@ -285,10 +262,7 @@ Route::middleware('role:admin,operator')->group(function () {
     Route::get('/admin/berita/detail/{id_berita}', [BeritaController::class, 'show'])
         ->name('admin.berita.show');
 
-    /*
-    | GALERI ADMIN
-    */
-
+    /* Galeri */
     Route::get('/admin/galeri', [GaleriController::class, 'index'])
         ->name('admin.galeri.index');
 
@@ -307,39 +281,24 @@ Route::middleware('role:admin,operator')->group(function () {
     Route::delete('/admin/galeri/delete/{id_galeri}', [GaleriController::class, 'destroy'])
         ->name('admin.galeri.delete');
 
-    /*
-    | EKSTRAKURIKULER ADMIN
-    */
+    /* Ekstrakurikuler */
+    Route::get('/admin/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])
+        ->name('admin.ekstrakurikuler.index');
 
-    Route::get(
-        '/admin/ekstrakurikuler',
-        [EkstrakurikulerController::class, 'index']
-    )->name('admin.ekstrakurikuler.index');
+    Route::get('/admin/ekstrakurikuler/create', [EkstrakurikulerController::class, 'create'])
+        ->name('admin.ekstrakurikuler.create');
 
-    Route::get(
-        '/admin/ekstrakurikuler/create',
-        [EkstrakurikulerController::class, 'create']
-    )->name('admin.ekstrakurikuler.create');
+    Route::post('/admin/ekstrakurikuler/store', [EkstrakurikulerController::class, 'store'])
+        ->name('admin.ekstrakurikuler.store');
 
-    Route::post(
-        '/admin/ekstrakurikuler/store',
-        [EkstrakurikulerController::class, 'store']
-    )->name('admin.ekstrakurikuler.store');
+    Route::get('/admin/ekstrakurikuler/edit/{id_ekskul}', [EkstrakurikulerController::class, 'edit'])
+        ->name('admin.ekstrakurikuler.edit');
 
-    Route::get(
-        '/admin/ekstrakurikuler/edit/{id_ekskul}',
-        [EkstrakurikulerController::class, 'edit']
-    )->name('admin.ekstrakurikuler.edit');
+    Route::put('/admin/ekstrakurikuler/update/{id_ekskul}', [EkstrakurikulerController::class, 'update'])
+        ->name('admin.ekstrakurikuler.update');
 
-    Route::put(
-        '/admin/ekstrakurikuler/update/{id_ekskul}',
-        [EkstrakurikulerController::class, 'update']
-    )->name('admin.ekstrakurikuler.update');
-
-    Route::delete(
-        '/admin/ekstrakurikuler/delete/{id_ekskul}',
-        [EkstrakurikulerController::class, 'destroy']
-    )->name('admin.ekstrakurikuler.delete');
+    Route::delete('/admin/ekstrakurikuler/delete/{id_ekskul}', [EkstrakurikulerController::class, 'destroy'])
+        ->name('admin.ekstrakurikuler.delete');
 });
 
 /*
@@ -380,6 +339,3 @@ Route::get('/profil', function () {
 
     return view('public.profil.index', compact('profil'));
 })->name('profil.public');
-
-
-

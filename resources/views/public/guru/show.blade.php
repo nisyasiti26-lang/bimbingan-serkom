@@ -1,327 +1,174 @@
+
 @extends('layouts.app')
 
 @section('title')
-    Detail Guru - {{ $guru->nama_guru }}
+    Detail Guru - {{ $guru->nama_guru ?? 'Guru' }}
 @endsection
 
 @push('styles')
-    <style>
-        /* =====================================================
-       DETAIL GURU
-    ===================================================== */
+<style>
+    .guru-detail-section {
+        background: #f3f8f5;
+        min-height: 70vh;
+        padding: 55px 0;
+    }
 
-        .guru-detail-section {
-            background: #f3f8f5;
-            min-height: 70vh;
-            padding: 55px 0;
-        }
+    .guru-detail-card {
+        max-width: 900px;
+        margin: auto;
+        padding: 35px;
+        background: #ffffff;
+        border: 1px solid #dcebe1;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(20, 83, 45, .08);
+    }
 
+    .guru-detail-title {
+        color: #14532d;
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 25px;
+    }
+
+    .guru-detail-photo {
+        width: 100%;
+        max-width: 300px;
+        height: 320px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 14px;
+        background: #eaf6ef;
+    }
+
+    .guru-detail-placeholder {
+        width: 100%;
+        max-width: 300px;
+        height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        background: #eaf6ef;
+        color: #198754;
+        font-size: 75px;
+    }
+
+    .guru-detail-label {
+        color: #71827b;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .guru-detail-value {
+        color: #14532d;
+        font-size: 15px;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+    }
+
+    .guru-detail-item {
+        padding: 14px 0;
+        border-bottom: 1px solid #dcebe1;
+    }
+
+    .guru-back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 25px;
+        padding: 11px 18px;
+        background: #198754;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 9px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .guru-back-button:hover {
+        background: #146c43;
+        color: #ffffff;
+    }
+
+    @media (max-width: 575px) {
         .guru-detail-card {
-            background: #ffffff;
-            border: 1px solid #dfebe3;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .05);
-            overflow: hidden;
+            padding: 22px;
         }
 
-
-        /* =====================================================
-       FOTO
-    ===================================================== */
-
-        .guru-detail-photo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .guru-detail-title {
+            font-size: 23px;
         }
 
-        .guru-detail-photo img {
-            width: 120px;
-            height: 150px;
-            object-fit: contain;
-            border-radius: 10px;
-            background: #e9f3ec;
-        }
-
+        .guru-detail-photo,
         .guru-detail-placeholder {
-            width: 120px;
-            height: 150px;
-            border-radius: 10px;
-            background: #e9f3ec;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            max-width: 100%;
+            height: 280px;
         }
-
-        .guru-detail-placeholder i {
-            font-size: 50px;
-            color: #7daa8b;
-        }
-
-
-        /* =====================================================
-       DATA GURU
-    ===================================================== */
-
-        .guru-detail-name {
-            color: #14532d;
-            font-size: 25px;
-            font-weight: 800;
-            margin-bottom: 22px;
-        }
-
-        .guru-detail-data {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .guru-detail-icon {
-            width: 22px;
-            flex-shrink: 0;
-
-            color: #198754;
-            text-align: center;
-
-            margin-top: 2px;
-        }
-
-        .guru-detail-label {
-            display: block;
-
-            color: #8a968f;
-            font-size: 11px;
-
-            margin-bottom: 2px;
-        }
-
-        .guru-detail-value {
-            display: block;
-
-            color: #3d5145;
-            font-size: 14px;
-            font-weight: 600;
-
-            line-height: 1.5;
-        }
-
-
-        /* =====================================================
-       HEADER
-    ===================================================== */
-
-        .detail-label {
-            color: #198754;
-            font-size: 11px;
-            font-weight: 700;
-
-            letter-spacing: 1px;
-            text-transform: uppercase;
-
-            margin-bottom: 5px;
-        }
-
-        .detail-title {
-            color: #14532d;
-            font-size: 30px;
-            font-weight: 800;
-
-            margin-bottom: 5px;
-        }
-
-        .detail-subtitle {
-            color: #89978e;
-            font-size: 14px;
-
-            margin-bottom: 30px;
-        }
-
-
-        /* =====================================================
-       BUTTON
-    ===================================================== */
-
-        .btn-kembali {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            background: #198754;
-            color: #ffffff;
-
-            border: none;
-            border-radius: 9px;
-
-            padding: 10px 18px;
-
-            font-size: 13px;
-            font-weight: 600;
-
-            text-decoration: none;
-
-            transition: .2s ease;
-        }
-
-        .btn-kembali:hover {
-            background: #146c43;
-            color: #ffffff;
-
-            transform: translateY(-1px);
-        }
-
-
-        /* =====================================================
-       RESPONSIVE
-    ===================================================== */
-
-        @media (max-width: 767px) {
-
-            .guru-detail-section {
-                padding: 40px 15px;
-            }
-
-            .guru-detail-photo {
-                margin-bottom: 30px;
-            }
-
-            .guru-detail-name {
-                text-align: center;
-                font-size: 22px;
-            }
-
-        }
-    </style>
+    }
+</style>
 @endpush
 
-
 @section('content')
+<section class="guru-detail-section">
+    <div class="container">
+        <div class="guru-detail-card">
 
-    <section class="guru-detail-section">
+            <h1 class="guru-detail-title">Detail Guru</h1>
 
-        <div class="container">
-
-            {{-- =====================================================
-            CARD DETAIL GURU
-            ===================================================== --}}
-
-            <div class="guru-detail-card">
-
-                <div class="card-body p-4 p-md-5">
-
-                    <div class="row align-items-center">
-
-                        {{-- =================================================
-                        FOTO GURU
-                        ================================================= --}}
-
-                        <div class="col-md-3">
-
-                            <div class="guru-detail-photo">
-
-                                @if($guru->foto)
-
-                                    <img src="{{ asset('storage/' . $guru->foto) }}" alt="{{ $guru->nama_guru }}">
-
-                                @else
-
-                                    <div class="guru-detail-placeholder">
-
-                                        <i class="bi bi-person-badge-fill"></i>
-
-                                    </div>
-
-                                @endif
-
-                            </div>
-
+            <div class="row g-4 align-items-start">
+                <div class="col-md-5 text-center">
+                    @if(!empty($guru->foto))
+                        <img
+                            src="{{ asset('storage/' . $guru->foto) }}"
+                            alt="Foto {{ $guru->nama_guru }}"
+                            class="guru-detail-photo"
+                        >
+                    @else
+                        <div class="guru-detail-placeholder mx-auto">
+                            <i class="bi bi-person-badge-fill"></i>
                         </div>
-
-
-                        {{-- =================================================
-                        DATA GURU
-                        ================================================= --}}
-
-                        <div class="col-md-9">
-
-                            <h2 class="guru-detail-name">
-                                {{ $guru->nama_guru }}
-                            </h2>
-
-
-                            {{-- NIP --}}
-
-                            <div class="guru-detail-data">
-
-                                <div class="guru-detail-icon">
-
-                                    <i class="bi bi-person-vcard-fill"></i>
-
-                                </div>
-
-                                <div>
-
-                                    <span class="guru-detail-label">
-                                        NIP
-                                    </span>
-
-                                    <span class="guru-detail-value">
-                                        {{ $guru->nip ?: '-' }}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            {{-- MATA PELAJARAN --}}
-
-                            <div class="guru-detail-data">
-
-                                <div class="guru-detail-icon">
-
-                                    <i class="bi bi-book-fill"></i>
-
-                                </div>
-
-                                <div>
-
-                                    <span class="guru-detail-label">
-                                        Mata Pelajaran
-                                    </span>
-
-                                    <span class="guru-detail-value">
-                                        {{ $guru->mapel ?: '-' }}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                    @endif
                 </div>
 
+                <div class="col-md-7">
+                    <div class="guru-detail-item">
+                        <div class="guru-detail-label">Nama Guru</div>
+                        <div class="guru-detail-value">
+                            {{ $guru->nama_guru ?? '-' }}
+                        </div>
+                    </div>
+
+                    <div class="guru-detail-item">
+                        <div class="guru-detail-label">NIP</div>
+                        <div class="guru-detail-value">
+                            {{ $guru->nip ?? '-' }}
+                        </div>
+                    </div>
+
+                    <div class="guru-detail-item">
+                        <div class="guru-detail-label">Mata Pelajaran</div>
+                        <div class="guru-detail-value">
+                            {{ $guru->mapel ?? '-' }}
+                        </div>
+                    </div>
+
+                    @if(isset($guru->kategori))
+                        <div class="guru-detail-item">
+                            <div class="guru-detail-label">Kategori</div>
+                            <div class="guru-detail-value">
+                                {{ $guru->kategori }}
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
 
-
-            {{-- =====================================================
-            TOMBOL KEMBALI
-            ===================================================== --}}
-
-
-            <div class="mt-4 d-flex justify-content-end">
-                <a href="{{ route('guru.public') }}" class="btn-kembali">
-                    <i class="bi bi-arrow-left"></i>
-                    Kembali ke Guru
-                </a>
-            </div>
+            <a href="{{ route('guru.public') }}" class="guru-back-button">
+                <i class="bi bi-arrow-left"></i>
+                Kembali ke Daftar Guru
+            </a>
 
         </div>
-
-    </section>
-
+    </div>
+</section>
 @endsection

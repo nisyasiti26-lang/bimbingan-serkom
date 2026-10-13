@@ -36,7 +36,7 @@
         font-size: 14px;
     }
 
-    /* GURU SECTION */
+    /* SECTION */
     .guru-section {
         min-height: 70vh;
         padding: 10px 0 35px;
@@ -159,6 +159,31 @@
         overflow-wrap: anywhere;
     }
 
+    /* TOMBOL DETAIL */
+    .guru-detail-wrap {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 16px;
+    }
+
+    .guru-detail-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 7px;
+        background: #198754;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        transition: 0.2s ease;
+    }
+
+    .guru-card:hover .guru-detail-button {
+        background: #146c43;
+    }
+
     /* DATA KOSONG */
     .guru-empty {
         grid-column: 1 / -1;
@@ -237,14 +262,12 @@
 {{-- HEADER --}}
 <section class="guru-header">
     <div class="container">
-        <div class="section-label">
-            Data Sekolah
-        </div>
+        <div class="section-label">Data Sekolah</div>
 
-        <h1>Guru &amp; Staf MTsN 10 Tasikmalaya</h1>
+        <h1>Guru &amp; Staf {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}</h1>
 
         <p>
-            Tenaga pendidik
+            Tenaga pendidik dan staf
             {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
         </p>
     </div>
@@ -257,11 +280,10 @@
 
             @forelse ($guru as $item)
 
-                <a
-                    href="{{ route('guru.show', ['slug' => $item->slug]) }}"
-                    class="guru-card"
-                >
-
+                {{-- CARD GURU --}}
+               
+<a href="{{ route('guru.show', ['id_guru' => $item->id_guru]) }}"
+   class="guru-card">
                     {{-- FOTO --}}
                     <div class="guru-photo">
                         @if ($item->foto)
@@ -318,8 +340,10 @@
                             </div>
 
                         </div>
-                    </div>
 
+                        
+
+                    </div>
                 </a>
 
             @empty

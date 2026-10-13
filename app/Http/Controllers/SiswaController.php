@@ -107,4 +107,13 @@ class SiswaController extends Controller
             ->route('admin.siswa.index')
             ->with('success', 'Data siswa berhasil dihapus.');
     }
+
+    public function publicShow($id_siswa)
+{
+    $siswa = Siswa::where('id', $id_siswa)->firstOrFail();
+
+    $profil = \App\Models\ProfilSekolah::first();
+
+    return view('public.siswa.show', compact('siswa', 'profil'));
+}
 }

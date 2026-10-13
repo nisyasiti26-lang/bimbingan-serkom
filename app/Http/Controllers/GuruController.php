@@ -27,27 +27,27 @@ class GuruController extends Controller
     // =========================
     // TAMBAH GURU
     // =========================
-   public function store(Request $request)
-{
-    $validated = $request->validate([
-        'nama_guru' => 'required|string|max:255',
-        'nip'       => 'nullable|string|max:15',
-        'mapel'     => 'nullable|string|max:255',
-        'kategori'  => 'required|in:guru,staf',
-        'foto'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_guru' => 'required|string|max:255',
+            'nip' => 'nullable|string|max:15',
+            'mapel' => 'nullable|string|max:255',
+            'kategori' => 'required|in:guru,staf',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    if ($request->hasFile('foto')) {
-        $validated['foto'] = $request->file('foto')
-            ->store('guru', 'public');
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')
+                ->store('guru', 'public');
+        }
+
+        Guru::create($validated);
+
+        return redirect()
+            ->route('admin.guru')
+            ->with('success', 'Data pembina berhasil ditambahkan.');
     }
-
-    Guru::create($validated);
-
-    return redirect()
-        ->route('admin.guru')
-        ->with('success', 'Data pembina berhasil ditambahkan.');
-}
     // =========================
     // EDIT GURU
     // =========================
@@ -139,11 +139,11 @@ class GuruController extends Controller
     // =========================
     // DETAIL GURU PUBLIK
     // =========================
-    public function show($slug)
-    {
-        $guru = Guru::where('slug', $slug)->firstOrFail();
-        $profil = ProfilSekolah::first();
+   public function show($id_guru)
+{
+    $guru = Guru::where('id_guru', $id_guru)->firstOrFail();
+    $profil = ProfilSekolah::first();
 
-        return view('public.guru.show', compact('guru', 'profil'));
-    }
+    return view('public.guru.show', compact('guru', 'profil'));
+}
 }

@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
+    {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
 @endsection
 
 @push('styles')
@@ -14,8 +14,7 @@
         --hijau-muda: #eaf6ef;
         --latar-hijau: #f3f8f5;
         --border-hijau: #dcebe1;
-        --teks: #43534a;
-        --putih: #fff;
+        --putih: #ffffff;
     }
 
     * {
@@ -58,7 +57,10 @@
         position: relative;
         overflow: hidden;
         background:
-            linear-gradient(rgba(20, 83, 45, .78), rgba(25, 135, 84, .72)),
+            linear-gradient(
+                rgba(20, 83, 45, .78),
+                rgba(25, 135, 84, .72)
+            ),
             url('{{ asset('images/latar.jpg') }}') center/cover no-repeat;
     }
 
@@ -106,7 +108,7 @@
         transform: translateY(-3px);
     }
 
-    /* PROFIL */
+    /* PROFIL SEKOLAH */
     .profile-section {
         padding: 35px 0 30px;
         background: var(--latar-hijau);
@@ -190,23 +192,15 @@
 
     /* SECTION */
     .guru-section,
-    .galeri-section {
-        background: var(--latar-hijau);
-    }
-
-    .berita-section,
-    .ekstrakurikuler-section {
-        background: var(--putih);
-    }
-
-    .guru-section,
     .berita-section,
     .galeri-section,
-    .ekstrakurikuler-section {
+    .ekstrakurikuler-section,
+    .siswa-section {
+        background: #ffffff !important;
         padding: 50px 0;
     }
 
-    /* CARD */
+    /* KARTU GURU, BERITA, EKSTRAKURIKULER */
     .guru-card,
     .berita-card,
     .ekskul-card {
@@ -299,7 +293,7 @@
         transition: .2s ease;
     }
 
-    /* BUTTON */
+    /* TOMBOL SECTION */
     .btn-section,
     .btn-berita-more,
     .btn-galeri-more {
@@ -338,8 +332,7 @@
 
     /* SISWA */
     .siswa-section {
-        padding: 20px 0 100px;
-        background: var(--putih);
+        padding: 50px 0 70px;
     }
 
     .siswa-grid {
@@ -353,7 +346,7 @@
         flex-direction: column;
         height: 100%;
         padding: 22px;
-        background: #fff;
+        background: #ffffff;
         border: 1px solid var(--border-hijau);
         border-radius: 15px;
         box-shadow: 0 3px 12px rgba(0, 0, 0, .05);
@@ -427,14 +420,15 @@
         padding-top: 18px;
     }
 
-    .siswa-detail-button {
+    .siswa-detail-button,
+    .siswa-all-button {
         display: inline-flex;
         align-items: center;
         gap: 6px;
         padding: 8px 12px;
         border-radius: 7px;
         background: var(--hijau-utama);
-        color: #fff;
+        color: #ffffff;
         font-size: 11px;
         font-weight: 600;
         text-decoration: none;
@@ -444,7 +438,7 @@
     .siswa-detail-button:hover,
     .siswa-all-button:hover {
         background: var(--hijau-gelap);
-        color: #fff;
+        color: #ffffff;
     }
 
     .siswa-all-wrap {
@@ -453,17 +447,9 @@
     }
 
     .siswa-all-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
         padding: 11px 18px;
         border-radius: 8px;
-        background: var(--hijau-utama);
-        color: #fff;
         font-size: 13px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: .2s ease;
     }
 
     /* BERITA */
@@ -582,8 +568,8 @@
         gap: 10px;
         width: 100%;
         height: 100%;
-        color: #198754;
-        background: #eaf6ef;
+        color: var(--hijau-utama);
+        background: var(--hijau-muda);
     }
 
     .galeri-placeholder i {
@@ -717,7 +703,7 @@
         padding: 9px 13px;
         border-radius: 8px;
         background: var(--hijau-utama);
-        color: #fff;
+        color: #ffffff;
         font-size: 12px;
         font-weight: 600;
         transition: .2s ease;
@@ -815,9 +801,7 @@
 <section id="beranda" class="hero-section">
     <div class="container">
         <div class="hero-content">
-            <h1>
-                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
-            </h1>
+            <h1>{{ $profil->nama_sekolah ?? 'SMK Singaparna' }}</h1>
 
             <p>
                 Selamat datang di Sistem Informasi Sekolah.
@@ -854,19 +838,19 @@
 
             <div class="col-lg-7">
                 <div class="welcome-content">
-                    <h3>
-                        Assalamu'alaikum Warahmatullahi Wabarakatuh
-                    </h3>
+                    <h3>Assalamu'alaikum Warahmatullahi Wabarakatuh</h3>
 
                     <p>
                         Puji syukur kita panjatkan ke hadirat Allah SWT atas
                         segala rahmat dan karunia-Nya sehingga website resmi
-                        MTsN 10 Tasikmalaya dapat menjadi sarana informasi dan
-                        komunikasi bagi seluruh warga sekolah serta masyarakat.
+                        {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
+                        dapat menjadi sarana informasi dan komunikasi bagi
+                        seluruh warga sekolah serta masyarakat.
                     </p>
 
                     <p>
-                        Selamat datang di website MTsN 10 Tasikmalaya.
+                        Selamat datang di website
+                        {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}.
                         Website ini diharapkan dapat memberikan informasi
                         mengenai profil sekolah, kegiatan peserta didik,
                         prestasi, tenaga pendidik, serta berbagai program
@@ -891,10 +875,9 @@
 
                     <div class="welcome-principal">
                         <div class="principal-line"></div>
-
                         <div>
                             <strong>
-                                {{ $profil->kepala_sekolah ?? 'Kepala MTsN 10 Tasikmalaya' }}
+                                {{ $profil->kepala_sekolah ?? 'Kepala Sekolah' }}
                             </strong>
                             <span>Kepala Sekolah</span>
                         </div>
@@ -905,42 +888,35 @@
     </div>
 </section>
 
-{{-- GURU --}}
+{{-- GURU & STAF --}}
 <section id="guru" class="section guru-section">
     <div class="container">
         <div class="section-title">
             <h2>Staf &amp; Guru</h2>
             <p>
-                Tenaga pendidik
-                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
+                Tenaga pendidik dan staf
+                {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
             </p>
         </div>
 
         <div class="row g-4">
             @forelse(($guru ?? collect())->take(4) as $item)
                 @php
-                    $slugGuru = $item->slug ?? null;
+                    $idGuru = $item->id_guru ?? null;
                     $namaGuru = $item->nama_guru ?? 'Nama Guru';
+                    $fotoGuru = $item->foto ?? null;
                 @endphp
 
                 <div class="col-lg-3 col-md-6">
-                    @if(!empty($slugGuru))
-                        <a
-                            href="{{ route('guru.show', ['slug' => $slugGuru]) }}"
-                            class="guru-card"
-                        >
-                    @else
-                        <a
-                            href="{{ route('guru.public') }}"
-                            class="guru-card"
-                        >
-                    @endif
-
+                    <a
+                        href="{{ $idGuru !== null ? route('guru.show', ['id_guru' => $idGuru]) : route('guru.public') }}"
+                        class="guru-card"
+                    >
                         <div class="guru-photo">
-                            @if(!empty($item->foto))
+                            @if(!empty($fotoGuru))
                                 <img
-                                    src="{{ asset('storage/' . $item->foto) }}"
-                                    alt="{{ $namaGuru }}"
+                                    src="{{ asset('storage/' . $fotoGuru) }}"
+                                    alt="Foto {{ $namaGuru }}"
                                     loading="lazy"
                                 >
                             @else
@@ -951,9 +927,7 @@
                         </div>
 
                         <div class="guru-info">
-                            <div class="guru-name">
-                                {{ $namaGuru }}
-                            </div>
+                            <div class="guru-name">{{ $namaGuru }}</div>
 
                             <div class="guru-detail-wrap">
                                 <span class="guru-detail-button">
@@ -967,7 +941,7 @@
             @empty
                 <div class="col-12">
                     <p class="text-muted text-center">
-                        Data guru belum tersedia.
+                        Data guru dan staf belum tersedia.
                     </p>
                 </div>
             @endforelse
@@ -982,75 +956,56 @@
     </div>
 </section>
 
-
-
 {{-- SISWA --}}
 <section id="siswa" class="section siswa-section">
     <div class="container">
         <div class="section-title">
             <h2>Siswa</h2>
             <p>
-                Daftar Siswa
-                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
+                Daftar siswa
+                {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
             </p>
         </div>
 
         <div class="siswa-grid">
             @forelse(($siswa ?? collect())->take(4) as $item)
+                @php
+                    $idSiswa = $item->id ?? null;
+                    $namaSiswa = $item->nama_siswa ?? 'Nama Siswa';
+                @endphp
+
                 <div class="siswa-card">
                     <div class="siswa-icon">
                         <i class="bi bi-person-fill"></i>
                     </div>
 
                     <div class="siswa-name">
-                        {{ $item->nama_siswa ?? 'Nama Siswa' }}
-                    </div>
-
-                    <div class="siswa-data">
-                        <div class="siswa-data-item">
-                            <i class="bi bi-person-vcard-fill"></i>
-                            <span>NISN: {{ $item->nisn ?? '-' }}</span>
-                        </div>
-
-                        <div class="siswa-data-item">
-                            <i class="bi bi-person-fill"></i>
-                            <span>{{ $item->jenis_kelamin ?? '-' }}</span>
-                        </div>
-
-                        <div class="siswa-data-item">
-                            <i class="bi bi-calendar3"></i>
-                            <span>
-                                Tahun Masuk: {{ $item->tahun_masuk ?? '-' }}
-                            </span>
-                        </div>
+                        {{ $namaSiswa }}
                     </div>
 
                     <div class="siswa-detail-wrap">
-                        <a
-                            href="{{ route('siswa.public') }}"
-                            class="siswa-detail-button"
-                        >
-                            Lihat Detail
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
+                        @if($idSiswa !== null)
+                            <a
+                                href="{{ route('siswa.show', ['id_siswa' => $idSiswa]) }}"
+                                class="siswa-detail-button"
+                            >
+                                Lihat Detail
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        @else
+                            <a
+                                href="{{ route('siswa.public') }}"
+                                class="siswa-detail-button"
+                            >
+                                Lihat Detail
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             @empty
-                <div style="
-                    grid-column:1/-1;
-                    padding:45px 20px;
-                    text-align:center;
-                    background:#fff;
-                    border:1px solid var(--border-hijau);
-                    border-radius:12px;
-                    color:#71827b;
-                ">
-                    <i class="bi bi-people" style="
-                        display:block;
-                        color:var(--hijau-utama);
-                        font-size:45px;
-                        margin-bottom:10px;
-                    "></i>
+                <div style="grid-column: 1 / -1; padding: 45px 20px; text-align: center; background: #fff; border: 1px solid var(--border-hijau); border-radius: 12px; color: #71827b;">
+                    <i class="bi bi-people" style="display:block;color:var(--hijau-utama);font-size:45px;margin-bottom:10px;"></i>
                     Belum ada data siswa.
                 </div>
             @endforelse
@@ -1129,9 +1084,7 @@
                 </div>
             @empty
                 <div class="col-12">
-                    <p class="text-muted text-center">
-                        Belum ada berita.
-                    </p>
+                    <p class="text-muted text-center">Belum ada berita.</p>
                 </div>
             @endforelse
         </div>
@@ -1151,7 +1104,8 @@
         <div class="section-title">
             <h2>Galeri</h2>
             <p>
-                Dokumentasi foto dan video kegiatan MTsN 10 Tasikmalaya
+                Dokumentasi foto dan video kegiatan
+                {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
             </p>
         </div>
 
@@ -1165,18 +1119,10 @@
                 @endphp
 
                 <div class="col-lg-4 col-md-6">
-                    @if($idGaleri !== null)
-                        <a
-                            href="{{ route('galeri.show', ['id' => $idGaleri]) }}"
-                            class="galeri-card"
-                        >
-                    @else
-                        <a
-                            href="{{ route('galeri.public') }}"
-                            class="galeri-card"
-                        >
-                    @endif
-
+                    <a
+                        href="{{ $idGaleri !== null ? route('galeri.show', ['id' => $idGaleri]) : route('galeri.public') }}"
+                        class="galeri-card"
+                    >
                         <div class="galeri-media">
                             @if($kategoriGaleri === 'Video')
                                 @if(!empty($fileGaleri))
@@ -1242,11 +1188,9 @@
                         <div class="galeri-overlay">
                             <span class="galeri-category">
                                 @if($kategoriGaleri === 'Video')
-                                    <i class="bi bi-play-circle-fill"></i>
-                                    Video
+                                    <i class="bi bi-play-circle-fill"></i> Video
                                 @else
-                                    <i class="bi bi-image-fill"></i>
-                                    Foto
+                                    <i class="bi bi-image-fill"></i> Foto
                                 @endif
                             </span>
 
@@ -1264,9 +1208,7 @@
                     <div class="galeri-empty">
                         <i class="bi bi-images"></i>
                         <h5>Galeri Belum Tersedia</h5>
-                        <p>
-                            Dokumentasi kegiatan sekolah akan ditampilkan di sini.
-                        </p>
+                        <p>Dokumentasi kegiatan sekolah akan ditampilkan di sini.</p>
                     </div>
                 </div>
             @endforelse
@@ -1303,18 +1245,10 @@
                 @endphp
 
                 <div class="col-lg-4 col-md-6">
-                    @if($idEkskul !== null)
-                        <a
-                            href="{{ route('ekstrakurikuler.show', ['id' => $idEkskul]) }}"
-                            class="ekskul-card-link"
-                        >
-                    @else
-                        <a
-                            href="{{ route('ekstrakurikuler.public') }}"
-                            class="ekskul-card-link"
-                        >
-                    @endif
-
+                    <a
+                        href="{{ $idEkskul !== null ? route('ekstrakurikuler.show', ['id' => $idEkskul]) : route('ekstrakurikuler.public') }}"
+                        class="ekskul-card-link"
+                    >
                         <div class="ekskul-card">
                             @if(!empty($gambarEkskul))
                                 <div class="ekskul-photo">
@@ -1353,10 +1287,7 @@
         </div>
 
         <div class="ekskul-more-wrap">
-            <a
-                href="{{ route('ekstrakurikuler.public') }}"
-                class="btn-section"
-            >
+            <a href="{{ route('ekstrakurikuler.public') }}" class="btn-section">
                 Lihat Semua Ekstrakurikuler
                 <i class="bi bi-arrow-right"></i>
             </a>

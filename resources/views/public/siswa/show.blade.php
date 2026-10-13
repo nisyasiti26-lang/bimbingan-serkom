@@ -1,327 +1,191 @@
+
 @extends('layouts.app')
 
-@section('title')
-    Detail Siswa - {{ $siswa->nama_guru }}
-@endsection
+@section('title', 'Detail Siswa - SMK Singaparna')
 
 @push('styles')
-    <style>
-        /* =====================================================
-       DETAIL SISWA
-    ===================================================== */
+<style>
+    .siswa-detail-section {
+        padding: 40px 0 60px;
+        min-height: 75vh;
+        background: #f3f8f5;
+    }
 
+    .siswa-detail-heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .siswa-detail-heading h2 {
+        color: #1b4332;
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .siswa-detail-heading p {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .siswa-detail-line {
+        width: 60px;
+        height: 4px;
+        background: #40916c;
+        border-radius: 10px;
+        margin: 14px auto 0;
+    }
+
+    .siswa-detail-card {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 25px 30px;
+        background: #ffffff;
+        border: 1px solid #e0ebe4;
+        border-radius: 14px;
+        box-shadow: 0 5px 18px rgba(27, 67, 50, 0.06);
+    }
+
+    .siswa-detail-name {
+        color: #1b4332;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e5eee8;
+    }
+
+    .siswa-detail-item {
+        display: flex;
+        padding: 12px 0;
+        border-bottom: 1px solid #edf2ee;
+        font-size: 15px;
+    }
+
+    .siswa-detail-item:last-child {
+        border-bottom: none;
+    }
+
+    .siswa-detail-label {
+        width: 190px;
+        flex-shrink: 0;
+        color: #6c757d;
+    }
+
+    .siswa-detail-value {
+        color: #1b4332;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+    }
+
+    .siswa-detail-back {
+        display: inline-block;
+        padding: 10px 18px;
+        background: #2d6a4f;
+        color: #ffffff;
+        text-decoration: none;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .siswa-detail-back:hover {
+        background: #1b4332;
+        color: #ffffff;
+    }
+
+    .siswa-detail-footer {
+        max-width: 700px;
+        margin: 15px auto 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    @media (max-width: 576px) {
         .siswa-detail-section {
-            background: #f3f8f5;
-            min-height: 70vh;
-            padding: 55px 0;
+            padding: 35px 0 45px;
+        }
+
+        .siswa-detail-heading h2 {
+            font-size: 26px;
         }
 
         .siswa-detail-card {
-            background: #ffffff;
-            border: 1px solid #dfebe3;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .05);
-            overflow: hidden;
+            padding: 20px;
         }
 
-
-        /* =====================================================
-       FOTO
-    ===================================================== */
-
-        .siswa-detail-photo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .siswa-detail-photo img {
-            width: 120px;
-            height: 150px;
-            object-fit: contain;
-            border-radius: 10px;
-            background: #e9f3ec;
-        }
-
-        .siswa-detail-placeholder {
-            width: 120px;
-            height: 150px;
-            border-radius: 10px;
-            background: #e9f3ec;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .siswa-detail-placeholder i {
-            font-size: 50px;
-            color: #7daa8b;
-        }
-
-
-        /* =====================================================
-       DATA SISWA
-    ===================================================== */
-
-        .siswa-detail-name {
-            color: #14532d;
-            font-size: 25px;
-            font-weight: 800;
-            margin-bottom: 22px;
-        }
-
-        .siswa-detail-data {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .siswa-detail-icon {
-            width: 22px;
-            flex-shrink: 0;
-
-            color: #198754;
-            text-align: center;
-
-            margin-top: 2px;
+        .siswa-detail-item {
+            flex-direction: column;
+            gap: 5px;
         }
 
         .siswa-detail-label {
-            display: block;
-
-            color: #8a968f;
-            font-size: 11px;
-
-            margin-bottom: 2px;
+            width: 100%;
         }
-
-        .siswa-detail-value {
-            display: block;
-
-            color: #3d5145;
-            font-size: 14px;
-            font-weight: 600;
-
-            line-height: 1.5;
-        }
-
-
-        /* =====================================================
-       HEADER
-    ===================================================== */
-
-        .detail-label {
-            color: #198754;
-            font-size: 11px;
-            font-weight: 700;
-
-            letter-spacing: 1px;
-            text-transform: uppercase;
-
-            margin-bottom: 5px;
-        }
-
-        .detail-title {
-            color: #14532d;
-            font-size: 30px;
-            font-weight: 800;
-
-            margin-bottom: 5px;
-        }
-
-        .detail-subtitle {
-            color: #89978e;
-            font-size: 14px;
-
-            margin-bottom: 30px;
-        }
-
-
-        /* =====================================================
-       BUTTON
-    ===================================================== */
-
-        .btn-kembali {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            background: #198754;
-            color: #ffffff;
-
-            border: none;
-            border-radius: 9px;
-
-            padding: 10px 18px;
-
-            font-size: 13px;
-            font-weight: 600;
-
-            text-decoration: none;
-
-            transition: .2s ease;
-        }
-
-        .btn-kembali:hover {
-            background: #146c43;
-            color: #ffffff;
-
-            transform: translateY(-1px);
-        }
-
-
-        /* =====================================================
-       RESPONSIVE
-    ===================================================== */
-
-        @media (max-width: 767px) {
-
-            .siswa-detail-section {
-                padding: 40px 15px;
-            }
-
-            .siswa-detail-photo {
-                margin-bottom: 30px;
-            }
-
-            .siswa-detail-name {
-                text-align: center;
-                font-size: 22px;
-            }
-
-        }
-    </style>
+    }
+</style>
 @endpush
 
-
 @section('content')
+<section class="siswa-detail-section">
+    <div class="container">
 
-    <section class="siswa-detail-section">
+        {{-- Judul halaman --}}
+        <div class="siswa-detail-heading">
+            <h2>Detail Siswa</h2>
+            <p>Informasi data siswa SMK Singaparna</p>
+            <div class="siswa-detail-line"></div>
+        </div>
 
-        <div class="container">
+        {{-- Kartu informasi siswa --}}
+        <div class="siswa-detail-card">
 
-            {{-- =====================================================
-            CARD DETAIL SISWA
-            ===================================================== --}}
+            <h4 class="siswa-detail-name">
+                {{ $siswa->nama_siswa }}
+            </h4>
 
-            <div class="siswa-detail-card">
-
-                <div class="card-body p-4 p-md-5">
-
-                    <div class="row align-items-center">
-
-                        {{-- =================================================
-                        FOTO SISWA
-                        ================================================= --}}
-
-                        <div class="col-md-3">
-
-                            <div class="siswa-detail-photo">
-
-                                @if($siswa->foto)
-
-                                    <img src="{{ asset('storage/' . $siswa->foto) }}" alt="{{ $siswa->nama_guru }}">
-
-                                @else
-
-                                    <div class="siswa-detail-placeholder">
-
-                                        <i class="bi bi-person-badge-fill"></i>
-
-                                    </div>
-
-                                @endif
-
-                            </div>
-
-                        </div>
-
-
-                        {{-- =================================================
-                        DATA SISWA
-                        ================================================= --}}
-
-                        <div class="col-md-9">
-
-                            <h2 class="siswa-detail-name">
-                                {{ $siswa->nama_siswa }}
-                            </h2>
-
-
-                            {{-- JENIS KELAMIN --}}
-
-                            <div class="siswa-detail-data">
-
-                                <div class="siswa-detail-icon">
-
-                                    <i class="bi bi-person-vcard-fill"></i>
-
-                                </div>
-
-                                <div>
-
-                                    <span class="siswa-detail-label">
-                                        Jenis Kelamin
-                                    </span>
-
-                                    <span class="siswa-detail-value">
-                                        {{ $siswa->jenis_kelamin ?: '-' }}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            {{-- TAHUN MASUK --}}
-
-                            <div class="siswa-detail-data">
-
-                                <div class="siswa-detail-icon">
-
-                                    <i class="bi bi-book-fill"></i>
-
-                                </div>
-
-                                <div>
-
-                                    <span class="siswa-detail-label">
-                                        Tahun Masuk
-                                    </span>
-
-                                    <span class="siswa-detail-value">
-                                        {{ $siswa->tahun_masuk ?: '-' }}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div class="siswa-detail-item">
+                <span class="siswa-detail-label">NISN</span>
+                <span class="siswa-detail-value">
+                    {{ $siswa->nisn ?: '-' }}
+                </span>
             </div>
 
+            <div class="siswa-detail-item">
+                <span class="siswa-detail-label">Nama Siswa</span>
+                <span class="siswa-detail-value">
+                    {{ $siswa->nama_siswa }}
+                </span>
+            </div>
 
-            {{-- =====================================================
-            TOMBOL KEMBALI
-            ===================================================== --}}
+            <div class="siswa-detail-item">
+                <span class="siswa-detail-label">Jenis Kelamin</span>
+                <span class="siswa-detail-value">
+                    {{ $siswa->jenis_kelamin ?: '-' }}
+                </span>
+            </div>
 
-
-            <div class="mt-4 d-flex justify-content-end">
-                <a href="{{ route('siswa.public') }}" class="btn-kembali">
-                    <i class="bi bi-arrow-left"></i>
-                    Kembali ke Siswa
-                </a>
+            <div class="siswa-detail-item">
+                <span class="siswa-detail-label">Tahun Masuk</span>
+                <span class="siswa-detail-value">
+                    {{ $siswa->tahun_masuk ?: '-' }}
+                </span>
             </div>
 
         </div>
 
-    </section>
+        {{-- Tombol kembali di kanan bawah kartu --}}
+        <div class="siswa-detail-footer">
+            <a href="{{ route('siswa.public') }}"
+               class="siswa-detail-back">
+                <i class="bi bi-arrow-left"></i>
+                Kembali Ke Daftar Siswa
+            </a>
+        </div>
 
+    </div>
+</section>
 @endsection

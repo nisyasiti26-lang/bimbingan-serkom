@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title')
@@ -6,10 +7,6 @@
 
 @push('styles')
 <style>
-    /* ================================
-       HEADER SISWA
-    ================================ */
-
     .siswa-header {
         padding: 35px 0 20px;
         text-align: center;
@@ -40,19 +37,11 @@
         line-height: 1.4;
     }
 
-    /* ================================
-       SECTION SISWA
-    ================================ */
-
     .siswa-section {
         min-height: 70vh;
         padding: 20px 0 35px;
         background: #f3f8f5;
     }
-
-    /* ================================
-       GRID SISWA
-    ================================ */
 
     .siswa-grid {
         display: grid;
@@ -60,31 +49,33 @@
         gap: 22px;
     }
 
-    /* ================================
-       CARD SISWA
-    ================================ */
-
+    /* KARTU SISWA BISA DIKLIK */
     .siswa-card {
         display: flex;
         flex-direction: column;
-        min-height: 270px;
+        min-height: 310px;
         padding: 22px;
         border: 1px solid #dfebe3;
         border-radius: 15px;
         background: #fff;
         box-shadow: 0 3px 12px rgba(0, 0, 0, .04);
         transition: all .2s ease;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
     }
 
     .siswa-card:hover {
         transform: translateY(-5px);
         border-color: #198754;
         box-shadow: 0 10px 24px rgba(25, 135, 84, .15);
+        color: inherit;
     }
 
-    /* ================================
-       ICON SISWA
-    ================================ */
+    .siswa-card:focus-visible {
+        outline: 3px solid #198754;
+        outline-offset: 3px;
+    }
 
     .siswa-icon {
         display: flex;
@@ -102,10 +93,6 @@
         font-size: 29px;
     }
 
-    /* ================================
-       NAMA SISWA
-    ================================ */
-
     .siswa-name {
         min-height: 45px;
         margin-bottom: 16px;
@@ -116,11 +103,8 @@
         overflow-wrap: anywhere;
     }
 
-    /* ================================
-       DATA SISWA
-    ================================ */
-
     .siswa-data {
+        margin-top: auto;
         padding-top: 13px;
         border-top: 1px solid #edf2ee;
     }
@@ -164,10 +148,6 @@
         overflow-wrap: anywhere;
     }
 
-    /* ================================
-       DATA KOSONG
-    ================================ */
-
     .siswa-empty {
         grid-column: 1 / -1;
         padding: 45px 20px;
@@ -184,10 +164,6 @@
         color: #76a88b;
         font-size: 45px;
     }
-
-    /* ================================
-       TOMBOL KEMBALI
-    ================================ */
 
     .siswa-back-bottom {
         padding: 0 0 45px;
@@ -215,19 +191,11 @@
         color: #fff;
     }
 
-    /* ================================
-       TABLET
-    ================================ */
-
     @media (max-width: 991px) {
         .siswa-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
-
-    /* ================================
-       HP
-    ================================ */
 
     @media (max-width: 575px) {
         .siswa-header {
@@ -260,15 +228,10 @@
 
 @section('content')
 
-{{-- ================================
-     HEADER DATA SISWA
-================================ --}}
-
+{{-- HEADER DATA SISWA --}}
 <section class="siswa-header">
     <div class="container">
-        <div class="section-label">
-            Data Sekolah
-        </div>
+        <div class="section-label">Data Sekolah</div>
 
         <h1>Data Siswa</h1>
 
@@ -278,17 +241,19 @@
     </div>
 </section>
 
-{{-- ================================
-     DAFTAR SISWA
-================================ --}}
-
+{{-- DAFTAR SISWA --}}
 <section class="siswa-section">
     <div class="container">
         <div class="siswa-grid">
 
             @forelse ($siswa as $item)
 
-                <div class="siswa-card">
+                {{-- KARTU SEKALIGUS TAUTAN DETAIL --}}
+                <a
+                    href="{{ route('siswa.show', ['id_siswa' => $item->id]) }}"
+                    class="siswa-card"
+                    aria-label="Lihat detail siswa {{ $item->nama_siswa }}"
+                >
 
                     {{-- ICON SISWA --}}
                     <div class="siswa-icon">
@@ -310,10 +275,7 @@
                             </div>
 
                             <div class="siswa-data-text">
-                                <span class="siswa-data-label">
-                                    NISN
-                                </span>
-
+                                <span class="siswa-data-label">NISN</span>
                                 <span class="siswa-data-value">
                                     {{ $item->nisn ?? '-' }}
                                 </span>
@@ -355,7 +317,8 @@
                         </div>
 
                     </div>
-                </div>
+
+                </a>
 
             @empty
 
@@ -372,10 +335,7 @@
     </div>
 </section>
 
-{{-- ================================
-     KEMBALI KE BERANDA
-================================ --}}
-
+{{-- KEMBALI KE BERANDA --}}
 <div class="container">
     <div class="siswa-back-bottom">
         <a href="{{ route('home') }}" class="btn-back-dashboard">
