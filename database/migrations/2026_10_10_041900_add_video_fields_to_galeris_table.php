@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -10,16 +9,34 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('galeris', function (Blueprint $table) {
-            $table->string('sumber_video')->nullable();
-            $table->text('link_video')->nullable();
+            if (!Schema::hasColumn('galeris', 'sumber_video')) {
+                $table->string('sumber_video')->nullable();
+            }
+
+            if (!Schema::hasColumn('galeris', 'link_video')) {
+                $table->text('link_video')->nullable();
+            }
+
             $table->string('file')->nullable()->change();
         });
     }
 
     public function down(): void
     {
-        Schema::table('galeris', function (Blueprint $table) {
-            $table->dropColumn(['sumber_video', 'link_video']);
-        });
+        $columns = [];
+
+        if (Schema::hasColumn('galeris', 'sumber_video')) {
+            $columns[] = 'sumber_video';
+        }
+
+        if (Schema::hasColumn('galeris', 'link_video')) {
+            $columns[] = 'link_video';
+        }
+
+        if (!empty($columns)) {
+            Schema::table('galeris', function (Blueprint $table) use ($columns) {
+                $table->dropColumn($columns);
+            });
+        }
     }
 };

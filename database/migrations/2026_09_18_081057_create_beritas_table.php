@@ -6,30 +6,47 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('beritas', function (Blueprint $table) {
-            $table->id();
-            // $table->uuid('id_berita')->primary;
-            // $table->string('judul', 50);
-            // $table->text('isi');
-            // $table->date('tanggal');
-            // $table->enum('status', ['drat', 'publish']);
-            // $table->string('gambar', 100)->nullable();
-            // $table->uuid('id_user');
-            // $table->foreign('id_user')->references('id_user')->on('user')->onUpdate('cascade')->onDelete('restric');
-            $table->timestamps();
-        });
+        if (!Schema::hasColumn('beritas', 'judul')) {
+            Schema::table('beritas', function (Blueprint $table) {
+                $table->string('judul', 50)->nullable();
+            });
+        }
+
+        if (!Schema::hasColumn('beritas', 'isi')) {
+            Schema::table('beritas', function (Blueprint $table) {
+                $table->longText('isi')->nullable();
+            });
+        }
+
+        if (!Schema::hasColumn('beritas', 'tanggal')) {
+            Schema::table('beritas', function (Blueprint $table) {
+                $table->date('tanggal')->nullable();
+            });
+        }
+
+        if (!Schema::hasColumn('beritas', 'gambar')) {
+            Schema::table('beritas', function (Blueprint $table) {
+                $table->string('gambar')->nullable();
+            });
+        }
+
+        if (!Schema::hasColumn('beritas', 'id_user')) {
+            Schema::table('beritas', function (Blueprint $table) {
+                $table->unsignedBigInteger('id_user')->nullable();
+            });
+        }
+
+        if (!Schema::hasColumn('beritas', 'status')) {
+            Schema::table('beritas', function (Blueprint $table) {
+                $table->string('status')->default('draft');
+            });
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('beritas');
+        // Kolom tidak dihapus agar data tetap aman.
     }
 };

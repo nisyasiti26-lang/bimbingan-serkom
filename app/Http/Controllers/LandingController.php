@@ -11,34 +11,34 @@ use App\Models\Ekstrakurikuler;
 
 class LandingController extends Controller
 {
-    
-public function index()
-{
-    return view('landing page.index', [
-        'profil' => \App\Models\ProfilSekolah::first(),
 
-        'guru' => \App\Models\Guru::orderBy('id_guru', 'desc')
-            ->take(4)
-            ->get(),
+    public function index()
+    {
+        return view('landing page.index', [
+            'profil' => \App\Models\ProfilSekolah::first(),
 
-        'siswa' => \App\Models\Siswa::all(),
+            'guru' => \App\Models\Guru::orderBy('id_guru', 'desc')
+                ->take(4)
+                ->get(),
 
-        'berita' => \App\Models\Berita::where('status', 'publikasi')
-            ->orderBy('tanggal', 'desc')
-            ->take(6)
-            ->get(),
-
-        
-        // Ambil data galeri terbaru untuk landing page
-        'galeri' => \App\Models\Galeri::orderBy('id', 'desc')
-            ->take(3)
-            ->get(),
+            'siswa' => \App\Models\Siswa::all(),
 
 
-        'ekstrakurikuler' => \App\Models\Ekstrakurikuler::orderBy('id', 'desc')
-            ->take(3)
-            ->get(),
-    ]);
-}
+            'berita' => \App\Models\Berita::where('status', 'publikasi')
+                ->orderBy('tanggal', 'desc')
+                ->take(6)
+                ->get(),
 
+
+            // Ambil data galeri terbaru untuk landing page
+            'galeri' => \App\Models\Galeri::orderBy('id', 'desc')
+                ->take(3)
+                ->get(),
+
+
+            'ekstrakurikuler' => \App\Models\Ekstrakurikuler::orderBy('id', 'desc')
+                ->take(3)
+                ->get(),
+        ]);
+    }
 }

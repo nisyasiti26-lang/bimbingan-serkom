@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
+    {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
 @endsection
 
 @push('styles')
@@ -801,7 +801,7 @@
 <section id="beranda" class="hero-section">
     <div class="container">
         <div class="hero-content">
-            <h1>{{ $profil->nama_sekolah ?? 'SMK Singaparna' }}</h1>
+            <h1>{{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}</h1>
 
             <p>
                 Selamat datang di Sistem Informasi Sekolah.
@@ -843,14 +843,14 @@
                     <p>
                         Puji syukur kita panjatkan ke hadirat Allah SWT atas
                         segala rahmat dan karunia-Nya sehingga website resmi
-                        {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
+                        {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
                         dapat menjadi sarana informasi dan komunikasi bagi
                         seluruh warga sekolah serta masyarakat.
                     </p>
 
                     <p>
                         Selamat datang di website
-                        {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}.
+                        {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}.
                         Website ini diharapkan dapat memberikan informasi
                         mengenai profil sekolah, kegiatan peserta didik,
                         prestasi, tenaga pendidik, serta berbagai program
@@ -895,7 +895,7 @@
             <h2>Staf &amp; Guru</h2>
             <p>
                 Tenaga pendidik dan staf
-                {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
+                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
             </p>
         </div>
 
@@ -963,7 +963,7 @@
             <h2>Siswa</h2>
             <p>
                 Daftar siswa
-                {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
+                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
             </p>
         </div>
 
@@ -1105,7 +1105,7 @@
             <h2>Galeri</h2>
             <p>
                 Dokumentasi foto dan video kegiatan
-                {{ $profil->nama_sekolah ?? 'SMK Singaparna' }}
+                {{ $profil->nama_sekolah ?? 'MTsN 10 Tasikmalaya' }}
             </p>
         </div>
 
